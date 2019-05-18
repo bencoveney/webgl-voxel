@@ -27,8 +27,13 @@ function initRenderer() {
 }
 
 function createCube({ x, y, z, r, g, b }, dx, dy, dz) {
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
   const color = `rgb(${r}, ${g}, ${b})`;
+  const geometry = new THREE.BoxGeometry(1, 1, 1);
+  // const wireframe = new THREE.WireframeGeometry(geometry);
+  // const material = new THREE.LineBasicMaterial({ color, linewidth: 1, depthTest: false, transparent: true });
+  // var line = new THREE.LineSegments( wireframe, material );
+  // line.position.set(x + dx, y + dy, z + dz);
+  // return line;
   const material = new THREE.MeshLambertMaterial({ color });
   const cube = new THREE.Mesh(geometry, material);
   cube.position.set(x + dx, y + dy, z + dz);
@@ -42,8 +47,13 @@ function createLight() {
 }
 
 function createModelAt(model, scene, x, y, z) {
-  model.voxels.forEach(definition => {
-    const voxel = createCube(definition, x * gridSize, y * gridSize, z * gridSize);
+  model.visible.forEach(definition => {
+    const voxel = createCube(
+      definition,
+      x * gridSize,
+      y * gridSize,
+      z * gridSize
+    );
     scene.add(voxel);
   });
 }
@@ -59,7 +69,7 @@ Promise.all(
 
   // @ts-ignore
   var controls = new THREE.OrbitControls(camera);
-  camera.position.set(gridSize * 1.5, 20, gridSize * 1.5)
+  camera.position.set(gridSize * 1.5, 20, gridSize * 1.5);
   controls.update();
 
   for (let x = 0; x < 3; x++) {
@@ -88,14 +98,14 @@ Promise.all(
 function loadModel(name) {
   const path = `./src/models/${name}.png`;
 
-  console.time(`loading ${path}`);
+  console.time(`${path}: loading`);
 
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.src = path;
     image.onload = () => {
-      console.timeEnd(`loading ${path}`);
-      console.time(`reading ${path}`);
+      console.timeEnd(`${path}: loading`);
+      console.time(`${path}: reading`);
 
       const size = image.naturalWidth;
 
@@ -120,7 +130,14 @@ function loadModel(name) {
         name,
         path,
         size,
-        voxels: []
+        voxels: [],
+        visible: [],
+        topVisible: [],
+        bottomVisible: [],
+        leftVisible: [],
+        rightVisible: [],
+        backVisible: [],
+        frontVisible: []
       };
 
       const partsPerPixel = 4;
@@ -141,9 +158,58 @@ function loadModel(name) {
         }
       }
 
-      console.timeEnd(`reading ${path}`);
+      console.timeEnd(`${path}: reading`);
 
-      console.log(model);
+      console.time(`${path}: optimising`);
+
+      function isVoxel(x1, y1, z1) {
+        return model.voxels.some(
+          ({ x, y, z }) => x1 == x && y1 == y && z1 == z
+        );
+      }
+
+      model.voxels.forEach(voxel => {
+        const { x, y, z } = voxel;
+
+        const leftVisible = !isVoxel(x - 1, y, z);
+        if (leftVisible) {
+          model.leftVisible.push(voxel);
+        }
+
+        const rightVisible = !isVoxel(x + 1, y, z);
+        if (rightVisible) {
+          model.rightVisible.push(voxel);
+        }
+
+        const bottomVisible = !isVoxel(x, y - 1, z);
+        if (bottomVisible) {
+          model.bottomVisible.push(voxel);
+        }
+
+        const topVisible = !isVoxel(x, y + 1, z);
+        if (topVisible) {
+          model.topVisible.push(voxel);
+        }
+
+        const backVisible = !isVoxel(x, y, z - 1);
+        if (backVisible) {
+          model.backVisible.push(voxel);
+        }
+
+        const frontVisible = !isVoxel(x, y, z + 1);
+        if (frontVisible) {
+          model.frontVisible.push(voxel);
+        }
+
+        if (leftVisible || rightVisible || bottomVisible || topVisible || backVisible || frontVisible) {
+          model.visible.push(voxel);
+        }
+      });
+
+      console.timeEnd(`${path}: optimising`);
+
+      console.log(`${path}: ${model.voxels.length} total voxels`);
+      console.log(`${path}: ${model.visible.length} visible voxels`);
 
       resolve(model);
     };
