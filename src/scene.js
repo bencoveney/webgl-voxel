@@ -7,6 +7,7 @@ function initScene() {
 
 const gridSize = 16;
 const debug = false;
+const shadows = true;
 
 function initCamera() {
   var aspect = window.innerWidth / window.innerHeight;
@@ -45,6 +46,8 @@ function createMaterial(color) {
         depthTest: false,
         transparent: true
       })
+    : shadows
+    ? new THREE.MeshStandardMaterial({ color })
     : new THREE.MeshLambertMaterial({ color });
 
   materialCache[color] = material;
@@ -57,7 +60,14 @@ function createMesh(geometry, material) {
     const wireframe = new THREE.WireframeGeometry(geometry);
     return new THREE.LineSegments(wireframe, material);
   } else {
-    return new THREE.Mesh(geometry, material);
+    const mesh = new THREE.Mesh(geometry, material);
+
+    if (shadows) {
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+    }
+
+    return mesh;
   }
 }
 
@@ -65,11 +75,11 @@ const geometryCache = {};
 
 function createGeometry(width, height) {
   if (geometryCache[width] === undefined) {
-    geometryCache[width] = {}
+    geometryCache[width] = {};
   }
 
   if (geometryCache[width][height] === undefined) {
-    geometryCache[width][height] = new THREE.PlaneBufferGeometry(width, height)
+    geometryCache[width][height] = new THREE.PlaneBufferGeometry(width, height);
   }
 
   return geometryCache[width][height];
@@ -85,26 +95,50 @@ function createFace({ x, y, z, color, width, height }, dx, dy, dz, side) {
   switch (side) {
     case "left":
       mesh.rotateY(-quarterTurn);
-      mesh.position.set(x + dx - 0.5, y + dy + (0.5 * height) - 0.5, z + dz + (0.5 * width) - 0.5);
+      mesh.position.set(
+        x + dx - 0.5,
+        y + dy + 0.5 * height - 0.5,
+        z + dz + 0.5 * width - 0.5
+      );
       break;
     case "right":
       mesh.rotateY(quarterTurn);
-      mesh.position.set(x + dx + 0.5, y + dy + (0.5 * height) - 0.5, z + dz + (0.5 * width) - 0.5);
+      mesh.position.set(
+        x + dx + 0.5,
+        y + dy + 0.5 * height - 0.5,
+        z + dz + 0.5 * width - 0.5
+      );
       break;
     case "bottom":
       mesh.rotateX(quarterTurn);
-      mesh.position.set(x + dx + (0.5 * width) - 0.5, y + dy - 0.5, z + dz + (0.5 * height) - 0.5);
+      mesh.position.set(
+        x + dx + 0.5 * width - 0.5,
+        y + dy - 0.5,
+        z + dz + 0.5 * height - 0.5
+      );
       break;
     case "top":
       mesh.rotateX(-quarterTurn);
-      mesh.position.set(x + dx + (0.5 * width) - 0.5, y + dy + 0.5, z + dz + (0.5 * height) - 0.5);
+      mesh.position.set(
+        x + dx + 0.5 * width - 0.5,
+        y + dy + 0.5,
+        z + dz + 0.5 * height - 0.5
+      );
       break;
     case "back":
       mesh.rotateX(halfTurn);
-      mesh.position.set(x + dx + (0.5 * width) - 0.5, y + dy + (0.5 * height) - 0.5, z + dz - 0.5);
+      mesh.position.set(
+        x + dx + 0.5 * width - 0.5,
+        y + dy + 0.5 * height - 0.5,
+        z + dz - 0.5
+      );
       break;
     case "front":
-      mesh.position.set(x + dx + (0.5 * width) - 0.5, y + dy + (0.5 * height) - 0.5, z + dz + 0.5);
+      mesh.position.set(
+        x + dx + 0.5 * width - 0.5,
+        y + dy + 0.5 * height - 0.5,
+        z + dz + 0.5
+      );
       break;
   }
   return mesh;
@@ -113,6 +147,9 @@ function createFace({ x, y, z, color, width, height }, dx, dy, dz, side) {
 function createLight() {
   const light = new THREE.PointLight(0xffffff, 1, 100);
   light.position.set(gridSize * 1.5, 32, gridSize * 1.5);
+  if (shadows) {
+    light.castShadow = true;
+  }
   return light;
 }
 
@@ -144,6 +181,11 @@ Promise.all(
   const scene = initScene();
   const camera = initCamera();
   const renderer = initRenderer();
+
+  if (shadows) {
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
+  }
 
   scene.add(new THREE.AmbientLight(0x404040));
 
