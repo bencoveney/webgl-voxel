@@ -1,5 +1,10 @@
-/// <reference types="three" />
-// @ts-check
+import "./index.scss";
+
+import * as THREE from "three";
+
+// @ts-ignore
+window.THREE = THREE;
+require("three/examples/js/controls/OrbitControls");
 
 function initScene() {
   return new THREE.Scene();
@@ -189,7 +194,6 @@ Promise.all(
 
   scene.add(new THREE.AmbientLight(0x404040));
 
-  // @ts-ignore
   var controls = new THREE.OrbitControls(camera);
   camera.position.set(gridSize * 1.5, 20, gridSize * 1.5);
   controls.update();
@@ -237,9 +241,9 @@ function loadModel(name) {
 
   console.time(`${path}: loading`);
 
-  return new Promise((resolve, reject) => {
+  return new Promise<HTMLImageElement>(resolve => {
     const image = new Image();
-    image.src = path;
+		image.src = path;
     image.onload = () => resolve(image);
   }).then(image => {
 
