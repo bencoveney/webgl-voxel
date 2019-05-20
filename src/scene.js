@@ -7,7 +7,7 @@ function initScene() {
 
 const gridSize = 16;
 const debug = false;
-const shadows = true;
+const shadows = false;
 
 function initCamera() {
   var aspect = window.innerWidth / window.innerHeight;
@@ -176,8 +176,8 @@ function createModelAt(model, scene, x, y, z) {
 }
 
 Promise.all(
-  ["brick1", "grass1", "small_tree", "tall_grass", "woodcutter"].map(loadModel)
-).then(([brick1, grass1, smallTree, tallGrass, woodcutter]) => {
+  ["brick1", "chef", "grass1", "knight", "scientist1", "small_tree", "tall_grass", "woodcutter"].map(loadModel)
+).then(([brick1, chef, grass1, knight, scientist, smallTree, tallGrass, woodcutter]) => {
   const scene = initScene();
   const camera = initCamera();
   const renderer = initRenderer();
@@ -204,6 +204,9 @@ Promise.all(
   createModelAt(smallTree, scene, -1, 0, 1);
   createModelAt(brick1, scene, -1, 0, -1);
   createModelAt(tallGrass, scene, 1, 0, -1);
+  createModelAt(chef, scene, -1, 0, 0);
+  createModelAt(scientist, scene, 1, 0, 0);
+  createModelAt(knight, scene, 0, 0, -1);
 
   const light = createLight();
   scene.add(light);
@@ -239,8 +242,6 @@ function loadModel(name) {
     image.src = path;
     image.onload = () => resolve(image);
   }).then(image => {
-    console.timeEnd(`${path}: loading`);
-    console.time(`${path}: reading`);
 
     const size = image.naturalWidth;
 
@@ -301,9 +302,9 @@ function loadModel(name) {
       }
     }
 
-    console.timeEnd(`${path}: reading`);
+    console.timeEnd(`${path}: loading`);
 
-    console.time(`${path}: finding visible faces`);
+    console.time(`${path}: optimising`);
 
     function isVoxel(x1, y1, z1) {
       return model.voxels.some(({ x, y, z }) => x1 == x && y1 == y && z1 == z);
@@ -355,10 +356,6 @@ function loadModel(name) {
         model.visible.push(voxel);
       }
     });
-
-    console.timeEnd(`${path}: finding visible faces`);
-
-    console.time(`${path}: combining visible faces`);
 
     function getVoxel(voxels, x1, y1, z1) {
       const matches = voxels.filter(
@@ -622,16 +619,17 @@ function loadModel(name) {
       combineFaces(backMask, model.backFaces);
     }
 
-    console.timeEnd(`${path}: combining visible faces`);
+    console.timeEnd(`${path}: optimising`);
+
+    const numberOfFaces = model.backFaces.length +
+      model.bottomFaces.length +
+      model.frontFaces.length +
+      model.leftFaces.length +
+      model.rightFaces.length +
+      model.topFaces.length;
 
     console.log(
-      `${model.voxels.length} voxels (${model.voxels.length *
-        6} faces) compressed to ${model.backFaces.length +
-        model.bottomFaces.length +
-        model.frontFaces.length +
-        model.leftFaces.length +
-        model.rightFaces.length +
-        model.topFaces.length} faces`
+      `${path}: ${model.voxels.length} voxels compressed to ${numberOfFaces} faces`
     );
 
     return model;
