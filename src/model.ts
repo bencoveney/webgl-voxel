@@ -6,26 +6,45 @@ export interface Model {
   size: number;
   voxels: Voxel[];
 
-  topFaces: Face[];
-  bottomFaces: Face[];
-  leftFaces: Face[];
-  rightFaces: Face[];
-  backFaces: Face[];
-  frontFaces: Face[];
+  topFaces: FaceData[];
+  bottomFaces: FaceData[];
+  leftFaces: FaceData[];
+  rightFaces: FaceData[];
+  backFaces: FaceData[];
+  frontFaces: FaceData[];
 }
 
 export interface Voxel extends Color {
   x: number;
   y: number;
   z: number;
+  data: Uint8Array;
 }
 
-export interface Face extends Color {
-  x: number;
-  y: number;
-  z: number;
-  width: number;
-  height: number;
+export const enum VoxelLookup {
+  x = 0,
+  y = 1,
+  z = 2,
+  r = 3,
+  g = 4,
+  b = 5
+}
+
+type LookupData<Index extends number> = {
+  [key in Index]: number;
+} & Uint8Array
+
+export type FaceData = LookupData<FaceLookup>;
+
+export const enum FaceLookup {
+  x = 0,
+  y = 1,
+  z = 2,
+  width = 3,
+  height = 4,
+  r = 5,
+  g = 6,
+  b = 7
 }
 
 export function loadModel(name: string): Promise<Model> {
@@ -138,8 +157,10 @@ function getVoxels({ size, data }: ImageData): Voxel[] {
           imageDataIndex + partsPerPixel
         );
 
+        const voxelData = new Uint8Array([x, y, z, r, g, b]);
+
         if (a !== 0) {
-          result.push({ x, y: size - (y + 1), z, r, g, b });
+          result.push({ x, y: size - (y + 1), z, r, g, b, data: voxelData });
         }
       }
     }
@@ -213,7 +234,7 @@ function optimizeModel(model: Model, size: number) {
       }
     }
 
-    function combineFaces(mask: Mask2d, target: Face[]) {
+    function combineFaces(mask: Mask2d, target: FaceData[]) {
       for (let x = 0; x < size; x++) {
         for (let z = 0; z < size; z++) {
           // Starting point
@@ -263,14 +284,8 @@ function optimizeModel(model: Model, size: number) {
               }
             }
 
-            target.push({
-              x,
-              y,
-              z,
-              width,
-              height: depth,
-              ...fromHexTriplet(color)
-            });
+            const {r, g, b} = fromHexTriplet(color);
+            target.push(new Uint8Array([x, y, z, width, depth, r, g, b]) as FaceData);
           }
         }
       }
@@ -298,7 +313,7 @@ function optimizeModel(model: Model, size: number) {
       }
     }
 
-    function combineFaces(mask: Mask2d, target: Face[]) {
+    function combineFaces(mask: Mask2d, target: FaceData[]) {
       for (let y = 0; y < size; y++) {
         for (let z = 0; z < size; z++) {
           // Starting point
@@ -348,14 +363,8 @@ function optimizeModel(model: Model, size: number) {
               }
             }
 
-            target.push({
-              x,
-              y,
-              z,
-              width: depth,
-              height,
-              ...fromHexTriplet(color)
-            });
+            const {r, g, b} = fromHexTriplet(color);
+            target.push(new Uint8Array([x, y, z, depth, height, r, g, b]) as FaceData);
           }
         }
       }
@@ -383,7 +392,8 @@ function optimizeModel(model: Model, size: number) {
       }
     }
 
-    function combineFaces(mask: Mask2d, target: Face[]) {
+    function combineFaces(mask: Mask2d, target: FaceData[]) {
+
       for (let x = 0; x < size; x++) {
         for (let y = 0; y < size; y++) {
           // Starting point
@@ -433,14 +443,8 @@ function optimizeModel(model: Model, size: number) {
               }
             }
 
-            target.push({
-              x,
-              y,
-              z,
-              width,
-              height,
-              ...fromHexTriplet(color)
-            });
+            const {r, g, b} = fromHexTriplet(color);
+            target.push(new Uint8Array([x, y, z, width, height, r, g, b]) as FaceData);
           }
         }
       }
