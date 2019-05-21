@@ -6,8 +6,8 @@ import * as THREE from "three";
 window.THREE = THREE;
 require("three/examples/js/controls/OrbitControls");
 
-import {loadModel, Voxel, FaceData, Model, FaceLookup} from "./model";
-import { Color, toHexTriplet } from "./color";
+import { loadModel, Voxel, FaceData, Model, FaceLookup } from "./model";
+import { Color, toHexTriplet } from "./utils";
 
 function initScene(): THREE.Scene {
   return new THREE.Scene();
@@ -45,7 +45,7 @@ function createMaterial(color: Color): THREE.Material {
     return materialCache[hexTriplet];
   }
 
-  const threeColor = new THREE.Color( hexTriplet );
+  const threeColor = new THREE.Color(hexTriplet);
 
   let material = debug
     ? new THREE.LineBasicMaterial({
@@ -97,8 +97,15 @@ const quarterTurn = Math.PI / 2;
 const halfTurn = Math.PI;
 
 function createFace(data: FaceData, dx, dy, dz, side) {
-  const material = createMaterial({ r: data[FaceLookup.r], g: data[FaceLookup.g], b: data[FaceLookup.b] });
-  const geometry = createGeometry(data[FaceLookup.width], data[FaceLookup.height]);
+  const material = createMaterial({
+    r: data[FaceLookup.r],
+    g: data[FaceLookup.g],
+    b: data[FaceLookup.b]
+  });
+  const geometry = createGeometry(
+    data[FaceLookup.width],
+    data[FaceLookup.height]
+  );
   const mesh = createMesh(geometry, material);
   switch (side) {
     case "left":
@@ -161,7 +168,13 @@ function createLight(): THREE.Light {
   return light;
 }
 
-function createModelAt(model: Model, scene: THREE.Scene, x: number, y: number, z: number) {
+function createModelAt(
+  model: Model,
+  scene: THREE.Scene,
+  x: number,
+  y: number,
+  z: number
+) {
   function createSides(voxels, side) {
     voxels.forEach(definition => {
       const voxel = createFace(
@@ -184,46 +197,65 @@ function createModelAt(model: Model, scene: THREE.Scene, x: number, y: number, z
 }
 
 Promise.all(
-  ["brick1", "chef", "grass1", "knight", "scientist1", "small_tree", "tall_grass", "woodcutter"].map(loadModel)
-).then(([brick1, chef, grass1, knight, scientist, smallTree, tallGrass, woodcutter]) => {
-  const scene = initScene();
-  const camera = initCamera();
-  const renderer = initRenderer();
+  [
+    "brick1",
+    "chef",
+    "grass1",
+    "knight",
+    "scientist1",
+    "small_tree",
+    "tall_grass",
+    "woodcutter"
+  ].map(loadModel)
+).then(
+  ([
+    brick1,
+    chef,
+    grass1,
+    knight,
+    scientist,
+    smallTree,
+    tallGrass,
+    woodcutter
+  ]) => {
+    const scene = initScene();
+    const camera = initCamera();
+    const renderer = initRenderer();
 
-  if (shadows) {
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
-  }
-
-  scene.add(new THREE.AmbientLight(0x404040));
-
-  var controls = new THREE.OrbitControls(camera);
-  camera.position.set(gridSize * 1.5, 20, gridSize * 1.5);
-  controls.update();
-
-  for (let x = 0; x < 3; x++) {
-    for (let z = 0; z < 3; z++) {
-      createModelAt(grass1, scene, 1 - x, -1, 1 - z);
+    if (shadows) {
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
     }
-  }
 
-  createModelAt(woodcutter, scene, 0, 0, 0);
-  createModelAt(smallTree, scene, -1, 0, 1);
-  createModelAt(brick1, scene, -1, 0, -1);
-  createModelAt(tallGrass, scene, 1, 0, -1);
-  createModelAt(chef, scene, -1, 0, 0);
-  createModelAt(scientist, scene, 1, 0, 0);
-  createModelAt(knight, scene, 0, 0, -1);
+    scene.add(new THREE.AmbientLight(0x404040));
 
-  const light = createLight();
-  scene.add(light);
-
-  function animate() {
+    var controls = new THREE.OrbitControls(camera);
+    camera.position.set(gridSize * 1.5, 20, gridSize * 1.5);
     controls.update();
-    renderer.render(scene, camera);
-    requestAnimationFrame(animate);
+
+    for (let x = 0; x < 3; x++) {
+      for (let z = 0; z < 3; z++) {
+        createModelAt(grass1, scene, 1 - x, -1, 1 - z);
+      }
+    }
+
+    createModelAt(woodcutter, scene, 0, 0, 0);
+    createModelAt(smallTree, scene, -1, 0, 1);
+    createModelAt(brick1, scene, -1, 0, -1);
+    createModelAt(tallGrass, scene, 1, 0, -1);
+    createModelAt(chef, scene, -1, 0, 0);
+    createModelAt(scientist, scene, 1, 0, 0);
+    createModelAt(knight, scene, 0, 0, -1);
+
+    const light = createLight();
+    scene.add(light);
+
+    function animate() {
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+
+    animate();
   }
-
-  animate();
-});
-
+);

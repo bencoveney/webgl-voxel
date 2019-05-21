@@ -1,4 +1,4 @@
-import { Color, toHexTriplet, fromHexTriplet } from "./color";
+import { Color, toHexTriplet, fromHexTriplet } from "./utils";
 
 export interface Model {
   name: string;
@@ -30,9 +30,7 @@ export const enum VoxelLookup {
   b = 5
 }
 
-type LookupData<Index extends number> = {
-  [key in Index]: number;
-} & Uint8Array
+type LookupData<Index extends number> = { [key in Index]: number } & Uint8Array;
 
 export type FaceData = LookupData<FaceLookup>;
 
@@ -170,12 +168,12 @@ function getVoxels({ size, data }: ImageData): Voxel[] {
 }
 
 function optimizeModel(model: Model, size: number) {
-	const topVisible: Voxel[] = [];
-	const bottomVisible: Voxel[] = [];
-	const leftVisible: Voxel[] = [];
-	const rightVisible: Voxel[] = [];
-	const backVisible: Voxel[] = [];
-	const frontVisible: Voxel[] = [];
+  const topVisible: Voxel[] = [];
+  const bottomVisible: Voxel[] = [];
+  const leftVisible: Voxel[] = [];
+  const rightVisible: Voxel[] = [];
+  const backVisible: Voxel[] = [];
+  const frontVisible: Voxel[] = [];
 
   function isVoxel(x1: number, y1: number, z1: number): boolean {
     return model.voxels.some(({ x, y, z }) => x1 == x && y1 == y && z1 == z);
@@ -284,8 +282,17 @@ function optimizeModel(model: Model, size: number) {
               }
             }
 
-            const {r, g, b} = fromHexTriplet(color);
-            target.push(new Uint8Array([x, y, z, width, depth, r, g, b]) as FaceData);
+            const { r, g, b } = fromHexTriplet(color);
+            target.push(new Uint8Array([
+              x,
+              y,
+              z,
+              width,
+              depth,
+              r,
+              g,
+              b
+            ]) as FaceData);
           }
         }
       }
@@ -363,8 +370,17 @@ function optimizeModel(model: Model, size: number) {
               }
             }
 
-            const {r, g, b} = fromHexTriplet(color);
-            target.push(new Uint8Array([x, y, z, depth, height, r, g, b]) as FaceData);
+            const { r, g, b } = fromHexTriplet(color);
+            target.push(new Uint8Array([
+              x,
+              y,
+              z,
+              depth,
+              height,
+              r,
+              g,
+              b
+            ]) as FaceData);
           }
         }
       }
@@ -393,7 +409,6 @@ function optimizeModel(model: Model, size: number) {
     }
 
     function combineFaces(mask: Mask2d, target: FaceData[]) {
-
       for (let x = 0; x < size; x++) {
         for (let y = 0; y < size; y++) {
           // Starting point
@@ -443,8 +458,17 @@ function optimizeModel(model: Model, size: number) {
               }
             }
 
-            const {r, g, b} = fromHexTriplet(color);
-            target.push(new Uint8Array([x, y, z, width, height, r, g, b]) as FaceData);
+            const { r, g, b } = fromHexTriplet(color);
+            target.push(new Uint8Array([
+              x,
+              y,
+              z,
+              width,
+              height,
+              r,
+              g,
+              b
+            ]) as FaceData);
           }
         }
       }
