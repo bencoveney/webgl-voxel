@@ -1,4 +1,6 @@
-interface Model {
+import { Color, toHexTriplet, fromHexTriplet } from "./color";
+
+export interface Model {
   name: string;
   path: string;
   size: number;
@@ -12,22 +14,18 @@ interface Model {
   frontFaces: Face[];
 }
 
-interface Voxel {
+export interface Voxel extends Color {
   x: number;
   y: number;
   z: number;
-  r: number;
-  g: number;
-  b: number;
 }
 
-interface Face {
+export interface Face extends Color {
   x: number;
   y: number;
   z: number;
   width: number;
   height: number;
-  color: string;
 }
 
 export function loadModel(name: string): Promise<Model> {
@@ -78,16 +76,14 @@ export function loadModel(name: string): Promise<Model> {
   });
 }
 
-function createColor({ r, g, b }) {
-  return `rgb(${r}, ${g}, ${b})`;
-}
+type Mask2d = Array<Array<number>>;
 
-function create2dArray(size1, size2, value) {
+function createMask2d(size: number): Mask2d {
   const array = [];
-  for (let j = 0; j < size1; j++) {
+  for (let j = 0; j < size; j++) {
     const row = [];
-    for (let k = 0; k < size2; k++) {
-      row.push(value);
+    for (let k = 0; k < size; k++) {
+      row.push(undefined);
     }
     array.push(row);
   }
@@ -160,7 +156,7 @@ function optimizeModel(model: Model, size: number) {
 	const backVisible: Voxel[] = [];
 	const frontVisible: Voxel[] = [];
 
-  function isVoxel(x1, y1, z1) {
+  function isVoxel(x1: number, y1: number, z1: number): boolean {
     return model.voxels.some(({ x, y, z }) => x1 == x && y1 == y && z1 == z);
   }
 
@@ -201,29 +197,29 @@ function optimizeModel(model: Model, size: number) {
 
   // Tops/bottoms
   for (let y = 0; y < size; y++) {
-    const topMask = create2dArray(size, size, "");
-    const bottomMask = create2dArray(size, size, "");
+    const topMask = createMask2d(size);
+    const bottomMask = createMask2d(size);
     for (let x = 0; x < size; x++) {
       for (let z = 0; z < size; z++) {
         const topVoxel = getVoxel(topVisible, x, y, z);
         if (topVoxel) {
-          topMask[x][z] = createColor(topVoxel);
+          topMask[x][z] = toHexTriplet(topVoxel);
         }
 
         const bottomVoxel = getVoxel(bottomVisible, x, y, z);
         if (bottomVoxel) {
-          bottomMask[x][z] = createColor(bottomVoxel);
+          bottomMask[x][z] = toHexTriplet(bottomVoxel);
         }
       }
     }
 
-    function combineFaces(mask, target) {
+    function combineFaces(mask: Mask2d, target: Face[]) {
       for (let x = 0; x < size; x++) {
         for (let z = 0; z < size; z++) {
           // Starting point
           const color = mask[x][z];
-          if (color !== "") {
-            mask[x][z] = "";
+          if (color !== undefined) {
+            mask[x][z] = undefined;
             let width = 1;
             let canExpandWidth = true;
             while (canExpandWidth) {
@@ -234,7 +230,7 @@ function optimizeModel(model: Model, size: number) {
                 canExpandWidth = false;
               } else if (mask[xToCheck][z] === color) {
                 width = nextWidth;
-                mask[xToCheck][z] = "";
+                mask[xToCheck][z] = undefined;
               } else {
                 canExpandWidth = false;
               }
@@ -259,7 +255,7 @@ function optimizeModel(model: Model, size: number) {
                 if (nextRowMatches) {
                   depth = nextDepth;
                   for (let i = 0; i < width; i++) {
-                    mask[x + i][zToCheck] = "";
+                    mask[x + i][zToCheck] = undefined;
                   }
                 } else {
                   canExpandDepth = false;
@@ -273,7 +269,7 @@ function optimizeModel(model: Model, size: number) {
               z,
               width,
               height: depth,
-              color
+              ...fromHexTriplet(color)
             });
           }
         }
@@ -286,29 +282,29 @@ function optimizeModel(model: Model, size: number) {
 
   // Lefts/rights
   for (let x = 0; x < size; x++) {
-    const leftMask = create2dArray(size, size, "");
-    const rightMask = create2dArray(size, size, "");
+    const leftMask = createMask2d(size);
+    const rightMask = createMask2d(size);
     for (let y = 0; y < size; y++) {
       for (let z = 0; z < size; z++) {
         const leftVoxel = getVoxel(leftVisible, x, y, z);
         if (leftVoxel) {
-          leftMask[y][z] = createColor(leftVoxel);
+          leftMask[y][z] = toHexTriplet(leftVoxel);
         }
 
         const rightVoxel = getVoxel(rightVisible, x, y, z);
         if (rightVoxel) {
-          rightMask[y][z] = createColor(rightVoxel);
+          rightMask[y][z] = toHexTriplet(rightVoxel);
         }
       }
     }
 
-    function combineFaces(mask, target) {
+    function combineFaces(mask: Mask2d, target: Face[]) {
       for (let y = 0; y < size; y++) {
         for (let z = 0; z < size; z++) {
           // Starting point
           const color = mask[y][z];
-          if (color !== "") {
-            mask[y][z] = "";
+          if (color !== undefined) {
+            mask[y][z] = undefined;
             let height = 1;
             let canExpandHeight = true;
             while (canExpandHeight) {
@@ -319,7 +315,7 @@ function optimizeModel(model: Model, size: number) {
                 canExpandHeight = false;
               } else if (mask[yToCheck][z] === color) {
                 height = nextHeight;
-                mask[yToCheck][z] = "";
+                mask[yToCheck][z] = undefined;
               } else {
                 canExpandHeight = false;
               }
@@ -344,7 +340,7 @@ function optimizeModel(model: Model, size: number) {
                 if (nextRowMatches) {
                   depth = nextDepth;
                   for (let i = 0; i < height; i++) {
-                    mask[y + i][zToCheck] = "";
+                    mask[y + i][zToCheck] = undefined;
                   }
                 } else {
                   canExpandDepth = false;
@@ -358,7 +354,7 @@ function optimizeModel(model: Model, size: number) {
               z,
               width: depth,
               height,
-              color
+              ...fromHexTriplet(color)
             });
           }
         }
@@ -371,29 +367,29 @@ function optimizeModel(model: Model, size: number) {
 
   // Fronts/backs
   for (let z = 0; z < size; z++) {
-    const frontMask = create2dArray(size, size, "");
-    const backMask = create2dArray(size, size, "");
+    const frontMask = createMask2d(size);
+    const backMask = createMask2d(size);
     for (let x = 0; x < size; x++) {
       for (let y = 0; y < size; y++) {
         const frontVoxel = getVoxel(frontVisible, x, y, z);
         if (frontVoxel) {
-          frontMask[x][y] = createColor(frontVoxel);
+          frontMask[x][y] = toHexTriplet(frontVoxel);
         }
 
         const backVoxel = getVoxel(backVisible, x, y, z);
         if (backVoxel) {
-          backMask[x][y] = createColor(backVoxel);
+          backMask[x][y] = toHexTriplet(backVoxel);
         }
       }
     }
 
-    function combineFaces(mask, target) {
+    function combineFaces(mask: Mask2d, target: Face[]) {
       for (let x = 0; x < size; x++) {
         for (let y = 0; y < size; y++) {
           // Starting point
           const color = mask[x][y];
-          if (color !== "") {
-            mask[x][y] = "";
+          if (color !== undefined) {
+            mask[x][y] = undefined;
             let width = 1;
             let canExpandWidth = true;
             while (canExpandWidth) {
@@ -404,7 +400,7 @@ function optimizeModel(model: Model, size: number) {
                 canExpandWidth = false;
               } else if (mask[xToCheck][y] === color) {
                 width = nextWidth;
-                mask[xToCheck][y] = "";
+                mask[xToCheck][y] = undefined;
               } else {
                 canExpandWidth = false;
               }
@@ -429,7 +425,7 @@ function optimizeModel(model: Model, size: number) {
                 if (nextRowMatches) {
                   height = nextHeight;
                   for (let i = 0; i < width; i++) {
-                    mask[x + i][yToCheck] = "";
+                    mask[x + i][yToCheck] = undefined;
                   }
                 } else {
                   canExpandHeight = false;
@@ -443,7 +439,7 @@ function optimizeModel(model: Model, size: number) {
               z,
               width,
               height,
-              color
+              ...fromHexTriplet(color)
             });
           }
         }

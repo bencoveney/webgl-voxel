@@ -6,9 +6,10 @@ import * as THREE from "three";
 window.THREE = THREE;
 require("three/examples/js/controls/OrbitControls");
 
-import {loadModel} from "./model";
+import {loadModel, Voxel, Face, Model} from "./model";
+import { Color, toHexTriplet } from "./color";
 
-function initScene() {
+function initScene(): THREE.Scene {
   return new THREE.Scene();
 }
 
@@ -16,7 +17,7 @@ const gridSize = 16;
 const debug = false;
 const shadows = false;
 
-function initCamera() {
+function initCamera(): THREE.Camera {
   var aspect = window.innerWidth / window.innerHeight;
   var d = 30;
   const camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d);
@@ -27,7 +28,7 @@ function initCamera() {
   return camera;
 }
 
-function initRenderer() {
+function initRenderer(): THREE.WebGLRenderer {
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -37,28 +38,32 @@ function initRenderer() {
 
 const materialCache = {};
 
-function createMaterial(color) {
-  if (materialCache[color]) {
-    return materialCache[color];
+function createMaterial(color: Color): THREE.Material {
+  const hexTriplet = toHexTriplet(color);
+
+  if (materialCache[hexTriplet]) {
+    return materialCache[hexTriplet];
   }
+
+  const threeColor = new THREE.Color( hexTriplet );
 
   let material = debug
     ? new THREE.LineBasicMaterial({
-        color,
+        color: threeColor,
         linewidth: 1,
         depthTest: false,
         transparent: true
       })
     : shadows
-    ? new THREE.MeshStandardMaterial({ color })
-    : new THREE.MeshLambertMaterial({ color });
+    ? new THREE.MeshStandardMaterial({ color: threeColor })
+    : new THREE.MeshLambertMaterial({ color: threeColor });
 
-  materialCache[color] = material;
+  materialCache[hexTriplet] = material;
 
   return material;
 }
 
-function createMesh(geometry, material) {
+function createMesh(geometry: THREE.Geometry, material: THREE.Material) {
   if (debug) {
     const wireframe = new THREE.WireframeGeometry(geometry);
     return new THREE.LineSegments(wireframe, material);
@@ -76,7 +81,7 @@ function createMesh(geometry, material) {
 
 const geometryCache = {};
 
-function createGeometry(width, height) {
+function createGeometry(width: number, height: number) {
   if (geometryCache[width] === undefined) {
     geometryCache[width] = {};
   }
@@ -91,8 +96,8 @@ function createGeometry(width, height) {
 const quarterTurn = Math.PI / 2;
 const halfTurn = Math.PI;
 
-function createFace({ x, y, z, color, width, height }, dx, dy, dz, side) {
-  const material = createMaterial(color);
+function createFace({ x, y, z, r, g, b, width, height }: Face, dx, dy, dz, side) {
+  const material = createMaterial({ r, g, b });
   const geometry = createGeometry(width, height);
   const mesh = createMesh(geometry, material);
   switch (side) {
@@ -147,7 +152,7 @@ function createFace({ x, y, z, color, width, height }, dx, dy, dz, side) {
   return mesh;
 }
 
-function createLight() {
+function createLight(): THREE.Light {
   const light = new THREE.PointLight(0xffffff, 1, 100);
   light.position.set(gridSize * 1.5, 32, gridSize * 1.5);
   if (shadows) {
@@ -156,7 +161,7 @@ function createLight() {
   return light;
 }
 
-function createModelAt(model, scene, x, y, z) {
+function createModelAt(model: Model, scene: THREE.Scene, x: number, y: number, z: number) {
   function createSides(voxels, side) {
     voxels.forEach(definition => {
       const voxel = createFace(
