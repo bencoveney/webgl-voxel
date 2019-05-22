@@ -1,9 +1,5 @@
 import "./index.scss";
-
 import * as THREE from "three";
-
-// @ts-ignore
-window.THREE = THREE;
 require("three/examples/js/controls/OrbitControls");
 
 import { loadModel, FaceData, Model, FaceLookup } from "./model";
