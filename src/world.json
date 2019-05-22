@@ -1,0 +1,178 @@
+[
+	{
+		"id": 0,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": -1,
+			"y": -1,
+			"z": -1
+		}
+	},
+	{
+		"id": 1,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 0,
+			"y": -1,
+			"z": -1
+		}
+	},
+	{
+		"id": 2,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 1,
+			"y": -1,
+			"z": -1
+		}
+	},
+	{
+		"id": 3,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": -1,
+			"y": -1,
+			"z": 0
+		}
+	},
+	{
+		"id": 4,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 0,
+			"y": -1,
+			"z": 0
+		}
+	},
+	{
+		"id": 5,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 1,
+			"y": -1,
+			"z": 0
+		}
+	},
+	{
+		"id": 6,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": -1,
+			"y": -1,
+			"z": 1
+		}
+	},
+	{
+		"id": 7,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 0,
+			"y": -1,
+			"z": 1
+		}
+	},
+	{
+		"id": 8,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 1,
+			"y": -1,
+			"z": 1
+		}
+	},
+	{
+		"id": 9,
+		"sprite": {
+			"name": "woodcutter"
+		},
+		"position": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		}
+	},
+	{
+		"id": 10,
+		"sprite": {
+			"name": "small_tree"
+		},
+		"position": {
+			"x": -1,
+			"y": 0,
+			"z": 1
+		}
+	},
+	{
+		"id": 11,
+		"sprite": {
+			"name": "brick1"
+		},
+		"position": {
+			"x": -1,
+			"y": 0,
+			"z": -1
+		}
+	},
+	{
+		"id": 12,
+		"sprite": {
+			"name": "tall_grass"
+		},
+		"position": {
+			"x": 1,
+			"y": 0,
+			"z": -1
+		}
+	},
+	{
+		"id": 13,
+		"sprite": {
+			"name": "chef"
+		},
+		"position": {
+			"x": -1,
+			"y": 0,
+			"z": 0
+		}
+	},
+	{
+		"id": 14,
+		"sprite": {
+			"name": "scientist1"
+		},
+		"position": {
+			"x": 1,
+			"y": 0,
+			"z": 0
+		}
+	},
+	{
+		"id": 15,
+		"sprite": {
+			"name": "knight"
+		},
+		"position": {
+			"x": 0,
+			"y": 0,
+			"z": -1
+		}
+	}
+]

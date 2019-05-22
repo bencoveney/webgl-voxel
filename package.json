@@ -20,6 +20,7 @@
   "homepage": "https://github.com/bencoveney/webgl-voxel#readme",
   "dependencies": {
     "@types/three": "^0.103.2",
+    "entity-component-system": "^4.0.5",
     "three": "^0.104.0"
   },
   "devDependencies": {

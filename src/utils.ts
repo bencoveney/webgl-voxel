@@ -43,7 +43,6 @@ export function createMask3d(size: number): Mask3d {
     const xContent = [];
     for (let y = 0; y < size; y++) {
       const yContent = [];
-      s;
       for (let z = 0; z < size; z++) {
         yContent.push(undefined);
       }
