@@ -17,3 +17,39 @@ export function fromHexTriplet(hexTriplet: number): Color {
     b: hexTriplet & 255
   };
 }
+
+export type LookupData<Index extends number> = { [key in Index]: number } &
+  Uint8Array;
+
+export type Mask2d = Array<Array<number>>;
+
+export function createMask2d(size: number): Mask2d {
+  const array = [];
+  for (let x = 0; x < size; x++) {
+    const row = [];
+    for (let y = 0; y < size; y++) {
+      row.push(undefined);
+    }
+    array.push(row);
+  }
+  return array;
+}
+
+export type Mask3d = Array<Array<Array<number>>>;
+
+export function createMask3d(size: number): Mask3d {
+  const array = [];
+  for (let x = 0; x < size; x++) {
+    const xContent = [];
+    for (let y = 0; y < size; y++) {
+      const yContent = [];
+      s;
+      for (let z = 0; z < size; z++) {
+        yContent.push(undefined);
+      }
+      array.push(yContent);
+    }
+    array.push(xContent);
+  }
+  return array;
+}

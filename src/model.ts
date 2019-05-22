@@ -1,10 +1,17 @@
-import { Color, toHexTriplet, fromHexTriplet } from "./utils";
+import {
+  toHexTriplet,
+  fromHexTriplet,
+  LookupData,
+  createMask2d,
+  Mask2d
+} from "./utils";
+import { Voxels, VoxelLookup } from "./voxels";
 
 export interface Model {
   name: string;
   path: string;
   size: number;
-  voxels: Voxel[];
+  voxels: Voxels;
 
   topFaces: FaceData[];
   bottomFaces: FaceData[];
@@ -13,24 +20,6 @@ export interface Model {
   backFaces: FaceData[];
   frontFaces: FaceData[];
 }
-
-export interface Voxel extends Color {
-  x: number;
-  y: number;
-  z: number;
-  data: Uint8Array;
-}
-
-export const enum VoxelLookup {
-  x = 0,
-  y = 1,
-  z = 2,
-  r = 3,
-  g = 4,
-  b = 5
-}
-
-type LookupData<Index extends number> = { [key in Index]: number } & Uint8Array;
 
 export type FaceData = LookupData<FaceLookup>;
 
@@ -93,20 +82,6 @@ export function loadModel(name: string): Promise<Model> {
   });
 }
 
-type Mask2d = Array<Array<number>>;
-
-function createMask2d(size: number): Mask2d {
-  const array = [];
-  for (let j = 0; j < size; j++) {
-    const row = [];
-    for (let k = 0; k < size; k++) {
-      row.push(undefined);
-    }
-    array.push(row);
-  }
-  return array;
-}
-
 interface ImageData {
   size: number;
   data: Uint8ClampedArray;
@@ -141,8 +116,8 @@ function loadImageData(path: string): Promise<ImageData> {
   });
 }
 
-function getVoxels({ size, data }: ImageData): Voxel[] {
-  const result: Voxel[] = [];
+function getVoxels({ size, data }: ImageData): Voxels {
+  const result = new Voxels(size);
 
   const partsPerPixel = 4;
   for (let x = 0; x < size; x++) {
@@ -155,10 +130,8 @@ function getVoxels({ size, data }: ImageData): Voxel[] {
           imageDataIndex + partsPerPixel
         );
 
-        const voxelData = new Uint8Array([x, y, z, r, g, b]);
-
         if (a !== 0) {
-          result.push({ x, y: size - (y + 1), z, r, g, b, data: voxelData });
+          result.populate(x, size - (y + 1), z, r, g, b);
         }
       }
     }
@@ -168,51 +141,33 @@ function getVoxels({ size, data }: ImageData): Voxel[] {
 }
 
 function optimizeModel(model: Model, size: number) {
-  const topVisible: Voxel[] = [];
-  const bottomVisible: Voxel[] = [];
-  const leftVisible: Voxel[] = [];
-  const rightVisible: Voxel[] = [];
-  const backVisible: Voxel[] = [];
-  const frontVisible: Voxel[] = [];
+  model.voxels.populatedOffsets.forEach(offset => {
+    const { x, y, z } = model.voxels.getPosition(offset);
 
-  function isVoxel(x1: number, y1: number, z1: number): boolean {
-    return model.voxels.some(({ x, y, z }) => x1 == x && y1 == y && z1 == z);
-  }
-
-  model.voxels.forEach(voxel => {
-    const { x, y, z } = voxel;
-
-    if (!isVoxel(x - 1, y, z)) {
-      leftVisible.push(voxel);
+    if (!model.voxels.existsByPos(x - 1, y, z)) {
+      model.voxels.setByOffset(offset, VoxelLookup.isLeftVisible, 1);
     }
 
-    if (!isVoxel(x + 1, y, z)) {
-      rightVisible.push(voxel);
+    if (!model.voxels.existsByPos(x + 1, y, z)) {
+      model.voxels.setByOffset(offset, VoxelLookup.isRightVisible, 1);
     }
 
-    if (!isVoxel(x, y - 1, z)) {
-      bottomVisible.push(voxel);
+    if (!model.voxels.existsByPos(x, y - 1, z)) {
+      model.voxels.setByOffset(offset, VoxelLookup.isBottomVisible, 1);
     }
 
-    if (!isVoxel(x, y + 1, z)) {
-      topVisible.push(voxel);
+    if (!model.voxels.existsByPos(x, y + 1, z)) {
+      model.voxels.setByOffset(offset, VoxelLookup.isTopVisible, 1);
     }
 
-    if (!isVoxel(x, y, z - 1)) {
-      backVisible.push(voxel);
+    if (!model.voxels.existsByPos(x, y, z - 1)) {
+      model.voxels.setByOffset(offset, VoxelLookup.isBackVisible, 1);
     }
 
-    if (!isVoxel(x, y, z + 1)) {
-      frontVisible.push(voxel);
+    if (!model.voxels.existsByPos(x, y, z + 1)) {
+      model.voxels.setByOffset(offset, VoxelLookup.isFrontVisible, 1);
     }
   });
-
-  function getVoxel(voxels, x1, y1, z1) {
-    const matches = voxels.filter(
-      ({ x, y, z }) => x1 == x && y1 == y && z1 == z
-    );
-    return matches.length > 0 ? matches[0] : undefined;
-  }
 
   // Tops/bottoms
   for (let y = 0; y < size; y++) {
@@ -220,14 +175,32 @@ function optimizeModel(model: Model, size: number) {
     const bottomMask = createMask2d(size);
     for (let x = 0; x < size; x++) {
       for (let z = 0; z < size; z++) {
-        const topVoxel = getVoxel(topVisible, x, y, z);
+        const topVoxel = model.voxels.getByPos(
+          x,
+          y,
+          z,
+          VoxelLookup.isTopVisible
+        );
         if (topVoxel) {
-          topMask[x][z] = toHexTriplet(topVoxel);
+          topMask[x][z] = toHexTriplet({
+            r: model.voxels.getByPos(x, y, z, VoxelLookup.r),
+            g: model.voxels.getByPos(x, y, z, VoxelLookup.g),
+            b: model.voxels.getByPos(x, y, z, VoxelLookup.b)
+          });
         }
 
-        const bottomVoxel = getVoxel(bottomVisible, x, y, z);
+        const bottomVoxel = model.voxels.getByPos(
+          x,
+          y,
+          z,
+          VoxelLookup.isBottomVisible
+        );
         if (bottomVoxel) {
-          bottomMask[x][z] = toHexTriplet(bottomVoxel);
+          bottomMask[x][z] = toHexTriplet({
+            r: model.voxels.getByPos(x, y, z, VoxelLookup.r),
+            g: model.voxels.getByPos(x, y, z, VoxelLookup.g),
+            b: model.voxels.getByPos(x, y, z, VoxelLookup.b)
+          });
         }
       }
     }
@@ -308,14 +281,32 @@ function optimizeModel(model: Model, size: number) {
     const rightMask = createMask2d(size);
     for (let y = 0; y < size; y++) {
       for (let z = 0; z < size; z++) {
-        const leftVoxel = getVoxel(leftVisible, x, y, z);
+        const leftVoxel = model.voxels.getByPos(
+          x,
+          y,
+          z,
+          VoxelLookup.isLeftVisible
+        );
         if (leftVoxel) {
-          leftMask[y][z] = toHexTriplet(leftVoxel);
+          leftMask[y][z] = toHexTriplet({
+            r: model.voxels.getByPos(x, y, z, VoxelLookup.r),
+            g: model.voxels.getByPos(x, y, z, VoxelLookup.g),
+            b: model.voxels.getByPos(x, y, z, VoxelLookup.b)
+          });
         }
 
-        const rightVoxel = getVoxel(rightVisible, x, y, z);
+        const rightVoxel = model.voxels.getByPos(
+          x,
+          y,
+          z,
+          VoxelLookup.isRightVisible
+        );
         if (rightVoxel) {
-          rightMask[y][z] = toHexTriplet(rightVoxel);
+          rightMask[y][z] = toHexTriplet({
+            r: model.voxels.getByPos(x, y, z, VoxelLookup.r),
+            g: model.voxels.getByPos(x, y, z, VoxelLookup.g),
+            b: model.voxels.getByPos(x, y, z, VoxelLookup.b)
+          });
         }
       }
     }
@@ -396,14 +387,32 @@ function optimizeModel(model: Model, size: number) {
     const backMask = createMask2d(size);
     for (let x = 0; x < size; x++) {
       for (let y = 0; y < size; y++) {
-        const frontVoxel = getVoxel(frontVisible, x, y, z);
+        const frontVoxel = model.voxels.getByPos(
+          x,
+          y,
+          z,
+          VoxelLookup.isFrontVisible
+        );
         if (frontVoxel) {
-          frontMask[x][y] = toHexTriplet(frontVoxel);
+          frontMask[x][y] = toHexTriplet({
+            r: model.voxels.getByPos(x, y, z, VoxelLookup.r),
+            g: model.voxels.getByPos(x, y, z, VoxelLookup.g),
+            b: model.voxels.getByPos(x, y, z, VoxelLookup.b)
+          });
         }
 
-        const backVoxel = getVoxel(backVisible, x, y, z);
+        const backVoxel = model.voxels.getByPos(
+          x,
+          y,
+          z,
+          VoxelLookup.isBackVisible
+        );
         if (backVoxel) {
-          backMask[x][y] = toHexTriplet(backVoxel);
+          backMask[x][y] = toHexTriplet({
+            r: model.voxels.getByPos(x, y, z, VoxelLookup.r),
+            g: model.voxels.getByPos(x, y, z, VoxelLookup.g),
+            b: model.voxels.getByPos(x, y, z, VoxelLookup.b)
+          });
         }
       }
     }

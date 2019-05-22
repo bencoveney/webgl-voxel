@@ -6,7 +6,7 @@ import * as THREE from "three";
 window.THREE = THREE;
 require("three/examples/js/controls/OrbitControls");
 
-import { loadModel, Voxel, FaceData, Model, FaceLookup } from "./model";
+import { loadModel, FaceData, Model, FaceLookup } from "./model";
 import { Color, toHexTriplet } from "./utils";
 
 function initScene(): THREE.Scene {
