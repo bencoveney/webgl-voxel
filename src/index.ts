@@ -24,10 +24,13 @@ function initCamera(): THREE.Camera {
   return camera;
 }
 
+const skyColor = 0x404070;
+
 function initRenderer(): THREE.WebGLRenderer {
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setClearColor(skyColor);
   window.document.body.appendChild(renderer.domElement);
   return renderer;
 }
@@ -223,7 +226,7 @@ Promise.all(
       renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
     }
 
-    scene.add(new THREE.AmbientLight(0x404040));
+    scene.add(new THREE.AmbientLight(skyColor));
 
     var controls = new THREE.OrbitControls(camera);
     camera.position.set(gridSize * 1.5, 20, gridSize * 1.5);
