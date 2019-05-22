@@ -1,56 +1,12 @@
+import { Model, FaceLookup, FaceData } from "./model";
+import { Color, toHexTriplet } from "../../utils";
 import * as THREE from "three";
-require("three/examples/js/controls/OrbitControls");
 
-import { loadModel, FaceData, Model, FaceLookup } from "../model";
-import { Color, toHexTriplet } from "../utils";
-
-import { EntityPool } from "entity-component-system";
-
-const GRID_SIZE = 16;
 const DEBUG = false;
+const GRID_SIZE = 16;
 const SHADOWS = false;
-const SKY_COLOR = 0x404070;
 
-const scene = new THREE.Scene();
-
-var aspectRatio = window.innerWidth / window.innerHeight;
-var depth = 30;
-const camera = new THREE.OrthographicCamera(-depth * aspectRatio, depth * aspectRatio, depth, -depth);
-camera.position.set(0, 100, 0);
-camera.rotation.order = "YXZ";
-camera.rotation.y = -Math.PI / 4;
-camera.rotation.x = Math.atan(-1 / Math.sqrt(2));
-
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setClearColor(SKY_COLOR);
-window.document.body.appendChild(renderer.domElement);
-
-const light = new THREE.PointLight(0xffffff, 1, 100);
-light.position.set(GRID_SIZE * 1.5, 32, GRID_SIZE * 1.5);
-if (SHADOWS) {
-  light.castShadow = true;
-}
-scene.add(light);
-
-var controls = new THREE.OrbitControls(camera);
-camera.position.set(GRID_SIZE * 1.5, 20, GRID_SIZE * 1.5);
-controls.update();
-
-if (SHADOWS) {
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
-}
-
-scene.add(new THREE.AmbientLight(SKY_COLOR));
-
-export function renderSystem(entities: EntityPool, deltaTime: number): void {
-  controls.update();
-  renderer.render(scene, camera);
-}
-
-function createModelAt(
+export function createModelAt(
   model: Model,
   scene: THREE.Scene,
   x: number,
@@ -198,41 +154,3 @@ function createFace(data: FaceData, dx, dy, dz, side) {
   }
   return mesh;
 }
-
-Promise.all(
-  [
-    "brick1",
-    "chef",
-    "grass1",
-    "knight",
-    "scientist1",
-    "small_tree",
-    "tall_grass",
-    "woodcutter"
-  ].map(loadModel)
-).then(
-  ([
-    brick1,
-    chef,
-    grass1,
-    knight,
-    scientist,
-    smallTree,
-    tallGrass,
-    woodcutter
-  ]) => {
-    for (let x = 0; x < 3; x++) {
-      for (let z = 0; z < 3; z++) {
-        createModelAt(grass1, scene, 1 - x, -1, 1 - z);
-      }
-    }
-
-    createModelAt(woodcutter, scene, 0, 0, 0);
-    createModelAt(smallTree, scene, -1, 0, 1);
-    createModelAt(brick1, scene, -1, 0, -1);
-    createModelAt(tallGrass, scene, 1, 0, -1);
-    createModelAt(chef, scene, -1, 0, 0);
-    createModelAt(scientist, scene, 1, 0, 0);
-    createModelAt(knight, scene, 0, 0, -1);
-  }
-);

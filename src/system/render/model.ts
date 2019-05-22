@@ -4,7 +4,7 @@ import {
   LookupData,
   createMask2d,
   Mask2d
-} from "./utils";
+} from "../../utils";
 import { Voxels, VoxelLookup } from "./voxels";
 
 export interface Model {
