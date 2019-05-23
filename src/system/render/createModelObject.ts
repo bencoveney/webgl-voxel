@@ -1,37 +1,38 @@
-import { Model, FaceLookup, FaceData } from "./model";
+import { FaceLookup, FaceData } from "./model";
 import { Color, toHexTriplet } from "../../utils";
 import * as THREE from "three";
 
 const DEBUG = false;
-const GRID_SIZE = 16;
 const SHADOWS = false;
 
-export function createModelAt(
-  model: Model,
-  scene: THREE.Scene,
-  x: number,
-  y: number,
-  z: number
-) {
+export function createModelObject(
+  topFaces: FaceData[],
+  bottomFaces: FaceData[],
+  leftFaces: FaceData[],
+  rightFaces: FaceData[],
+  backFaces: FaceData[],
+  frontFaces: FaceData[]
+): THREE.Group {
+  const result = new THREE.Group();
+
   function createSides(voxels, side) {
     voxels.forEach(definition => {
       const voxel = createFace(
         definition,
-        x * GRID_SIZE,
-        y * GRID_SIZE,
-        z * GRID_SIZE,
         side
       );
-      scene.add(voxel);
+      result.add(voxel);
     });
   }
 
-  createSides(model.leftFaces, "left");
-  createSides(model.rightFaces, "right");
-  createSides(model.topFaces, "top");
-  createSides(model.bottomFaces, "bottom");
-  createSides(model.frontFaces, "front");
-  createSides(model.backFaces, "back");
+  createSides(leftFaces, "left");
+  createSides(rightFaces, "right");
+  createSides(topFaces, "top");
+  createSides(bottomFaces, "bottom");
+  createSides(frontFaces, "front");
+  createSides(backFaces, "back");
+
+  return result;
 }
 
 const materialCache = {};
@@ -92,7 +93,7 @@ function createGeometry(width: number, height: number) {
 const quarterTurn = Math.PI / 2;
 const halfTurn = Math.PI;
 
-function createFace(data: FaceData, dx, dy, dz, side) {
+function createFace(data: FaceData, side) {
   const material = createMaterial({
     r: data[FaceLookup.r],
     g: data[FaceLookup.g],
@@ -107,48 +108,48 @@ function createFace(data: FaceData, dx, dy, dz, side) {
     case "left":
       mesh.rotateY(-quarterTurn);
       mesh.position.set(
-        data[FaceLookup.x] + dx - 0.5,
-        data[FaceLookup.y] + dy + 0.5 * data[FaceLookup.height] - 0.5,
-        data[FaceLookup.z] + dz + 0.5 * data[FaceLookup.width] - 0.5
+        data[FaceLookup.x] - 0.5,
+        data[FaceLookup.y] + 0.5 * data[FaceLookup.height] - 0.5,
+        data[FaceLookup.z] + 0.5 * data[FaceLookup.width] - 0.5
       );
       break;
     case "right":
       mesh.rotateY(quarterTurn);
       mesh.position.set(
-        data[FaceLookup.x] + dx + 0.5,
-        data[FaceLookup.y] + dy + 0.5 * data[FaceLookup.height] - 0.5,
-        data[FaceLookup.z] + dz + 0.5 * data[FaceLookup.width] - 0.5
+        data[FaceLookup.x] + 0.5,
+        data[FaceLookup.y] + 0.5 * data[FaceLookup.height] - 0.5,
+        data[FaceLookup.z] + 0.5 * data[FaceLookup.width] - 0.5
       );
       break;
     case "bottom":
       mesh.rotateX(quarterTurn);
       mesh.position.set(
-        data[FaceLookup.x] + dx + 0.5 * data[FaceLookup.width] - 0.5,
-        data[FaceLookup.y] + dy - 0.5,
-        data[FaceLookup.z] + dz + 0.5 * data[FaceLookup.height] - 0.5
+        data[FaceLookup.x] + 0.5 * data[FaceLookup.width] - 0.5,
+        data[FaceLookup.y] - 0.5,
+        data[FaceLookup.z] + 0.5 * data[FaceLookup.height] - 0.5
       );
       break;
     case "top":
       mesh.rotateX(-quarterTurn);
       mesh.position.set(
-        data[FaceLookup.x] + dx + 0.5 * data[FaceLookup.width] - 0.5,
-        data[FaceLookup.y] + dy + 0.5,
-        data[FaceLookup.z] + dz + 0.5 * data[FaceLookup.height] - 0.5
+        data[FaceLookup.x] + 0.5 * data[FaceLookup.width] - 0.5,
+        data[FaceLookup.y] + 0.5,
+        data[FaceLookup.z] + 0.5 * data[FaceLookup.height] - 0.5
       );
       break;
     case "back":
       mesh.rotateX(halfTurn);
       mesh.position.set(
-        data[FaceLookup.x] + dx + 0.5 * data[FaceLookup.width] - 0.5,
-        data[FaceLookup.y] + dy + 0.5 * data[FaceLookup.height] - 0.5,
-        data[FaceLookup.z] + dz - 0.5
+        data[FaceLookup.x] + 0.5 * data[FaceLookup.width] - 0.5,
+        data[FaceLookup.y] + 0.5 * data[FaceLookup.height] - 0.5,
+        data[FaceLookup.z] - 0.5
       );
       break;
     case "front":
       mesh.position.set(
-        data[FaceLookup.x] + dx + 0.5 * data[FaceLookup.width] - 0.5,
-        data[FaceLookup.y] + dy + 0.5 * data[FaceLookup.height] - 0.5,
-        data[FaceLookup.z] + dz + 0.5
+        data[FaceLookup.x] + 0.5 * data[FaceLookup.width] - 0.5,
+        data[FaceLookup.y] + 0.5 * data[FaceLookup.height] - 0.5,
+        data[FaceLookup.z] + 0.5
       );
       break;
   }

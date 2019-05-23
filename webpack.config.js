@@ -22,5 +22,5 @@ module.exports = {
     new webpack.ProvidePlugin({
       THREE: "three"
     })
-  ],
+  ]
 };

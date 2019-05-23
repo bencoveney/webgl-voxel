@@ -6,6 +6,7 @@ import {
   Mask2d
 } from "../../utils";
 import { Voxels, VoxelLookup } from "./voxels";
+import { createModelObject } from "./createModelObject";
 
 export interface Model {
   name: string;
@@ -19,6 +20,8 @@ export interface Model {
   rightFaces: FaceData[];
   backFaces: FaceData[];
   frontFaces: FaceData[];
+
+  group: THREE.Group;
 }
 
 export type FaceData = LookupData<FaceLookup>;
@@ -53,7 +56,9 @@ export function loadModel(name: string): Promise<Model> {
       leftFaces: [],
       rightFaces: [],
       backFaces: [],
-      frontFaces: []
+      frontFaces: [],
+
+      group: null
     };
 
     console.timeEnd(`${path}: loading`);
@@ -63,6 +68,19 @@ export function loadModel(name: string): Promise<Model> {
     optimizeModel(model, size);
 
     console.timeEnd(`${path}: optimising`);
+
+    console.time(`${path}: creating object`);
+
+    model.group = createModelObject(
+      model.topFaces,
+      model.bottomFaces,
+      model.leftFaces,
+      model.rightFaces,
+      model.backFaces,
+      model.frontFaces
+    );
+
+    console.timeEnd(`${path}: creating object`);
 
     const numberOfFaces =
       model.backFaces.length +
@@ -487,3 +505,5 @@ function optimizeModel(model: Model, size: number) {
     combineFaces(backMask, model.backFaces);
   }
 }
+
+function createGroup()

@@ -5,9 +5,13 @@
 			"name": "grass1"
 		},
 		"position": {
-			"x": -1,
+			"x": 0,
 			"y": -1,
-			"z": -1
+			"z": 0
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
 		}
 	},
 	{
@@ -16,9 +20,13 @@
 			"name": "grass1"
 		},
 		"position": {
-			"x": 0,
+			"x": 1,
 			"y": -1,
-			"z": -1
+			"z": 0
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
 		}
 	},
 	{
@@ -27,9 +35,13 @@
 			"name": "grass1"
 		},
 		"position": {
-			"x": 1,
+			"x": 2,
 			"y": -1,
-			"z": -1
+			"z": 0
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
 		}
 	},
 	{
@@ -38,9 +50,13 @@
 			"name": "grass1"
 		},
 		"position": {
-			"x": -1,
+			"x": 3,
 			"y": -1,
 			"z": 0
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
 		}
 	},
 	{
@@ -49,9 +65,13 @@
 			"name": "grass1"
 		},
 		"position": {
-			"x": 0,
+			"x": 4,
 			"y": -1,
 			"z": 0
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
 		}
 	},
 	{
@@ -60,9 +80,13 @@
 			"name": "grass1"
 		},
 		"position": {
-			"x": 1,
+			"x": 0,
 			"y": -1,
-			"z": 0
+			"z": 1
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
 		}
 	},
 	{
@@ -71,9 +95,13 @@
 			"name": "grass1"
 		},
 		"position": {
-			"x": -1,
+			"x": 1,
 			"y": -1,
 			"z": 1
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
 		}
 	},
 	{
@@ -82,9 +110,13 @@
 			"name": "grass1"
 		},
 		"position": {
-			"x": 0,
+			"x": 2,
 			"y": -1,
 			"z": 1
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
 		}
 	},
 	{
@@ -93,70 +125,339 @@
 			"name": "grass1"
 		},
 		"position": {
-			"x": 1,
+			"x": 3,
 			"y": -1,
 			"z": 1
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
 		}
 	},
 	{
 		"id": 9,
 		"sprite": {
-			"name": "woodcutter"
+			"name": "grass1"
 		},
 		"position": {
-			"x": 0,
-			"y": 0,
-			"z": 0
+			"x": 4,
+			"y": -1,
+			"z": 1
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
 		}
 	},
 	{
 		"id": 10,
 		"sprite": {
-			"name": "small_tree"
+			"name": "grass1"
 		},
 		"position": {
-			"x": -1,
-			"y": 0,
-			"z": 1
+			"x": 0,
+			"y": -1,
+			"z": 2
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
 		}
 	},
 	{
 		"id": 11,
 		"sprite": {
-			"name": "brick1"
+			"name": "grass1"
 		},
 		"position": {
-			"x": -1,
-			"y": 0,
-			"z": -1
+			"x": 1,
+			"y": -1,
+			"z": 2
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
 		}
 	},
 	{
 		"id": 12,
 		"sprite": {
-			"name": "tall_grass"
+			"name": "grass1"
 		},
 		"position": {
-			"x": 1,
-			"y": 0,
-			"z": -1
+			"x": 2,
+			"y": -1,
+			"z": 2
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
 		}
 	},
 	{
 		"id": 13,
 		"sprite": {
-			"name": "chef"
+			"name": "grass1"
 		},
 		"position": {
-			"x": -1,
-			"y": 0,
-			"z": 0
+			"x": 3,
+			"y": -1,
+			"z": 2
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
 		}
 	},
 	{
 		"id": 14,
 		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 4,
+			"y": -1,
+			"z": 2
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
+		}
+	},
+	{
+		"id": 15,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 0,
+			"y": -1,
+			"z": 3
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
+		}
+	},
+	{
+		"id": 16,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 1,
+			"y": -1,
+			"z": 3
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
+		}
+	},
+	{
+		"id": 17,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 2,
+			"y": -1,
+			"z": 3
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
+		}
+	},
+	{
+		"id": 18,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 3,
+			"y": -1,
+			"z": 3
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
+		}
+	},
+	{
+		"id": 19,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 4,
+			"y": -1,
+			"z": 3
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
+		}
+	},
+	{
+		"id": 20,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 0,
+			"y": -1,
+			"z": 4
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
+		}
+	},
+	{
+		"id": 21,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 1,
+			"y": -1,
+			"z": 4
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
+		}
+	},
+	{
+		"id": 22,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 2,
+			"y": -1,
+			"z": 4
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
+		}
+	},
+	{
+		"id": 23,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 3,
+			"y": -1,
+			"z": 4
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
+		}
+	},
+	{
+		"id": 24,
+		"sprite": {
+			"name": "grass1"
+		},
+		"position": {
+			"x": 4,
+			"y": -1,
+			"z": 4
+		},
+		"walk": {
+			"canWalk": true,
+			"walkSpeed": 1
+		}
+	},
+	{
+		"id": 25,
+		"sprite": {
+			"name": "woodcutter"
+		},
+		"position": {
+			"x": 3,
+			"y": 0,
+			"z": 0
+		},
+		"path": {
+			"x": 3,
+			"y": 0,
+			"z": 4
+		}
+	},
+	{
+		"id": 26,
+		"sprite": {
+			"name": "small_tree"
+		},
+		"position": {
+			"x": 0,
+			"y": 0,
+			"z": 2
+		},
+		"walk": {
+			"canWalk": false
+		}
+	},
+	{
+		"id": 27,
+		"sprite": {
+			"name": "brick1"
+		},
+		"position": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"walk": {
+			"canWalk": false
+		}
+	},
+	{
+		"id": 28,
+		"sprite": {
+			"name": "tall_grass"
+		},
+		"position": {
+			"x": 2,
+			"y": 0,
+			"z": 0
+		},
+		"walk": {
+			"canWalk": false
+		}
+	},
+	{
+		"id": 29,
+		"sprite": {
+			"name": "chef"
+		},
+		"position": {
+			"x": 0,
+			"y": 0,
+			"z": 1
+		}
+	},
+	{
+		"id": 30,
+		"sprite": {
 			"name": "scientist1"
+		},
+		"position": {
+			"x": 4,
+			"y": 0,
+			"z": 0
+		}
+	},
+	{
+		"id": 31,
+		"sprite": {
+			"name": "knight"
 		},
 		"position": {
 			"x": 1,
@@ -165,14 +466,45 @@
 		}
 	},
 	{
-		"id": 15,
+		"id": 32,
 		"sprite": {
-			"name": "knight"
+			"name": "pillar_bottom_1"
 		},
 		"position": {
-			"x": 0,
+			"x": 2,
 			"y": 0,
-			"z": -1
+			"z": 2
+		},
+		"walk": {
+			"canWalk": false
+		}
+	},
+	{
+		"id": 33,
+		"sprite": {
+			"name": "pillar_mid_1"
+		},
+		"position": {
+			"x": 2,
+			"y": 1,
+			"z": 2
+		},
+		"walk": {
+			"canWalk": false
+		}
+	},
+	{
+		"id": 34,
+		"sprite": {
+			"name": "pillar_top_1"
+		},
+		"position": {
+			"x": 2,
+			"y": 2,
+			"z": 2
+		},
+		"walk": {
+			"canWalk": false
 		}
 	}
 ]

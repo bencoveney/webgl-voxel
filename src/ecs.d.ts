@@ -26,6 +26,7 @@ declare module "entity-component-system" {
       component: string,
       value: Component
     ): void;
+    removeComponent<Component>(id: number, component: string): Component;
     onAddComponent<Component>(
       component: string,
       callback: Callback<Component>
