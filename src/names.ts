@@ -1,11 +1,13 @@
 export const enum EntityNames {
-	position = "position",
-	sprite = "sprite",
-	walk = "walk",
-	path = "path"
+	POSITION = "position",
+	SPRITE = "sprite",
+	WALK = "walk",
+	PATH = "path",
+	TIME_TRIGGER = "time_trigger"
 }
 
 export const enum SearchNames {
-	renderable = "renderable",
-	pathable = "pathable"
+	RENDERABLE = "renderable",
+	PATHABLE = "pathable",
+	TRIGGERABLE = "triggerable"
 }

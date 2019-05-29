@@ -384,10 +384,9 @@
 			"y": 0,
 			"z": 0
 		},
-		"path": {
-			"x": 3,
-			"y": 0,
-			"z": 4
+		"time_trigger": {
+			"frequency": "hourly",
+			"action": "moveToRandomLocation"
 		}
 	},
 	{

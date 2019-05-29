@@ -47,9 +47,9 @@ scene.add(new THREE.AmbientLight(SKY_COLOR));
 
 export function renderSystem(entities: EntityPool, deltaTime: number): void {
   // For each renderable entity...
-  entities.find(SearchNames.renderable).forEach(entityId => {
-    const sprite = entities.getComponent<Sprite>(entityId, EntityNames.sprite);
-    const position = entities.getComponent<Position>(entityId, EntityNames.position);
+  entities.find(SearchNames.RENDERABLE).forEach(entityId => {
+    const sprite = entities.getComponent<Sprite>(entityId, EntityNames.SPRITE);
+    const position = entities.getComponent<Position>(entityId, EntityNames.POSITION);
     const clampedPosition = clampPosition(position);
     const entityHash = hashComponents(sprite, clampedPosition);
 
