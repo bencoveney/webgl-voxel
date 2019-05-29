@@ -30,7 +30,7 @@ ecs.add(renderSystem);
 ecs.add(pathFindSystem);
 ecs.add(dayNightSystem);
 
-entities.load(require("./world.json"));
+entities.load(require("./world_1.json"));
 
 let lastTime = performance.now();
 function run(time: number): void {

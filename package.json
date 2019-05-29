@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npm run prod",
     "dev": "webpack-dev-server --mode=development",
-    "prod": "webpack --mode=production"
+    "prod": "webpack --mode=production",
+    "gen_map": "node ./gen_map.js"
   },
   "repository": {
     "type": "git",

@@ -36,9 +36,9 @@ export function dayNightSystem(entities: EntityPool, deltaTime: number) {
 			const {frequency, action} = entities.getComponent<TimeTrigger>(entityId, ComponentNames.TIME_TRIGGER);
 			if (frequency == "hourly" && action == "moveToRandomLocation") {
 				const path = entities.addComponent(entityId, ComponentNames.PATH)
-				path.x = Math.floor(Math.random() * 5),
-				path.y = 0,
-				path.z = Math.floor(Math.random() * 5)
+				path.x = Math.floor(Math.random() * 10) - 5,
+				path.y = 1,
+				path.z = Math.floor(Math.random() * 10) - 5
 				console.log(`Moving to ${path.x}, ${path.z}`)
 			}
 		})
