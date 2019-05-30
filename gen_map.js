@@ -86,7 +86,16 @@ setAtPosition(8, 0, 8, 1, "lake_boat");
 setAtPosition(6, 0, 9, 0, "lake_lilly");
 
 // Castle
-function createCastleSection(x, z, rotation, base, bottom, mid, top, crenellations) {
+function createCastleSection(
+  x,
+  z,
+  rotation,
+  base,
+  bottom,
+  mid,
+  top,
+  crenellations
+) {
   setAtPosition(x, 0, z, rotation, base);
   setAtPosition(x, 1, z, rotation, bottom);
   setAtPosition(x, 2, z, rotation, mid);
@@ -190,7 +199,27 @@ function getSpriteName(name) {
 
 let id = 0;
 
-const withIds = world.map((model, index) => ({
+const walkableTiles = [
+  "castle_base",
+  "castle_roof",
+  "castle_arch_base",
+  "lake_edge_pier",
+  "cliff_corner_inner",
+  "cliff_corner_outer",
+  "cliff_straight",
+  "stone_path_end",
+  "stream_stone_bridge",
+  "stone_path_corner",
+  "stone_path_straight",
+  "dirt_path_end",
+  "dirt_path_corner",
+  "dirt_path_straight",
+  "stream_wood_bridge",
+  "stream_stepping_stones",
+  "grass"
+];
+
+const withIds = world.map(model => ({
   ...model,
   id: id++,
   position: {
@@ -198,24 +227,27 @@ const withIds = world.map((model, index) => ({
     x: model.position.x - 5,
     z: model.position.z - 5
   },
-  sprite: { name: getSpriteName(model.sprite.name) }
+  sprite: { name: getSpriteName(model.sprite.name) },
+  terrain: {
+    walkSpeed: walkableTiles.indexOf(model.sprite.name) !== -1 ? 1 : -1
+  }
 }));
 
 withIds.push({
- id: id++,
- sprite: {
-   name: "knight"
- },
- position: {
-   x: 3,
-   y: 1,
-   z: 0
- },
- time_trigger: {
-   frequency: "hourly",
-   action: "moveToRandomLocation"
- }
+  id: id++,
+  sprite: {
+    name: "knight"
+  },
+  position: {
+    x: 3,
+    y: 1,
+    z: 0
+  },
+  time_trigger: {
+    frequency: "hourly",
+    action: "moveToRandomLocation"
+  }
 });
 
 const content = JSON.stringify(withIds, null, 2);
-fs.writeFileSync("./src/world_1.json", content);
+fs.writeFileSync("./src/world.json", content);

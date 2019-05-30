@@ -1,7 +1,7 @@
 export const enum ComponentNames {
 	POSITION = "position",
 	SPRITE = "sprite",
-	WALK = "walk",
+	TERRAIN = "terrain",
 	PATH = "path",
 	TIME_TRIGGER = "time_trigger"
 }

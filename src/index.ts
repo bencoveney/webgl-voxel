@@ -18,7 +18,7 @@ const ecs = new EntityComponentSystem();
 const entities = new EntityPool();
 entities.registerComponent(ComponentNames.POSITION, positionFactory);
 entities.registerComponent(ComponentNames.SPRITE, spriteFactory);
-entities.registerComponent(ComponentNames.WALK, terrainFactory);
+entities.registerComponent(ComponentNames.TERRAIN, terrainFactory);
 entities.registerComponent(ComponentNames.PATH, pathToFactory);
 entities.registerComponent(ComponentNames.TIME_TRIGGER, timeTriggerFactory);
 
@@ -30,7 +30,7 @@ ecs.add(renderSystem);
 ecs.add(pathFindSystem);
 ecs.add(dayNightSystem);
 
-entities.load(require("./world_1.json"));
+entities.load(require("./world.json"));
 
 let lastTime = performance.now();
 function run(time: number): void {
