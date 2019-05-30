@@ -1,26 +1,23 @@
-import { FaceLookup, FaceData } from "./model";
-import { Color, toHexTriplet } from "../../utils";
 import * as THREE from "three";
+import { FaceData, FaceLookup, Faces } from "./faces";
+import { toHexTriplet, Color } from "../utils";
 
 const DEBUG = false;
 const SHADOWS = false;
 
-export function createModelObject(
-  topFaces: FaceData[],
-  bottomFaces: FaceData[],
-  leftFaces: FaceData[],
-  rightFaces: FaceData[],
-  backFaces: FaceData[],
-  frontFaces: FaceData[]
-): THREE.Group {
+export function facesToGroup({
+  topFaces,
+  bottomFaces,
+  leftFaces,
+  rightFaces,
+  backFaces,
+  frontFaces
+}: Faces): THREE.Group {
   const result = new THREE.Group();
 
   function createSides(voxels, side) {
     voxels.forEach(definition => {
-      const voxel = createFace(
-        definition,
-        side
-      );
+      const voxel = createFace(definition, side);
       result.add(voxel);
     });
   }

@@ -20,7 +20,7 @@ export class Voxels {
   public populatedOffsets: number[] = [];
   private sizeSquared: number;
 
-  constructor(private readonly size: number) {
+  constructor(public readonly size: number) {
     this.length = size * size * size;
     this.sizeSquared = size * size;
     this.data = new Uint8Array(this.length * voxelLookupLength);

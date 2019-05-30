@@ -1,10 +1,10 @@
 import * as THREE from "three";
 import "three/examples/js/controls/OrbitControls";
 import { EntityPool } from "entity-component-system";
-import { loadModel, Model } from "./model";
-import { Position, Rotation } from "../../component/position";
-import { Sprite } from "../../component/sprite";
-import { SearchNames, ComponentNames } from "../../names";
+import { loadModel, Model, getModel } from "../voxel/model";
+import { Position, Rotation } from "../component/position";
+import { Sprite } from "../component/sprite";
+import { SearchNames, ComponentNames } from "../names";
 
 const GRID_SIZE = 16;
 const SHADOWS = false;
@@ -13,7 +13,7 @@ const SKY_COLOR = 0x404070;
 const scene = new THREE.Scene();
 
 const aspectRatio = window.innerWidth / window.innerHeight;
-const depth = 50;
+const depth = 75;
 const camera = new THREE.OrthographicCamera(
   -depth * aspectRatio,
   depth * aspectRatio,
@@ -99,20 +99,6 @@ function hashComponents(
   { x, y, z, rotation }: Position
 ): string {
   return [name, x, y, z, rotation].join();
-}
-
-const models = new Map<string, "loading" | Model>();
-function getModel(name: string): Model {
-  const existing = models.get(name);
-  if (existing === "loading") {
-    return undefined;
-  }
-  if (existing === undefined) {
-    models.set(name, "loading");
-    loadModel(name).then(model => models.set(name, model));
-    return undefined;
-  }
-  return existing;
 }
 
 const objects = new Map<number, THREE.Object3D>();
