@@ -2,9 +2,9 @@ import * as THREE from "three";
 import "three/examples/js/controls/OrbitControls";
 import { EntityPool } from "entity-component-system";
 import { loadModel, Model } from "./model";
-import { Position, Rotation } from "../../entity/position";
-import { Sprite } from "../../entity/sprite";
-import { SearchNames, EntityNames } from "../../names";
+import { Position, Rotation } from "../../component/position";
+import { Sprite } from "../../component/sprite";
+import { SearchNames, ComponentNames } from "../../names";
 
 const GRID_SIZE = 16;
 const SHADOWS = false;
@@ -53,8 +53,8 @@ scene.add(new THREE.AmbientLight(SKY_COLOR));
 export function renderSystem(entities: EntityPool, deltaTime: number): void {
   // For each renderable entity...
   entities.find(SearchNames.RENDERABLE).forEach(entityId => {
-    const sprite = entities.getComponent<Sprite>(entityId, EntityNames.SPRITE);
-    const position = entities.getComponent<Position>(entityId, EntityNames.POSITION);
+    const sprite = entities.getComponent<Sprite>(entityId, ComponentNames.SPRITE);
+    const position = entities.getComponent<Position>(entityId, ComponentNames.POSITION);
     const clampedPosition = clampPosition(position);
     const entityHash = hashComponents(sprite, clampedPosition);
 

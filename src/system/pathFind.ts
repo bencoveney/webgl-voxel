@@ -1,12 +1,12 @@
 import { EntityPool } from "entity-component-system";
-import { SearchNames, EntityNames } from "../names";
-import { Position } from "../entity/position";
-import { PathTo } from "../entity/pathTo";
+import { SearchNames, ComponentNames } from "../names";
+import { Position } from "../component/position";
+import { PathTo } from "../component/pathTo";
 
 export function pathFindSystem(entities: EntityPool, deltaTime: number): void {
 	entities.find(SearchNames.PATHABLE).forEach(entityId => {
-    const path = entities.getComponent<PathTo>(entityId, EntityNames.PATH);
-		const position = entities.getComponent<Position>(entityId, EntityNames.POSITION);
+    const path = entities.getComponent<PathTo>(entityId, ComponentNames.PATH);
+		const position = entities.getComponent<Position>(entityId, ComponentNames.POSITION);
 
 		const speed = deltaTime * 0.0003;
 
@@ -20,7 +20,7 @@ export function pathFindSystem(entities: EntityPool, deltaTime: number): void {
 			position.x = path.x;
 			position.y = path.y;
 			position.z = path.z;
-			entities.removeComponent(entityId, EntityNames.PATH);
+			entities.removeComponent(entityId, ComponentNames.PATH);
 			return;
 		}
 

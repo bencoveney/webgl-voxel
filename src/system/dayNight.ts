@@ -1,6 +1,6 @@
 import { EntityPool } from "entity-component-system";
-import { SearchNames, EntityNames as ComponentNames } from "../names";
-import { TimeTrigger } from "../entity/timeTrigger";
+import { SearchNames, ComponentNames as ComponentNames } from "../names";
+import { TimeTrigger } from "../component/timeTrigger";
 
 let time = -1;
 
@@ -9,13 +9,17 @@ export const hms = msToHMS(time);
 const msInASecond = 1000;
 const msInAMinute = 60 * msInASecond;
 const msInAnHour = 60 * msInAMinute;
+const hoursInADay = 24;
 
 function msToHMS(timeMs) {
-	const hours = Math.floor(timeMs / msInAnHour);
+	let hours = Math.floor(timeMs / msInAnHour);
 	const minutesRemaining = timeMs - (hours * msInAnHour);
 	const minutes = Math.floor(minutesRemaining / msInAMinute);
 	const secondsRemaining = minutesRemaining - (minutes * msInAMinute);
 	const seconds = Math.floor(secondsRemaining / msInASecond);
+
+	hours = hours % hoursInADay;
+
 	return { hours, minutes, seconds };
 }
 

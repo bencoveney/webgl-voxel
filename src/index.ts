@@ -1,30 +1,30 @@
 import "./index.scss";
 
 import { EntityComponentSystem, EntityPool } from "entity-component-system";
-import { positionFactory } from "./entity/position";
-import { spriteFactory } from "./entity/sprite";
+import { positionFactory } from "./component/position";
+import { spriteFactory } from "./component/sprite";
 import { renderSystem } from "./system/render";
-import { EntityNames, SearchNames } from "./names";
-import { walkFactory } from "./entity/walk";
-import { pathToFactory } from "./entity/pathTo";
+import { ComponentNames, SearchNames } from "./names";
+import { terrainFactory } from "./component/terrain";
+import { pathToFactory } from "./component/pathTo";
 import { pathFindSystem } from "./system/pathFind";
 import { dayNightSystem } from "./system/dayNight";
 import { renderUi } from "./ui/render";
-import { timeTriggerFactory } from "./entity/timeTrigger";
+import { timeTriggerFactory } from "./component/timeTrigger";
 require("./system/render");
 
 const ecs = new EntityComponentSystem();
 
 const entities = new EntityPool();
-entities.registerComponent(EntityNames.POSITION, positionFactory);
-entities.registerComponent(EntityNames.SPRITE, spriteFactory);
-entities.registerComponent(EntityNames.WALK, walkFactory);
-entities.registerComponent(EntityNames.PATH, pathToFactory);
-entities.registerComponent(EntityNames.TIME_TRIGGER, timeTriggerFactory);
+entities.registerComponent(ComponentNames.POSITION, positionFactory);
+entities.registerComponent(ComponentNames.SPRITE, spriteFactory);
+entities.registerComponent(ComponentNames.WALK, terrainFactory);
+entities.registerComponent(ComponentNames.PATH, pathToFactory);
+entities.registerComponent(ComponentNames.TIME_TRIGGER, timeTriggerFactory);
 
-entities.registerSearch(SearchNames.RENDERABLE, [EntityNames.SPRITE, EntityNames.POSITION]);
-entities.registerSearch(SearchNames.PATHABLE, [EntityNames.PATH, EntityNames.POSITION]);
-entities.registerSearch(SearchNames.TRIGGERABLE, [EntityNames.TIME_TRIGGER]);
+entities.registerSearch(SearchNames.RENDERABLE, [ComponentNames.SPRITE, ComponentNames.POSITION]);
+entities.registerSearch(SearchNames.PATHABLE, [ComponentNames.PATH, ComponentNames.POSITION]);
+entities.registerSearch(SearchNames.TRIGGERABLE, [ComponentNames.TIME_TRIGGER]);
 
 ecs.add(renderSystem);
 ecs.add(pathFindSystem);

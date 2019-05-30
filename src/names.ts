@@ -1,4 +1,4 @@
-export const enum EntityNames {
+export const enum ComponentNames {
 	POSITION = "position",
 	SPRITE = "sprite",
 	WALK = "walk",
