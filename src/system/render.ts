@@ -27,8 +27,15 @@ camera.rotation.x = Math.atan(-1 / Math.sqrt(2));
 
 const controls = new (THREE as any).OrbitControls(camera) as any;
 controls.update();
+controls.addEventListener("change", () => needsRender = true);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({
+  antialias: false,
+  alpha: false,
+  stencil: false,
+  powerPreference: "high-performance",
+
+});
 renderer.setSize(window.innerWidth, window.innerHeight, true);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor(SKY_COLOR);
@@ -39,6 +46,7 @@ scene.add(new THREE.AmbientLight(SKY_COLOR));
 var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
 scene.add( directionalLight );
 
+let needsRender = false;
 
 export function renderSystem(entities: EntityPool, deltaTime: number): void {
   // For each renderable entity...
@@ -53,6 +61,8 @@ export function renderSystem(entities: EntityPool, deltaTime: number): void {
       return;
     }
 
+    needsRender = true;
+
     // Is there an instance of it?
     const object = objects.get(entityId);
     if (object) {
@@ -62,6 +72,7 @@ export function renderSystem(entities: EntityPool, deltaTime: number): void {
         clampedPosition.z
       );
       object.rotateY((Math.PI / 2) * clampedPosition.rotation);
+      object.updateMatrix();
       lastUpdates.set(entityId, entityHash);
       return;
     }
@@ -70,16 +81,22 @@ export function renderSystem(entities: EntityPool, deltaTime: number): void {
     const model = getModel(sprite.name);
     if (model) {
       const object = model.mesh.clone();
+      object.matrixAutoUpdate = false;
       scene.add(object);
       objects.set(entityId, object);
       setPosition(object, clampedPosition);
+      object.updateMatrix();
       lastUpdates.set(entityId, entityHash);
       return;
     }
   });
 
   controls.update();
-  renderer.render(scene, camera);
+
+  if (needsRender) {
+    renderer.render(scene, camera);
+    needsRender = false;
+  }
 }
 
 // Hash determines which components need to be updated.

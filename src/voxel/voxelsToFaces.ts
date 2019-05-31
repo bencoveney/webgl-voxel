@@ -3,14 +3,14 @@ import { Voxels, VoxelLookup } from "./voxels";
 import { createMask2d, toHexTriplet, Mask2d, fromHexTriplet } from "../utils";
 
 export function voxelsToFaces(voxels: Voxels): Faces {
-	const faces: Faces = {
-		topFaces: [],
-		bottomFaces: [],
-		leftFaces: [],
-		rightFaces: [],
-		backFaces: [],
-		frontFaces: []
-	}
+  const faces: Faces = {
+    topFaces: [],
+    bottomFaces: [],
+    leftFaces: [],
+    rightFaces: [],
+    backFaces: [],
+    frontFaces: []
+  };
 
   voxels.populatedOffsets.forEach(offset => {
     const { x, y, z } = voxels.getPosition(offset);
@@ -46,12 +46,7 @@ export function voxelsToFaces(voxels: Voxels): Faces {
     const bottomMask = createMask2d(voxels.size);
     for (let x = 0; x < voxels.size; x++) {
       for (let z = 0; z < voxels.size; z++) {
-        const topVoxel = voxels.getByPos(
-          x,
-          y,
-          z,
-          VoxelLookup.isTopVisible
-        );
+        const topVoxel = voxels.getByPos(x, y, z, VoxelLookup.isTopVisible);
         if (topVoxel) {
           topMask[x][z] = toHexTriplet({
             r: voxels.getByPos(x, y, z, VoxelLookup.r),
@@ -152,12 +147,7 @@ export function voxelsToFaces(voxels: Voxels): Faces {
     const rightMask = createMask2d(voxels.size);
     for (let y = 0; y < voxels.size; y++) {
       for (let z = 0; z < voxels.size; z++) {
-        const leftVoxel = voxels.getByPos(
-          x,
-          y,
-          z,
-          VoxelLookup.isLeftVisible
-        );
+        const leftVoxel = voxels.getByPos(x, y, z, VoxelLookup.isLeftVisible);
         if (leftVoxel) {
           leftMask[y][z] = toHexTriplet({
             r: voxels.getByPos(x, y, z, VoxelLookup.r),
@@ -166,12 +156,7 @@ export function voxelsToFaces(voxels: Voxels): Faces {
           });
         }
 
-        const rightVoxel = voxels.getByPos(
-          x,
-          y,
-          z,
-          VoxelLookup.isRightVisible
-        );
+        const rightVoxel = voxels.getByPos(x, y, z, VoxelLookup.isRightVisible);
         if (rightVoxel) {
           rightMask[y][z] = toHexTriplet({
             r: voxels.getByPos(x, y, z, VoxelLookup.r),
@@ -258,12 +243,7 @@ export function voxelsToFaces(voxels: Voxels): Faces {
     const backMask = createMask2d(voxels.size);
     for (let x = 0; x < voxels.size; x++) {
       for (let y = 0; y < voxels.size; y++) {
-        const frontVoxel = voxels.getByPos(
-          x,
-          y,
-          z,
-          VoxelLookup.isFrontVisible
-        );
+        const frontVoxel = voxels.getByPos(x, y, z, VoxelLookup.isFrontVisible);
         if (frontVoxel) {
           frontMask[x][y] = toHexTriplet({
             r: voxels.getByPos(x, y, z, VoxelLookup.r),
@@ -272,12 +252,7 @@ export function voxelsToFaces(voxels: Voxels): Faces {
           });
         }
 
-        const backVoxel = voxels.getByPos(
-          x,
-          y,
-          z,
-          VoxelLookup.isBackVisible
-        );
+        const backVoxel = voxels.getByPos(x, y, z, VoxelLookup.isBackVisible);
         if (backVoxel) {
           backMask[x][y] = toHexTriplet({
             r: voxels.getByPos(x, y, z, VoxelLookup.r),
@@ -356,7 +331,7 @@ export function voxelsToFaces(voxels: Voxels): Faces {
 
     combineFaces(frontMask, faces.frontFaces);
     combineFaces(backMask, faces.backFaces);
-	}
+  }
 
-	return faces;
+  return faces;
 }
