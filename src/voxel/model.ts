@@ -2,7 +2,7 @@
 import { loadSprite } from "./loadSprite";
 import { spriteToVoxels } from "./spriteToVoxels";
 import { voxelsToFaces } from "./voxelsToFaces";
-import { facesToGroup } from "./facesToGroup";
+import { facesToMesh } from "./facesToMesh";
 import { Voxels } from "./voxels";
 import { Faces } from "./faces";
 
@@ -10,7 +10,7 @@ export interface Model {
   name: string;
   voxels: Voxels;
   faces: Faces;
-  group: THREE.Group;
+  mesh: THREE.Mesh;
 }
 
 const models = new Map<string, Model>();
@@ -24,8 +24,8 @@ export function loadModel(name: string): Promise<void> {
 
 export function addModel(name: string, voxels: Voxels) {
   const faces = voxelsToFaces(voxels);
-  const group = facesToGroup(faces);
-  models.set(name, { name, voxels, faces, group });
+  const mesh = facesToMesh(faces);
+  models.set(name, { name, voxels, faces, mesh });
 }
 
 export function getModel(name: string): Model {

@@ -69,7 +69,7 @@ export function renderSystem(entities: EntityPool, deltaTime: number): void {
     // Does the model exist?
     const model = getModel(sprite.name);
     if (model) {
-      const object = model.group.clone();
+      const object = model.mesh.clone();
       scene.add(object);
       objects.set(entityId, object);
       setPosition(object, clampedPosition);

@@ -13,5 +13,5 @@ Playing with voxels in webgl using Three.js - [Demo](https://bencoveney.github.i
 - TODO: *Group static voxels into bigger sets*
 - *Calculate + combine visible sides of voxels*
 - **Faces**: face data - `x, y, z, rotation, width, height, r, g, b`
-- *Create ThreeJS group*
-- **THREE.Group**
+- *Create ThreeJS mesh*
+- **THREE.Mesh**
