@@ -4,7 +4,7 @@ import { EntityComponentSystem, EntityPool } from "entity-component-system";
 import { positionFactory } from "./component/position";
 import { spriteFactory } from "./component/sprite";
 import { renderSystem } from "./system/render";
-import { ComponentNames, SearchNames } from "./names";
+import { ComponentNames, SearchNames } from "./constants";
 import { terrainFactory } from "./component/terrain";
 import { pathToFactory } from "./component/pathTo";
 import { pathFindSystem } from "./system/pathFind";
@@ -16,27 +16,27 @@ require("./system/render");
 
 type TickEcs = (deltaTime: number) => void;
 
-function configureEcs(): TickEcs {
+function configureEcs(entities: any[]): TickEcs {
   const ecs = new EntityComponentSystem();
 
-  const entities = new EntityPool();
-  entities.registerComponent(ComponentNames.POSITION, positionFactory);
-  entities.registerComponent(ComponentNames.SPRITE, spriteFactory);
-  entities.registerComponent(ComponentNames.TERRAIN, terrainFactory);
-  entities.registerComponent(ComponentNames.PATH, pathToFactory);
-  entities.registerComponent(ComponentNames.TIME_TRIGGER, timeTriggerFactory);
+  const entityPool = new EntityPool();
+  entityPool.registerComponent(ComponentNames.POSITION, positionFactory);
+  entityPool.registerComponent(ComponentNames.SPRITE, spriteFactory);
+  entityPool.registerComponent(ComponentNames.TERRAIN, terrainFactory);
+  entityPool.registerComponent(ComponentNames.PATH, pathToFactory);
+  entityPool.registerComponent(ComponentNames.TIME_TRIGGER, timeTriggerFactory);
 
-  entities.registerSearch(SearchNames.RENDERABLE, [ComponentNames.SPRITE, ComponentNames.POSITION]);
-  entities.registerSearch(SearchNames.PATHABLE, [ComponentNames.PATH, ComponentNames.POSITION]);
-  entities.registerSearch(SearchNames.TRIGGERABLE, [ComponentNames.TIME_TRIGGER]);
+  entityPool.registerSearch(SearchNames.RENDERABLE, [ComponentNames.SPRITE, ComponentNames.POSITION]);
+  entityPool.registerSearch(SearchNames.PATHABLE, [ComponentNames.PATH, ComponentNames.POSITION]);
+  entityPool.registerSearch(SearchNames.TRIGGERABLE, [ComponentNames.TIME_TRIGGER]);
 
   ecs.add(renderSystem);
   ecs.add(pathFindSystem);
   ecs.add(dayNightSystem);
 
-  entities.load(require("./world.json"));
+  entityPool.load(entities);
 
-  return (deltaTime: number) => ecs.run(entities, deltaTime);
+  return (deltaTime: number) => ecs.run(entityPool, deltaTime);
 }
 
 function gameLoop(onTick: TickEcs) {
@@ -56,8 +56,8 @@ function gameLoop(onTick: TickEcs) {
   run(lastTime);
 }
 
-loadWorld("world").then(() => {
-  const tickEcs = configureEcs();
+loadWorld("world").then(entities => {
+  const tickEcs = configureEcs(entities);
   gameLoop(tickEcs);
 });
 

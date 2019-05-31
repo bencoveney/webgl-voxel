@@ -143,7 +143,7 @@ export function voxelsToFaces(voxels: Voxels): Faces {
     }
 
     combineFaces(topMask, faces.topFaces);
-    combineFaces(bottomMask, faces.bottomFaces);
+    // combineFaces(bottomMask, faces.bottomFaces);
   }
 
   // Lefts/rights

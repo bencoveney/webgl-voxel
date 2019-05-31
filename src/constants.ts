@@ -11,3 +11,6 @@ export const enum SearchNames {
 	PATHABLE = "pathable",
 	TRIGGERABLE = "triggerable"
 }
+
+export const GRID_SIZE = 16;
+export const DEBUG = false;

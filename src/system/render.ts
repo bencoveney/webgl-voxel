@@ -1,14 +1,12 @@
 import * as THREE from "three";
 import "three/examples/js/controls/OrbitControls";
 import { EntityPool } from "entity-component-system";
-import { loadModel, Model, getModel } from "../voxel/model";
+import { getModel } from "../voxel/model";
 import { Position, Rotation } from "../component/position";
 import { Sprite } from "../component/sprite";
-import { SearchNames, ComponentNames } from "../names";
+import { SearchNames, ComponentNames, GRID_SIZE } from "../constants";
 
-const GRID_SIZE = 16;
-const SHADOWS = false;
-const SKY_COLOR = 0x404070;
+const SKY_COLOR = 0x8080a0;
 
 const scene = new THREE.Scene();
 
@@ -36,19 +34,11 @@ renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor(SKY_COLOR);
 window.document.body.appendChild(renderer.domElement);
 
-const light = new THREE.PointLight(0xffffff, 1, 100);
-light.position.set(GRID_SIZE * 1.5, 32, GRID_SIZE * 1.5);
-if (SHADOWS) {
-  light.castShadow = true;
-}
-scene.add(light);
-
-if (SHADOWS) {
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
-}
-
 scene.add(new THREE.AmbientLight(SKY_COLOR));
+
+var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+scene.add( directionalLight );
+
 
 export function renderSystem(entities: EntityPool, deltaTime: number): void {
   // For each renderable entity...

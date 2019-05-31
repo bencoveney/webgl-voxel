@@ -1,9 +1,7 @@
 import * as THREE from "three";
 import { FaceData, FaceLookup, Faces } from "./faces";
 import { toHexTriplet, Color } from "../utils";
-
-const DEBUG = false;
-const SHADOWS = false;
+import { DEBUG } from "../constants";
 
 export function facesToGroup({
   topFaces,
@@ -49,8 +47,6 @@ function createMaterial(color: Color): THREE.Material {
         depthTest: false,
         transparent: true
       })
-    : SHADOWS
-    ? new THREE.MeshStandardMaterial({ color: threeColor })
     : new THREE.MeshLambertMaterial({ color: threeColor });
 
   materialCache[hexTriplet] = material;
@@ -63,14 +59,7 @@ function createMesh(geometry: THREE.Geometry, material: THREE.Material) {
     const wireframe = new THREE.WireframeGeometry(geometry);
     return new THREE.LineSegments(wireframe, material);
   } else {
-    const mesh = new THREE.Mesh(geometry, material);
-
-    if (SHADOWS) {
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
-    }
-
-    return mesh;
+    return new THREE.Mesh(geometry, material);
   }
 }
 

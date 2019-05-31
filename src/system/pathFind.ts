@@ -1,5 +1,5 @@
 import { EntityPool } from "entity-component-system";
-import { SearchNames, ComponentNames } from "../names";
+import { SearchNames, ComponentNames } from "../constants";
 import { Position } from "../component/position";
 import { PathTo } from "../component/pathTo";
 
@@ -8,7 +8,7 @@ export function pathFindSystem(entities: EntityPool, deltaTime: number): void {
     const path = entities.getComponent<PathTo>(entityId, ComponentNames.PATH);
 		const position = entities.getComponent<Position>(entityId, ComponentNames.POSITION);
 
-		const speed = deltaTime * 0.0003;
+		const speed = deltaTime * 0.001;
 
 		const deltaX = path.x - position.x;
 		const deltaY = path.y - position.y;

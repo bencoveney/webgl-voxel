@@ -1,5 +1,5 @@
 import { EntityPool } from "entity-component-system";
-import { SearchNames, ComponentNames as ComponentNames } from "../names";
+import { SearchNames, ComponentNames as ComponentNames } from "../constants";
 import { TimeTrigger } from "../component/timeTrigger";
 
 let time = -1;
