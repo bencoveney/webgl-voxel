@@ -1,5 +1,6 @@
 import { loadModel, getModel, addModel } from "./voxel/model";
 import { groupVoxels } from "./voxel/groupVoxels";
+import { CHUNK_SIZE } from "./constants";
 
 export function loadWorld(name): Promise<any[]> {
   const loading = document.createElement("div");
@@ -9,13 +10,11 @@ export function loadWorld(name): Promise<any[]> {
 
   const entities: any[] = require(`./${name}.json`);
 
-  return loadSprites(entities).then(
-    () => {
-      const groupedEntities = groupTerrain(entities);
-      document.body.removeChild(loading);
-      return groupedEntities;
-    }
-  );
+  return loadSprites(entities).then(() => {
+    const groupedEntities = groupTerrain(entities);
+    document.body.removeChild(loading);
+    return groupedEntities;
+  });
 }
 
 function loadSprites(entities: any[]): Promise<any> {
@@ -28,20 +27,39 @@ function loadSprites(entities: any[]): Promise<any> {
 }
 
 function groupTerrain(entities: any[]): any[] {
-  const terrainEntities = entities.filter(entity => !!entity.position && !!entity.sprite && !!entity.terrain);
-  const otherEntities = entities.filter(entity => terrainEntities.indexOf(entity) === -1);
+  const terrainEntities = entities.filter(
+    entity => !!entity.position && !!entity.sprite && !!entity.terrain
+  );
+  const otherEntities = entities.filter(
+    entity => terrainEntities.indexOf(entity) === -1
+  );
 
-  const terrainVoxels = terrainEntities.map(({position, sprite}) => ({ position, voxels: getModel(sprite.name).voxels }));
-  const groupedTerrainVoxels = groupVoxels(terrainVoxels);
+  const chunks = new Map<string, any[]>();
+  terrainEntities.forEach(entity => {
+    const chunkX = Math.floor(entity.position.x / CHUNK_SIZE);
+    const chunkZ = Math.floor(entity.position.z / CHUNK_SIZE);
+    const chunkKey = `chunk_${chunkX}_${chunkZ}`;
+    chunks.set(chunkKey, (chunks.get(chunkKey) || []).concat(entity));
+  });
 
-  addModel("grouped_terrain", groupedTerrainVoxels.voxels)
+  let id = 10000;
 
-  otherEntities.push({
-    id: 10000,
-    position: groupedTerrainVoxels.position,
-    sprite: {
-      name: "grouped_terrain"
-    }
+  chunks.forEach((value, key) => {
+    const terrainVoxels = value.map(({ position, sprite }) => ({
+      position,
+      voxels: getModel(sprite.name).voxels
+    }));
+
+    const groupedTerrainVoxels = groupVoxels(terrainVoxels);
+    addModel(key, groupedTerrainVoxels.voxels);
+
+    otherEntities.push({
+      id: id++,
+      position: groupedTerrainVoxels.position,
+      sprite: {
+        name: key
+      }
+    });
   });
 
   return otherEntities;

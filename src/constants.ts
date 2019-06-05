@@ -13,4 +13,5 @@ export const enum SearchNames {
 }
 
 export const GRID_SIZE = 16;
+export const CHUNK_SIZE = 10;
 export const DEBUG = false;
