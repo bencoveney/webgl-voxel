@@ -6,7 +6,8 @@ import { Position, Rotation } from "../component/position";
 import { Sprite } from "../component/sprite";
 import { SearchNames, ComponentNames, GRID_SIZE } from "../constants";
 
-const SKY_COLOR = 0xCCCCCC;
+const CLEAR_COLOR = 0x6DF7C1;
+const SKY_COLOR = 0xEEEEEE;
 
 const scene = new THREE.Scene();
 
@@ -38,7 +39,7 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(window.innerWidth, window.innerHeight, true);
 renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setClearColor(SKY_COLOR);
+renderer.setClearColor(CLEAR_COLOR);
 window.document.body.appendChild(renderer.domElement);
 
 scene.add(new THREE.AmbientLight(SKY_COLOR));

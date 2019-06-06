@@ -7,7 +7,8 @@
     "test": "npm run prod",
     "dev": "webpack-dev-server --mode=development",
     "prod": "webpack --mode=production",
-    "gen_map": "nodemon --ignore src/ ./gen_map.js"
+    "gen_map": "nodemon --ignore src/ ./gen_map.js",
+    "host": "http-server ./docs"
   },
   "repository": {
     "type": "git",
