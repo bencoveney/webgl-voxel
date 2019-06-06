@@ -43,7 +43,6 @@ export function dayNightSystem(entities: EntityPool, deltaTime: number) {
 				path.x = Math.floor(Math.random() * 10) - 5,
 				path.y = 1,
 				path.z = Math.floor(Math.random() * 10) - 5
-				console.log(`Moving to ${path.x}, ${path.z}`)
 			}
 		})
 	}

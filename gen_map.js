@@ -3,7 +3,7 @@ const path = require("path");
 
 const files = fs
   .readdirSync("./src/models")
-  .filter(name => name.startsWith("terrain-"))
+  .filter(name => name.startsWith("islands-"))
   .map(name => path.basename(name, ".png"));
 
 let world = [];
@@ -21,174 +21,6 @@ function setAtPosition(x, y, z, rotation, name) {
     .concat([{ position: { x, y, z, rotation }, sprite: { name } }]);
 }
 
-// World floor
-for (let x = 0; x < 10; x++) {
-  for (let z = 0; z < 10; z++) {
-    setAtPosition(x, 0, z, 0, "grass");
-  }
-}
-
-// Raised floor
-for (let x = 6; x < 10; x++) {
-  for (let z = 0; z < 3; z++) {
-    setAtPosition(x, 1, z, 0, "grass");
-  }
-}
-for (let x = 4; x < 10; x++) {
-  for (let z = 0; z < 1; z++) {
-    setAtPosition(x, 1, z, 0, "grass");
-  }
-}
-
-// Lake floor
-for (let x = 6; x < 10; x++) {
-  for (let z = 6; z < 10; z++) {
-    setAtPosition(x, 0, z, 0, "lake");
-  }
-}
-for (let x = 4; x < 10; x++) {
-  for (let z = 8; z < 10; z++) {
-    setAtPosition(x, 0, z, 0, "lake");
-  }
-}
-
-// Cliff edges
-setAtPosition(4, 1, 0, 2, "cliff_corner_outer");
-setAtPosition(5, 1, 0, 3, "cliff_straight");
-setAtPosition(6, 1, 0, 2, "cliff_corner_inner");
-setAtPosition(6, 1, 1, 2, "cliff_straight");
-setAtPosition(6, 1, 2, 2, "cliff_corner_outer");
-setAtPosition(8, 1, 2, 3, "cliff_straight");
-setAtPosition(9, 1, 2, 3, "cliff_straight");
-
-// Stream
-setAtPosition(7, 0, 2, 3, "waterfall_base");
-setAtPosition(7, 0, 3, 3, "stream_straight");
-setAtPosition(7, 0, 4, 3, "stream_stone_bridge");
-setAtPosition(7, 0, 5, 3, "stream_straight");
-setAtPosition(7, 0, 6, 3, "lake_entry");
-
-setAtPosition(7, 1, 0, 3, "stream_straight");
-setAtPosition(7, 1, 1, 3, "stream_stepping_stones");
-setAtPosition(7, 1, 2, 3, "waterfall_top");
-
-// Lake edge
-setAtPosition(4, 0, 9, 0, "lake_edge_straight");
-setAtPosition(4, 0, 8, 3, "lake_edge_inner");
-setAtPosition(5, 0, 8, 3, "lake_edge_straight");
-setAtPosition(6, 0, 8, 3, "lake_edge_outer");
-setAtPosition(6, 0, 7, 0, "lake_edge_pier");
-setAtPosition(6, 0, 6, 3, "lake_edge_inner");
-setAtPosition(8, 0, 6, 3, "lake_edge_straight");
-setAtPosition(9, 0, 6, 3, "lake_edge_straight");
-
-setAtPosition(8, 0, 8, 1, "lake_boat");
-setAtPosition(6, 0, 9, 0, "lake_lilly");
-
-// Castle
-function createCastleSection(
-  x,
-  z,
-  rotation,
-  base,
-  bottom,
-  mid,
-  top,
-  crenellations
-) {
-  setAtPosition(x, 0, z, rotation, base);
-  setAtPosition(x, 1, z, rotation, bottom);
-  setAtPosition(x, 2, z, rotation, mid);
-  setAtPosition(x, 3, z, rotation, top);
-  setAtPosition(x, 4, z, rotation, crenellations);
-}
-
-function createCastleCorner(x, z, rotation) {
-  createCastleSection(
-    x,
-    z,
-    rotation,
-    "castle_outer_base",
-    "castle_outer_wall_bottom",
-    "castle_outer_wall_mid",
-    "castle_outer_wall_top",
-    "castle_outer_crenellation"
-  );
-}
-
-createCastleCorner(0, 2, 1);
-createCastleCorner(4, 2, 0);
-createCastleCorner(4, 6, 3);
-createCastleCorner(0, 6, 2);
-
-function createCastleWall(x, z, rotation) {
-  createCastleSection(
-    x,
-    z,
-    rotation,
-    "castle_straight_base",
-    "castle_straight_wall_bottom",
-    "castle_straight_wall_mid",
-    "castle_straight_wall_top",
-    "castle_straight_crenellation"
-  );
-}
-
-function createCastleWindow(x, z, rotation) {
-  createCastleSection(
-    x,
-    z,
-    rotation,
-    "castle_straight_base",
-    "castle_window_bottom",
-    "castle_window_top",
-    "castle_straight_wall_top",
-    "castle_straight_crenellation"
-  );
-}
-
-function createCastleDoor(x, z, rotation) {
-  createCastleSection(
-    x,
-    z,
-    rotation,
-    "castle_arch_base",
-    "castle_arch_bottom",
-    "castle_arch_top",
-    "castle_straight_wall_top",
-    "castle_straight_crenellation"
-  );
-}
-
-createCastleWall(1, 2, 1);
-createCastleWindow(2, 2, 1);
-createCastleWall(3, 2, 1);
-
-createCastleWall(4, 3, 0);
-createCastleDoor(4, 4, 0);
-createCastleWall(4, 5, 0);
-
-createCastleWall(3, 6, 3);
-createCastleWindow(2, 6, 3);
-createCastleWall(1, 6, 3);
-
-createCastleWall(0, 5, 2);
-createCastleWindow(0, 4, 2);
-createCastleWall(0, 3, 2);
-
-for (let x = 1; x < 4; x++) {
-  for (let z = 3; z < 6; z++) {
-    setAtPosition(x, 0, z, 0, "castle_base");
-    setAtPosition(x, 3, z, 0, "castle_roof");
-  }
-}
-
-// Path
-setAtPosition(5, 0, 4, 0, "stone_path_straight");
-setAtPosition(6, 0, 4, 0, "stone_path_straight");
-setAtPosition(8, 0, 4, 0, "stone_path_straight");
-setAtPosition(9, 0, 4, 0, "stone_path_straight");
-
 function getSpriteName(name) {
   const found = files.filter(file => file.endsWith(name));
   if (found.length !== 1) {
@@ -199,25 +31,309 @@ function getSpriteName(name) {
 
 let id = 0;
 
-const walkableTiles = [
-  "castle_base",
-  "castle_roof",
-  "castle_arch_base",
-  "lake_edge_pier",
-  "cliff_corner_inner",
-  "cliff_corner_outer",
-  "cliff_straight",
-  "stone_path_end",
-  "stream_stone_bridge",
-  "stone_path_corner",
-  "stone_path_straight",
-  "dirt_path_end",
-  "dirt_path_corner",
-  "dirt_path_straight",
-  "stream_wood_bridge",
-  "stream_stepping_stones",
-  "grass"
-];
+const csv = `,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,grass,grass,grass,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,,,,grass,grass,grass,grass,grass,grass,grass,grass,,,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,,,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,,,grass,grass,house,house,house,house,house,house,grass,grass,,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,,,grass,grass,house,house,house,house,house,house,grass,grass,,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,,grass,grass,grass,house,house,house,house,house,house,grass,grass,grass,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,walkway,grass,grass,grass,house,house,house,house,house,house,grass,grass,grass,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,walkway,grass,grass,grass,house,house,house,house,house,house,grass,grass,grass,,,,grass,grass,grass,grass,grass,grass,,,,
+,,,,,,,,,,,walkway,walkway,,grass,grass,grass,house,house,house,house,house,house,grass,grass,grass,,,grass,grass,grass,grass,grass,grass,grass,grass,,,
+,,,,,,,,,,,walkway,walkway,,,grass,grass,grass,grass,house,house,house,house,grass,grass,grass,,,grass,house,house,house,house,house,house,grass,grass,,
+,,,,,,,,,,,walkway,walkway,,,,grass,grass,grass,house,house,house,house,grass,grass,walkway,walkway,grass,grass,house,house,house,house,house,house,grass,grass,grass,
+,,,,,,,,,,,walkway,walkway,,,,,grass,grass,grass,grass,grass,grass,grass,grass,walkway,walkway,grass,grass,house,house,house,house,house,house,grass,grass,grass,
+,,,,,,,,,,,walkway,walkway,,,,,,grass,grass,grass,grass,grass,grass,,,,grass,grass,house,house,house,house,house,house,grass,grass,grass,
+,,,,,,,,,,,walkway,walkway,,,,,,,,grass,grass,grass,,,,grass,grass,grass,house,house,house,house,house,house,grass,grass,grass,grass
+,,,,,,,,,,,walkway,walkway,,,,grass,grass,,,,,,,grass,grass,grass,grass,grass,house,house,house,house,house,house,grass,grass,grass,grass
+,,,,,,,,,,,walkway,walkway,,,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,house,house,house,house,house,house,grass,grass,grass,grass
+,,,,,,,,,,,walkway,walkway,,,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,house,house,house,house,house,house,grass,grass,grass,grass
+,,,,,,,,,,,walkway,walkway,,grass,grass,grass,grass,grass,grass,grass,house,house,house,house,house,house,house,house,house,house,house,house,house,house,grass,grass,grass,grass
+,,,,,,,,,,,walkway,walkway,,grass,grass,grass,grass,grass,grass,grass,house,house,house,house,house,house,house,house,house,house,house,house,house,house,grass,grass,grass,grass
+,,,,,,,,,,,walkway,walkway,,grass,grass,grass,grass,grass,grass,grass,house,house,house,house,house,house,house,house,house,house,house,house,house,house,grass,grass,grass,grass
+,,,,,,,,,,,walkway,walkway,,,grass,grass,grass,grass,grass,grass,house,house,house,house,house,house,house,house,house,house,house,house,house,house,grass,grass,grass,grass
+,,,,,,,,,,,walkway,walkway,,,,grass,grass,grass,grass,grass,house,house,house,house,house,house,house,house,house,house,house,house,house,house,grass,grass,grass,grass
+,,,,,,,,,grass,grass,grass,grass,grass,grass,,,,grass,grass,grass,house,house,house,house,house,house,house,house,house,house,house,house,house,house,grass,grass,grass,
+,,,,,,,,grass,grass,grass,grass,grass,grass,grass,grass,,,,grass,grass,house,house,house,house,house,house,house,house,house,house,house,house,house,house,grass,grass,,
+,,,,,,,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,,,,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,,,
+,,,,,,,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,,,,,,,,,,walkway,walkway,,,,,,,,,,,
+walkway,walkway,walkway,walkway,walkway,walkway,walkway,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway
+walkway,walkway,walkway,walkway,walkway,walkway,walkway,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway,walkway
+,,,,,,,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,grass,grass,grass,grass,grass,grass,grass,grass,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,grass,grass,grass,grass,grass,grass,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,walkway,walkway,,,,,,,,,,,,,,,,,,,,,,,,,,`;
+
+const cells = csv
+  .split(/[\r\n]+/)
+  //.reverse()
+  .map(
+    (line, row) =>
+      line
+        .split(",")
+        //.reverse()
+        .map((cell, column) => ({ cell, row, column }))
+    //.reverse()
+  );
+//.reverse();
+
+function getAtPosition(row, column) {
+  const foundRow = cells[row];
+
+  if (!foundRow) {
+    return undefined;
+  }
+
+  const foundColumn = foundRow[column];
+
+  if (!foundColumn) {
+    return undefined;
+  }
+
+  return foundColumn.cell;
+}
+
+function is(cell, types) {
+  return types.indexOf(cell) >= 0 ? 1 : 0;
+}
+
+cells.forEach(row =>
+  row.forEach(({ cell, row, column }) => {
+    switch (cell) {
+      case "":
+        break;
+      case "walkway":
+        {
+          const tile = Math.random() >= 0.2 ? "walkway_1" : "walkway_2";
+          const rotation = Math.floor(Math.random() * 4);
+          setAtPosition(column, 0, row, rotation, tile);
+
+          function doPathEdge(row, column) {
+            const maybeAir = getAtPosition(row, column);
+            if (maybeAir !== "") {
+              return;
+            }
+
+            const pathAbove = is(getAtPosition(row - 1, column), ["walkway"]);
+            const pathRight = is(getAtPosition(row, column + 1), ["walkway"]);
+            const pathBelow = is(getAtPosition(row + 1, column), ["walkway"]);
+            const pathLeft = is(getAtPosition(row, column - 1), ["walkway"]);
+            const pathTotal = pathAbove + pathRight + pathBelow + pathLeft;
+
+            let tileBase;
+            let tileAbove;
+            let rotation = 0;
+
+            switch (pathTotal) {
+              case 0:
+                throw new Error("Unexpected surrounding blocks");
+              case 1:
+                tileBase = "walkway_base_straight";
+                tileAbove = "walkway_rope_straight";
+                if (pathAbove === 1) {
+                  rotation = 1;
+                } else if (pathRight === 1) {
+                  rotation = 0;
+                } else if (pathBelow === 1) {
+                  rotation = 3;
+                } else if (pathLeft === 1) {
+                  rotation = 2;
+                }
+                break;
+              case 2:
+                tileBase = "walkway_base_in";
+                tileAbove = "walkway_rope_in";
+                if (pathAbove === 0 && pathRight === 0) {
+                  rotation = 2;
+                } else if (pathRight === 0 && pathBelow === 0) {
+                  rotation = 1;
+                } else if (pathBelow === 0 && pathLeft === 0) {
+                  rotation = 0;
+                } else if (pathLeft === 0 && pathAbove === 0) {
+                  rotation = 3;
+                }
+                break;
+              case 3:
+                throw new Error("Unexpected surrounding blocks");
+              case 4:
+                throw new Error("Unexpected surrounding blocks");
+            }
+
+            setAtPosition(column, 0, row, rotation, tileBase);
+            setAtPosition(column, 1, row, rotation, tileAbove);
+          }
+
+          doPathEdge(row - 1, column);
+          doPathEdge(row, column + 1);
+          doPathEdge(row + 1, column);
+          doPathEdge(row, column - 1);
+        }
+        break;
+      case "grass":
+        {
+          const solid = ["grass", "house"];
+          const grassAbove = is(getAtPosition(row - 1, column), solid);
+          const grassRight = is(getAtPosition(row, column + 1), solid);
+          const grassBelow = is(getAtPosition(row + 1, column), solid);
+          const grassLeft = is(getAtPosition(row, column - 1), solid);
+          const grassTotal = grassAbove + grassBelow + grassLeft + grassRight;
+
+          let tile = "grass";
+          let rotation = 0;
+
+          switch (grassTotal) {
+            case 0:
+              throw new Error("Unexpected surrounding blocks");
+            case 1:
+              throw new Error("Unexpected surrounding blocks");
+            case 2:
+              tile = `edge1_corner_out_${Math.floor(Math.random() * 6) + 1}`;
+
+              if (grassAbove === 0 && grassRight === 0) {
+                rotation = 0;
+              } else if (grassRight === 0 && grassBelow === 0) {
+                rotation = 3;
+              } else if (grassBelow === 0 && grassLeft === 0) {
+                rotation = 2;
+              } else if (grassLeft === 0 && grassAbove === 0) {
+                rotation = 1;
+              }
+              break;
+            case 3:
+              tile = `edge1_straight_${Math.floor(Math.random() * 4) + 1}`;
+
+              if (grassAbove === 0) {
+                rotation = 1;
+              } else if (grassRight === 0) {
+                rotation = 0;
+              } else if (grassBelow === 0) {
+                rotation = 3;
+              } else if (grassLeft === 0) {
+                rotation = 2;
+              }
+              break;
+            case 4:
+              // TODO:
+              tile = "edge1_corner_in_1";
+              tile = "grass";
+              break;
+          }
+
+          setAtPosition(column, 0, row, rotation, tile);
+        }
+        break;
+      case "house":
+        {
+          const houseUp = is(getAtPosition(row - 1, column), ["house"]);
+          const houseRight = is(getAtPosition(row, column + 1), ["house"]);
+          const houseDown = is(getAtPosition(row + 1, column), ["house"]);
+          const houseLeft = is(getAtPosition(row, column - 1), ["house"]);
+          const houseTotal = houseUp + houseRight + houseDown + houseLeft;
+
+          switch (houseTotal) {
+            case 0:
+              throw new Error("Unexpected surrounding blocks");
+            case 1:
+              throw new Error("Unexpected surrounding blocks");
+            case 2:
+              {
+                let rotation = 0;
+
+                if (houseUp === 0 && houseRight === 0) {
+                  rotation = 1;
+                } else if (houseRight === 0 && houseDown === 0) {
+                  rotation = 0;
+                } else if (houseDown === 0 && houseLeft === 0) {
+                  rotation = 3;
+                } else if (houseLeft === 0 && houseUp === 0) {
+                  rotation = 2;
+                }
+
+                setAtPosition(column, 0, row, 0, "grass");
+                setAtPosition(column, 1, row, rotation, "wall_out");
+                setAtPosition(column, 2, row, rotation, "wall_out");
+              }
+              break;
+            case 3:
+              {
+                let rotation = 0;
+
+                if (houseUp === 0) {
+                  rotation = 1;
+                } else if (houseRight === 0) {
+                  rotation = 0;
+                } else if (houseDown === 0) {
+                  rotation = 3;
+                } else if (houseLeft === 0) {
+                  rotation = 2;
+                }
+
+                setAtPosition(column, 0, row, 0, "grass");
+                setAtPosition(column, 1, row, rotation, "wall_straight");
+                setAtPosition(column, 2, row, rotation, "wall_straight");
+              }
+              break;
+            case 4:
+              {
+                const houseUpRight = is(getAtPosition(row - 1, column + 1), [
+                  "house"
+                ]);
+                const houseDownRight = is(getAtPosition(row + 1, column + 1), [
+                  "house"
+                ]);
+                const houseDownLeft = is(getAtPosition(row + 1, column - 1), [
+                  "house"
+                ]);
+                const houseUpLeft = is(getAtPosition(row - 1, column - 1), [
+                  "house"
+                ]);
+                const diagonalTotal =
+                  houseUpRight + houseDownRight + houseDownLeft + houseUpLeft;
+
+                if (diagonalTotal === 4) {
+                  setAtPosition(column, 0, row, 0, "carpet_1");
+                  return;
+                }
+
+                let rotation = 0;
+
+                if (houseUpRight === 0) {
+                  rotation = 1;
+                } else if (houseDownRight === 0) {
+                  rotation = 0;
+                } else if (houseDownLeft === 0) {
+                  rotation = 3;
+                } else if (houseUpLeft === 0) {
+                  rotation = 2;
+                }
+
+                setAtPosition(column, 0, row, 0, "grass");
+                setAtPosition(column, 1, row, rotation, "wall_in");
+                setAtPosition(column, 2, row, rotation, "wall_in");
+              }
+              break;
+          }
+        }
+        break;
+    }
+  })
+);
+
+const walkableTiles = [];
 
 const withIds = world.map(model => ({
   ...model,

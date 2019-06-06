@@ -6,7 +6,7 @@ import { Position, Rotation } from "../component/position";
 import { Sprite } from "../component/sprite";
 import { SearchNames, ComponentNames, GRID_SIZE } from "../constants";
 
-const SKY_COLOR = 0x8080a0;
+const SKY_COLOR = 0xCCCCCC;
 
 const scene = new THREE.Scene();
 
