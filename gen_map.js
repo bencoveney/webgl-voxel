@@ -52,8 +52,8 @@ const csv = `,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,walkway,walkway,,,,grass,grass,,,,,,,grass,grass,grass,grass,grass,house,house,house,house,house,house,grass,grass,grass,grass
 ,,,,,,,,,,,walkway,walkway,,,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,house,house,house,house,house,house,grass,grass,grass,grass
 ,,,,,,,,,,,walkway,walkway,,,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,grass,house,house,house,house,house,house,grass,grass,grass,grass
-,,,,,,,,,,,walkway,walkway,,grass,grass,grass,grass,grass,grass,grass,house,house,house,house,house,house,house,house,house,house,house,house,house,house,grass,grass,grass,grass
-,,,,,,,,,,,walkway,walkway,,grass,grass,grass,grass,grass,grass,grass,house,house,house,house,house,house,house,house,house,house,house,house,house,house,grass,grass,grass,grass
+,,,,,,,,,,,walkway,walkway,walkway,grass,grass,grass,grass,grass,grass,grass,house,house,house,house,house,house,house,house,house,house,house,house,house,house,grass,grass,grass,grass
+,,,,,,,,,,,walkway,walkway,walkway,grass,grass,grass,grass,grass,grass,grass,house,house,house,house,house,house,house,house,house,house,house,house,house,house,grass,grass,grass,grass
 ,,,,,,,,,,,walkway,walkway,,grass,grass,grass,grass,grass,grass,grass,house,house,house,house,house,house,house,house,house,house,house,house,house,house,grass,grass,grass,grass
 ,,,,,,,,,,,walkway,walkway,,,grass,grass,grass,grass,grass,grass,house,house,house,house,house,house,house,house,house,house,house,house,house,house,grass,grass,grass,grass
 ,,,,,,,,,,,walkway,walkway,,,,grass,grass,grass,grass,grass,house,house,house,house,house,house,house,house,house,house,house,house,house,house,grass,grass,grass,grass
@@ -192,6 +192,15 @@ cells.forEach(row =>
           const grassLeft = is(getAtPosition(row, column - 1), solid);
           const grassTotal = grassAbove + grassBelow + grassLeft + grassRight;
 
+          let isIsolated = true;
+          for (let x = row - 2; x <= row + 2; x++) {
+            for (let y = column - 2; y <= column + 2; y++) {
+              if (is(getAtPosition(x, y), ["house", "walkway"]) === 1) {
+                isIsolated = false;
+              }
+            }
+          }
+
           let tile = "grass";
           let rotation = 0;
 
@@ -201,7 +210,6 @@ cells.forEach(row =>
             case 1:
               throw new Error("Unexpected surrounding blocks");
             case 2:
-              tile = `edge1_corner_out_${Math.floor(Math.random() * 6) + 1}`;
 
               if (grassAbove === 0 && grassRight === 0) {
                 rotation = 0;
@@ -212,9 +220,19 @@ cells.forEach(row =>
               } else if (grassLeft === 0 && grassAbove === 0) {
                 rotation = 1;
               }
+
+              if (isIsolated) {
+                tile = `edge2_corner_out_${Math.floor(Math.random() * 6) + 1}`;
+                setAtPosition(column, 0, row, rotation, tile);
+                isolated = `fence1_out_${Math.floor(Math.random() * 4) + 1}`;
+                setAtPosition(column, 1, row, rotation, isolated);
+              } else {
+                tile = `edge1_corner_out_${Math.floor(Math.random() * 6) + 1}`;
+                setAtPosition(column, 0, row, rotation, tile);
+              }
+
               break;
             case 3:
-              tile = `edge1_straight_${Math.floor(Math.random() * 4) + 1}`;
 
               if (grassAbove === 0) {
                 rotation = 1;
@@ -225,15 +243,25 @@ cells.forEach(row =>
               } else if (grassLeft === 0) {
                 rotation = 2;
               }
+
+              if (isIsolated) {
+                tile = `edge2_straight_${Math.floor(Math.random() * 4) + 1}`;
+                setAtPosition(column, 0, row, rotation, tile);
+                isolated = `fence1_straight_${Math.floor(Math.random() * 3) + 1}`;
+                setAtPosition(column, 1, row, rotation, isolated);
+              } else {
+                tile = `edge1_straight_${Math.floor(Math.random() * 4) + 1}`;
+                setAtPosition(column, 0, row, rotation, tile);
+              }
               break;
             case 4:
               // TODO:
               tile = "edge1_corner_in_1";
               tile = "grass";
+
+              setAtPosition(column, 0, row, rotation, tile);
               break;
           }
-
-          setAtPosition(column, 0, row, rotation, tile);
         }
         break;
       case "house":

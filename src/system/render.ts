@@ -7,7 +7,7 @@ import { Sprite } from "../component/sprite";
 import { SearchNames, ComponentNames, GRID_SIZE } from "../constants";
 
 const CLEAR_COLOR = 0x6DF7C1;
-const SKY_COLOR = 0xEEEEEE;
+const SKY_COLOR = 0xDDDDDD;
 
 const scene = new THREE.Scene();
 
