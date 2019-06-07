@@ -1,20 +1,44 @@
 import { loadModel, getModel, addModel } from "./voxel/model";
 import { groupVoxels } from "./voxel/groupVoxels";
 import { CHUNK_SIZE } from "./constants";
+import { resolve } from "url";
 
 export function loadWorld(name): Promise<any[]> {
-  const loading = document.createElement("div");
-  loading.setAttribute("id", "loading");
-  loading.innerText = "Loading!";
-  document.body.appendChild(loading);
+  createScreen();
 
   const entities: any[] = require(`./${name}.json`);
 
-  return loadSprites(entities).then(() => {
-    const groupedEntities = groupTerrain(entities);
-    document.body.removeChild(loading);
-    return groupedEntities;
-  });
+  return loadSprites(entities)
+    .then(() => groupTerrain(entities))
+    .then(groupedEntities => {
+      destroyScreen();
+
+      return groupedEntities;
+    });
+}
+
+let wrapper: HTMLDivElement;
+let inner: HTMLDivElement;
+
+function createScreen() {
+  wrapper = document.createElement("div");
+  wrapper.setAttribute("id", "loading-wrapper");
+
+  document.body.appendChild(wrapper);
+
+  inner = document.createElement("div");
+  inner.setAttribute("id", "loading");
+
+  inner.innerText = "Loading!";
+
+  wrapper.appendChild(inner);
+}
+
+function destroyScreen() {
+  wrapper.removeChild(inner);
+  document.body.removeChild(wrapper);
+  wrapper = undefined;
+  inner = undefined;
 }
 
 function loadSprites(entities: any[]): Promise<any> {
@@ -45,21 +69,21 @@ function groupTerrain(entities: any[]): any[] {
   let id = 10000;
 
   chunks.forEach((value, key) => {
-    const terrainVoxels = value.map(({ position, sprite }) => ({
-      position,
-      voxels: getModel(sprite.name).voxels
-    }));
+        const terrainVoxels = value.map(({ position, sprite }) => ({
+          position,
+          voxels: getModel(sprite.name).voxels
+        }));
 
-    const groupedTerrainVoxels = groupVoxels(terrainVoxels);
-    addModel(key, groupedTerrainVoxels.voxels);
+        const groupedTerrainVoxels = groupVoxels(terrainVoxels);
+        addModel(key, groupedTerrainVoxels.voxels);
 
-    otherEntities.push({
-      id: id++,
-      position: groupedTerrainVoxels.position,
-      sprite: {
-        name: key
-      }
-    });
+        otherEntities.push({
+          id: id++,
+          position: groupedTerrainVoxels.position,
+          sprite: {
+            name: key
+          }
+        });
   });
 
   return otherEntities;
