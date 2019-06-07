@@ -49,6 +49,29 @@ scene.add( directionalLight );
 
 let needsRender = false;
 
+export const intersectionPoint: {x?: number, y?: number, z?: number} = {};
+
+const sceneObjects = [];
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+function onDocumentMouseMove( event ) {
+  event.preventDefault();
+  mouse.set( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1 );
+  raycaster.setFromCamera( mouse, camera );
+  var intersects = raycaster.intersectObjects(sceneObjects);
+  if (intersects.length > 0) {
+    const point = intersects[0].point;
+    intersectionPoint.x = Math.floor(point.x / 16);
+    intersectionPoint.y = Math.floor(point.y / 16);
+    intersectionPoint.z = Math.floor(point.z / 16);
+  } else {
+    intersectionPoint.x = undefined;
+    intersectionPoint.y = undefined;
+    intersectionPoint.z = undefined;
+  }
+}
+
 export function renderSystem(entities: EntityPool, deltaTime: number): void {
   // For each renderable entity...
   entities.find(SearchNames.RENDERABLE).forEach(entityId => {
@@ -84,6 +107,7 @@ export function renderSystem(entities: EntityPool, deltaTime: number): void {
       const object = model.mesh.clone();
       object.matrixAutoUpdate = false;
       scene.add(object);
+      sceneObjects.push(object);
       objects.set(entityId, object);
       setPosition(object, clampedPosition);
       object.updateMatrix();

@@ -1,4 +1,5 @@
 import { hms } from "../system/dayNight";
+import { intersectionPoint } from "../system/render";
 
 const container = document.createElement("div");
 container.id = "ui";
@@ -17,9 +18,20 @@ function getFps(deltaTime) {
 	return Math.floor(1000 / deltaTime);
 }
 
+function getSelection() {
+	if (intersectionPoint.x !== undefined && intersectionPoint.y !== undefined && intersectionPoint.z !== undefined) {
+		return `x ${intersectionPoint.x}, y ${intersectionPoint.y}, z ${intersectionPoint.z}`;
+	}
+	else {
+		return "Nothing";
+	}
+}
+
 export function renderUi(deltaTime: number) {
 	setUi(`Time: ${getTime()}
-FPS: ${getFps(deltaTime)}`);
+FPS: ${getFps(deltaTime)}
+Selected: ${getSelection()}
+`);
 }
 
 let previousUi = ""
