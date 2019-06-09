@@ -405,9 +405,9 @@ withIds.push({
     name: "knight"
   },
   position: {
-    x: 3,
+    x: 6,
     y: 1,
-    z: 0
+    z: 26
   },
   time_trigger: {
     frequency: "hourly",
