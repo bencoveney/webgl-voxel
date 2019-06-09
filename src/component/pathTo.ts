@@ -1,7 +1,6 @@
-export interface PathTo {
-  x: number;
-  y: number;
-  z: number;
+import { Vector3 } from "../utils";
+
+export interface PathTo extends Vector3 {
 }
 
 export function pathToFactory(): PathTo {

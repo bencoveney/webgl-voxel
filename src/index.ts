@@ -7,7 +7,7 @@ import { renderSystem } from "./system/render";
 import { ComponentNames, SearchNames } from "./constants";
 import { terrainFactory } from "./component/terrain";
 import { pathToFactory } from "./component/pathTo";
-import { pathFindSystem } from "./system/pathFind";
+import { pathFindSystem, buildWalkMask } from "./system/pathFind";
 import { dayNightSystem } from "./system/dayNight";
 import { renderUi } from "./ui/render";
 import { timeTriggerFactory } from "./component/timeTrigger";
@@ -28,6 +28,7 @@ function configureEcs(entities: any[]): TickEcs {
 
   entityPool.registerSearch(SearchNames.RENDERABLE, [ComponentNames.SPRITE, ComponentNames.POSITION]);
   entityPool.registerSearch(SearchNames.PATHABLE, [ComponentNames.PATH, ComponentNames.POSITION]);
+  entityPool.registerSearch(SearchNames.TERRAIN, [ComponentNames.TERRAIN, ComponentNames.POSITION]);
   entityPool.registerSearch(SearchNames.TRIGGERABLE, [ComponentNames.TIME_TRIGGER]);
 
   ecs.add(renderSystem);
@@ -35,6 +36,8 @@ function configureEcs(entities: any[]): TickEcs {
   ecs.add(dayNightSystem);
 
   entityPool.load(entities);
+
+  buildWalkMask(entityPool);
 
   return (deltaTime: number) => ecs.run(entityPool, deltaTime);
 }

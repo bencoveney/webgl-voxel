@@ -1,3 +1,5 @@
+import { Vector3 } from "../utils";
+
 export const enum Rotation {
   TURN_0 = 0,
   TURN_1 = 1,
@@ -5,10 +7,7 @@ export const enum Rotation {
   TURN_3 = 3
 }
 
-export interface Position {
-  x: number;
-  y: number;
-  z: number;
+export interface Position extends Vector3 {
   rotation: Rotation;
 }
 

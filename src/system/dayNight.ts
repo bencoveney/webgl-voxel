@@ -1,6 +1,7 @@
 import { EntityPool } from "entity-component-system";
 import { SearchNames, ComponentNames as ComponentNames } from "../constants";
 import { TimeTrigger } from "../component/timeTrigger";
+import { getRandomDestination } from "./pathFind";
 
 let time = -1;
 
@@ -39,10 +40,11 @@ export function dayNightSystem(entities: EntityPool, deltaTime: number) {
 		entities.find(SearchNames.TRIGGERABLE).forEach(entityId => {
 			const {frequency, action} = entities.getComponent<TimeTrigger>(entityId, ComponentNames.TIME_TRIGGER);
 			if (frequency == "hourly" && action == "moveToRandomLocation") {
+				const dest = getRandomDestination();
 				const path = entities.addComponent(entityId, ComponentNames.PATH)
-				path.x = Math.floor(Math.random() * 10) - 5,
-				path.y = 1,
-				path.z = Math.floor(Math.random() * 10) - 5
+				path.x = dest.x;
+				path.y = dest.y;
+				path.z = dest.z;
 			}
 		})
 	}

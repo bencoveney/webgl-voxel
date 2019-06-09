@@ -69,22 +69,24 @@ function groupTerrain(entities: any[]): any[] {
   let id = 10000;
 
   chunks.forEach((value, key) => {
-        const terrainVoxels = value.map(({ position, sprite }) => ({
-          position,
-          voxels: getModel(sprite.name).voxels
-        }));
+    const terrainVoxels = value.map(({ position, sprite }) => ({
+      position,
+      voxels: getModel(sprite.name).voxels
+    }));
 
-        const groupedTerrainVoxels = groupVoxels(terrainVoxels);
-        addModel(key, groupedTerrainVoxels.voxels);
+    const groupedTerrainVoxels = groupVoxels(terrainVoxels);
+    addModel(key, groupedTerrainVoxels.voxels);
 
-        otherEntities.push({
-          id: id++,
-          position: groupedTerrainVoxels.position,
-          sprite: {
-            name: key
-          }
-        });
+    otherEntities.push({
+      id: id++,
+      position: groupedTerrainVoxels.position,
+      sprite: {
+        name: key
+      }
+    });
   });
 
-  return otherEntities;
+  return otherEntities.concat(
+    terrainEntities.map(entity => ({ ...entity, sprite: undefined }))
+  );
 }

@@ -18,6 +18,15 @@ export function fromHexTriplet(hexTriplet: number): Color {
   };
 }
 
+export interface Vector2 {
+  x: number;
+  y: number;
+}
+
+export interface Vector3 extends Vector2 {
+  z: number;
+}
+
 export type LookupData<Index extends number> = { [key in Index]: number } &
   Uint8Array;
 
@@ -35,20 +44,36 @@ export function createMask2d(size: number): Mask2d {
   return array;
 }
 
-export type Mask3d = Array<Array<Array<number>>>;
+export type Mask3d<Value = number> = Array<Array<Array<Value>>>;
 
-export function createMask3d(size: number): Mask3d {
+export function createMask3d<Value = number>(xSize: number, ySize: number, zSize: number): Mask3d<Value> {
   const array = [];
-  for (let x = 0; x < size; x++) {
+  for (let x = 0; x < xSize; x++) {
     const xContent = [];
-    for (let y = 0; y < size; y++) {
+    for (let y = 0; y < ySize; y++) {
       const yContent = [];
-      for (let z = 0; z < size; z++) {
+      for (let z = 0; z < zSize; z++) {
         yContent.push(undefined);
       }
-      array.push(yContent);
+      xContent.push(yContent);
     }
     array.push(xContent);
   }
   return array;
+}
+
+export function mask3dGet<Value>(mask3d: Mask3d<Value>, x: number, y: number, z: number): Value {
+  let xContent = mask3d[x];
+
+  if (xContent === undefined) {
+    return undefined;
+  }
+
+  let yContent = xContent[y];
+
+  if (yContent === undefined) {
+    return undefined;
+  }
+
+  return yContent[z];
 }

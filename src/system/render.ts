@@ -5,7 +5,7 @@ import { getModel } from "../voxel/model";
 import { Position, Rotation } from "../component/position";
 import { Sprite } from "../component/sprite";
 import { SearchNames, ComponentNames, GRID_SIZE } from "../constants";
-
+import { Vector3 } from "../utils";
 const CLEAR_COLOR = 0x6DF7C1;
 const SKY_COLOR = 0xDDDDDD;
 
@@ -49,7 +49,7 @@ scene.add( directionalLight );
 
 let needsRender = false;
 
-export const intersectionPoint: {x?: number, y?: number, z?: number} = {};
+export const intersectionPoint: Partial<Vector3> = {};
 
 const sceneObjects = [];
 const raycaster = new THREE.Raycaster();

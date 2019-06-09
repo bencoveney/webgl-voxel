@@ -361,7 +361,29 @@ cells.forEach(row =>
   })
 );
 
-const walkableTiles = [];
+const walkableTiles = [
+  "edge1_corner_out_1",
+  "edge1_corner_out_2",
+  "edge1_corner_out_3",
+  "edge1_corner_out_4",
+  "edge1_corner_out_5",
+  "edge1_corner_out_6",
+  "edge1_corner_in_1",
+  "edge1_corner_in_2",
+  "edge1_straight_1",
+  "edge1_straight_2",
+  "edge1_straight_3",
+  "edge1_straight_4",
+  "grass",
+  "walkway_1",
+  "walkway_2",
+  "carpet_1",
+  "carpet_2",
+  "carpet_3",
+  "carpet_4",
+  "carpet_5",
+  "carpet_6"
+];
 
 const withIds = world.map(model => ({
   ...model,

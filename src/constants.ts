@@ -9,7 +9,8 @@ export const enum ComponentNames {
 export const enum SearchNames {
 	RENDERABLE = "renderable",
 	PATHABLE = "pathable",
-	TRIGGERABLE = "triggerable"
+	TRIGGERABLE = "triggerable",
+	TERRAIN = "terrain"
 }
 
 export const GRID_SIZE = 16;
