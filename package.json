@@ -8,7 +8,8 @@
     "dev": "webpack-dev-server --mode=development",
     "prod": "webpack --mode=production",
     "gen_map": "nodemon --ignore src/ ./gen_map.js",
-    "host": "http-server ./docs"
+    "host": "http-server ./docs",
+    "itch": "npm run prod && butler push ./docs bencoveney/the-mobius-grand:web"
   },
   "repository": {
     "type": "git",
