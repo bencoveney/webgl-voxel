@@ -1,0 +1,6 @@
+{
+  "watch": ["map"],
+  "ext": "ts",
+  "ignore": [],
+  "exec": "ts-node ./map/index.ts"
+}

@@ -202,6 +202,7 @@ cells.forEach(row =>
           }
 
           let tile = "grass";
+          let isolated = "grass";
           let rotation = 0;
 
           switch (grassTotal) {

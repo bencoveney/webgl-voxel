@@ -1,10 +1,18 @@
 import * as THREE from "three";
-import { FaceData, FaceLookup, Faces } from "./faces";
-import { toHexTriplet, Color } from "../utils";
-import { DEBUG } from "../constants";
+import { FaceData, FaceLookup, Faces } from "../models/voxel/faces";
+import { toHexTriplet, Color } from "../models/voxel/utils";
+import { DEBUG } from "./constants";
 import { Vector3, Mesh } from "three";
 
-export function facesToMesh({
+export function loadModel(name: string): THREE.Mesh {
+  return facesToMesh(getRaw(name));
+}
+
+function getRaw(name: string): Faces {
+  return require("../models/compiled/" + name + ".json");
+}
+
+function facesToMesh({
   topFaces,
   bottomFaces,
   leftFaces,

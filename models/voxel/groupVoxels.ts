@@ -1,6 +1,6 @@
-import { Position, Rotation } from "../component/position";
+import { Position, Rotation } from "../../src/component/position";
 import { Voxels, VoxelLookup } from "./voxels";
-import { GRID_SIZE } from "../constants";
+import { GRID_SIZE } from "../../src/constants";
 
 export interface PositionedVoxel {
   position: Position;

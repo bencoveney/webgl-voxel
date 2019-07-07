@@ -1,13 +1,14 @@
-import * as THREE from "three";
 import "three/examples/js/controls/OrbitControls";
+import "three/examples/js/loaders/deprecated/LegacyJSONLoader";
 import { EntityPool } from "entity-component-system";
-import { getModel } from "../voxel/model";
 import { Position, Rotation } from "../component/position";
 import { Sprite } from "../component/sprite";
 import { SearchNames, ComponentNames, GRID_SIZE } from "../constants";
 import { Vector3 } from "../utils";
-const CLEAR_COLOR = 0x6DF7C1;
-const SKY_COLOR = 0xDDDDDD;
+import * as THREE from "three";
+import { loadModel } from "../modelLoader";
+const CLEAR_COLOR = 0x6df7c1;
+const SKY_COLOR = 0xdddddd;
 
 const scene = new THREE.Scene();
 
@@ -28,14 +29,13 @@ camera.rotation.x = Math.atan(-1 / Math.sqrt(2));
 
 const controls = new (THREE as any).OrbitControls(camera) as any;
 controls.update();
-controls.addEventListener("change", () => needsRender = true);
+controls.addEventListener("change", () => (needsRender = true));
 
 const renderer = new THREE.WebGLRenderer({
   antialias: false,
   alpha: false,
   stencil: false,
-  powerPreference: "high-performance",
-
+  powerPreference: "high-performance"
 });
 renderer.setSize(window.innerWidth, window.innerHeight, true);
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -44,8 +44,8 @@ window.document.body.appendChild(renderer.domElement);
 
 scene.add(new THREE.AmbientLight(SKY_COLOR));
 
-var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-scene.add( directionalLight );
+var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+scene.add(directionalLight);
 
 let needsRender = false;
 
@@ -54,11 +54,14 @@ export const intersectionPoint: Partial<Vector3> = {};
 const sceneObjects = [];
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
-document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-function onDocumentMouseMove( event ) {
+document.addEventListener("mousemove", onDocumentMouseMove, false);
+function onDocumentMouseMove(event) {
   event.preventDefault();
-  mouse.set( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1 );
-  raycaster.setFromCamera( mouse, camera );
+  mouse.set(
+    (event.clientX / window.innerWidth) * 2 - 1,
+    -(event.clientY / window.innerHeight) * 2 + 1
+  );
+  raycaster.setFromCamera(mouse, camera);
   var intersects = raycaster.intersectObjects(sceneObjects);
   if (intersects.length > 0) {
     const point = intersects[0].point;
@@ -75,8 +78,14 @@ function onDocumentMouseMove( event ) {
 export function renderSystem(entities: EntityPool, deltaTime: number): void {
   // For each renderable entity...
   entities.find(SearchNames.RENDERABLE).forEach(entityId => {
-    const sprite = entities.getComponent<Sprite>(entityId, ComponentNames.SPRITE);
-    const position = entities.getComponent<Position>(entityId, ComponentNames.POSITION);
+    const sprite = entities.getComponent<Sprite>(
+      entityId,
+      ComponentNames.SPRITE
+    );
+    const position = entities.getComponent<Position>(
+      entityId,
+      ComponentNames.POSITION
+    );
     const clampedPosition = clampPosition(position);
     const entityHash = hashComponents(sprite, clampedPosition);
 
@@ -102,9 +111,9 @@ export function renderSystem(entities: EntityPool, deltaTime: number): void {
     }
 
     // Does the model exist?
-    const model = getModel(sprite.name);
-    if (model) {
-      const object = model.mesh.clone();
+    const mesh = loadModel(sprite.name);
+    if (mesh) {
+      const object = mesh.clone();
       object.matrixAutoUpdate = false;
       scene.add(object);
       sceneObjects.push(object);

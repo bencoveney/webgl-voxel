@@ -1,6 +1,6 @@
 import { Faces, FaceData } from "./faces";
 import { Voxels, VoxelLookup } from "./voxels";
-import { createMask2d, toHexTriplet, Mask2d, fromHexTriplet } from "../utils";
+import { createMask2d, toHexTriplet, Mask2d, fromHexTriplet } from "./utils";
 
 export function voxelsToFaces(voxels: Voxels): Faces {
   const faces: Faces = {

@@ -1,0 +1,6 @@
+{
+  "watch": ["models"],
+  "ext": "ts",
+  "ignore": [],
+  "exec": "ts-node ./models/index.ts"
+}

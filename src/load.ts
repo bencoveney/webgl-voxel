@@ -1,20 +1,14 @@
-import { loadModel, getModel, addModel } from "./voxel/model";
-import { groupVoxels } from "./voxel/groupVoxels";
 import { CHUNK_SIZE } from "./constants";
-import { resolve } from "url";
+import { Position } from "./component/position";
 
-export function loadWorld(name): Promise<any[]> {
+export function loadWorld(name): any[] {
   createScreen();
 
   const entities: any[] = require(`./${name}.json`);
 
-  return loadSprites(entities)
-    .then(() => groupTerrain(entities))
-    .then(groupedEntities => {
-      destroyScreen();
-
-      return groupedEntities;
-    });
+  const groupedEntities = groupTerrain(entities);
+  destroyScreen();
+  return groupedEntities;
 }
 
 let wrapper: HTMLDivElement;
@@ -41,15 +35,6 @@ function destroyScreen() {
   inner = undefined;
 }
 
-function loadSprites(entities: any[]): Promise<any> {
-  const spritesToLoad = new Set<string>();
-  entities.forEach(
-    entity => entity.sprite && spritesToLoad.add(entity.sprite.name)
-  );
-
-  return Promise.all(Array.from(spritesToLoad.values()).map(loadModel));
-}
-
 function groupTerrain(entities: any[]): any[] {
   const terrainEntities = entities.filter(
     entity => !!entity.position && !!entity.sprite && !!entity.terrain
@@ -69,17 +54,13 @@ function groupTerrain(entities: any[]): any[] {
   let id = 10000;
 
   chunks.forEach((value, key) => {
-    const terrainVoxels = value.map(({ position, sprite }) => ({
-      position,
-      voxels: getModel(sprite.name).voxels
-    }));
+    const terrainVoxels = value.map(({ position }) => position);
 
-    const groupedTerrainVoxels = groupVoxels(terrainVoxels);
-    addModel(key, groupedTerrainVoxels.voxels);
+    const position = getGroupPosition(terrainVoxels);
 
     otherEntities.push({
       id: id++,
-      position: groupedTerrainVoxels.position,
+      position,
       sprite: {
         name: key
       }
@@ -89,4 +70,29 @@ function groupTerrain(entities: any[]): any[] {
   return otherEntities.concat(
     terrainEntities.map(entity => ({ ...entity, sprite: undefined }))
   );
+}
+
+function getGroupPosition(positions: Position[]): Position {
+  let minX = positions[0].x;
+  let maxX = positions[0].x;
+  let minY = positions[0].y;
+  let maxY = positions[0].y;
+  let minZ = positions[0].z;
+  let maxZ = positions[0].z;
+
+  positions.forEach(position => {
+    minX = Math.min(position.x, minX);
+    maxX = Math.max(position.x, maxX);
+    minY = Math.min(position.y, minY);
+    maxY = Math.max(position.y, maxY);
+    minZ = Math.min(position.z, minZ);
+    maxZ = Math.max(position.z, maxZ);
+  });
+
+  return {
+    x: minX,
+    y: minY,
+    z: minZ,
+    rotation: 0
+  };
 }

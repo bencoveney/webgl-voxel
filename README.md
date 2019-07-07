@@ -6,6 +6,8 @@ Playing with voxels in webgl using Three.js - [Demo](https://bencoveney.github.i
 
 ## Voxel Model Loading
 
+### Compile Time:
+
 - *Load image*
 - **Sprite**: `.png` data
 - *Parse image*
@@ -13,5 +15,8 @@ Playing with voxels in webgl using Three.js - [Demo](https://bencoveney.github.i
 - TODO: *Group static voxels into bigger sets*
 - *Calculate + combine visible sides of voxels*
 - **Faces**: face data - `x, y, z, rotation, width, height, r, g, b`
+
+### Run Time:
+
 - *Create ThreeJS mesh*
 - **THREE.Mesh**

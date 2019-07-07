@@ -7,7 +7,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-88-edge2_corner_out_5"
+      "name": "islands-92-edge2_corner_out_1"
     },
     "id": 0,
     "terrain": {
@@ -37,7 +37,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-82-edge2_straight_3"
+      "name": "islands-84-edge2_straight_1"
     },
     "id": 2,
     "terrain": {
@@ -52,7 +52,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-75-fence1_straight_1"
+      "name": "islands-73-fence1_straight_3"
     },
     "id": 3,
     "terrain": {
@@ -67,7 +67,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-90-edge2_corner_out_3"
+      "name": "islands-88-edge2_corner_out_5"
     },
     "id": 4,
     "terrain": {
@@ -82,7 +82,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-77-fence1_out_4"
+      "name": "islands-78-fence1_out_3"
     },
     "id": 5,
     "terrain": {
@@ -94,10 +94,10 @@
       "x": 6,
       "y": 0,
       "z": 0,
-      "rotation": 2
+      "rotation": 3
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 6,
     "terrain": {
@@ -169,7 +169,7 @@
       "x": 7,
       "y": 0,
       "z": 0,
-      "rotation": 3
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -247,7 +247,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-101-edge1_corner_out_5"
+      "name": "islands-102-edge1_corner_out_4"
     },
     "id": 16,
     "terrain": {
@@ -307,7 +307,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-96-edge1_straight_2"
+      "name": "islands-97-edge1_straight_1"
     },
     "id": 20,
     "terrain": {
@@ -322,7 +322,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-94-edge1_straight_4"
+      "name": "islands-97-edge1_straight_1"
     },
     "id": 21,
     "terrain": {
@@ -337,7 +337,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-95-edge1_straight_3"
+      "name": "islands-94-edge1_straight_4"
     },
     "id": 22,
     "terrain": {
@@ -352,7 +352,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-102-edge1_corner_out_4"
+      "name": "islands-103-edge1_corner_out_3"
     },
     "id": 23,
     "terrain": {
@@ -409,10 +409,10 @@
       "x": 7,
       "y": 0,
       "z": 1,
-      "rotation": 0
+      "rotation": 2
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 27,
     "terrain": {
@@ -592,7 +592,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-101-edge1_corner_out_5"
+      "name": "islands-100-edge1_corner_out_6"
     },
     "id": 39,
     "terrain": {
@@ -604,10 +604,10 @@
       "x": 6,
       "y": 0,
       "z": 2,
-      "rotation": 1
+      "rotation": 3
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 40,
     "terrain": {
@@ -649,10 +649,10 @@
       "x": 7,
       "y": 0,
       "z": 2,
-      "rotation": 0
+      "rotation": 3
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 43,
     "terrain": {
@@ -697,7 +697,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-94-edge1_straight_4"
+      "name": "islands-95-edge1_straight_3"
     },
     "id": 46,
     "terrain": {
@@ -1012,7 +1012,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-96-edge1_straight_2"
+      "name": "islands-97-edge1_straight_1"
     },
     "id": 67,
     "terrain": {
@@ -1024,7 +1024,7 @@
       "x": 6,
       "y": 0,
       "z": 3,
-      "rotation": 2
+      "rotation": 1
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -1069,7 +1069,7 @@
       "x": 7,
       "y": 0,
       "z": 3,
-      "rotation": 3
+      "rotation": 1
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -1117,7 +1117,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-94-edge1_straight_4"
+      "name": "islands-97-edge1_straight_1"
     },
     "id": 74,
     "terrain": {
@@ -1312,7 +1312,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-95-edge1_straight_3"
+      "name": "islands-94-edge1_straight_4"
     },
     "id": 87,
     "terrain": {
@@ -1324,10 +1324,10 @@
       "x": 6,
       "y": 0,
       "z": 4,
-      "rotation": 0
+      "rotation": 1
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 88,
     "terrain": {
@@ -1369,7 +1369,7 @@
       "x": 7,
       "y": 0,
       "z": 4,
-      "rotation": 0
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -1387,7 +1387,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-104-edge1_corner_out_2"
+      "name": "islands-100-edge1_corner_out_6"
     },
     "id": 92,
     "terrain": {
@@ -1612,7 +1612,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-87-edge2_corner_out_6"
+      "name": "islands-92-edge2_corner_out_1"
     },
     "id": 107,
     "terrain": {
@@ -1627,7 +1627,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-80-fence1_out_1"
+      "name": "islands-79-fence1_out_2"
     },
     "id": 108,
     "terrain": {
@@ -1684,10 +1684,10 @@
       "x": 7,
       "y": 0,
       "z": 5,
-      "rotation": 3
+      "rotation": 1
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 112,
     "terrain": {
@@ -1699,7 +1699,7 @@
       "x": 8,
       "y": 0,
       "z": 5,
-      "rotation": 1
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -1747,7 +1747,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-95-edge1_straight_3"
+      "name": "islands-97-edge1_straight_1"
     },
     "id": 116,
     "terrain": {
@@ -1972,7 +1972,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-82-edge2_straight_3"
+      "name": "islands-84-edge2_straight_1"
     },
     "id": 131,
     "terrain": {
@@ -1987,7 +1987,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-73-fence1_straight_3"
+      "name": "islands-75-fence1_straight_1"
     },
     "id": 132,
     "terrain": {
@@ -1999,7 +1999,7 @@
       "x": 6,
       "y": 0,
       "z": 6,
-      "rotation": 2
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -2044,7 +2044,7 @@
       "x": 7,
       "y": 0,
       "z": 6,
-      "rotation": 1
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -2059,7 +2059,7 @@
       "x": 8,
       "y": 0,
       "z": 6,
-      "rotation": 1
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -2077,7 +2077,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-97-edge1_straight_1"
+      "name": "islands-95-edge1_straight_3"
     },
     "id": 138,
     "terrain": {
@@ -2302,7 +2302,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-83-edge2_straight_2"
+      "name": "islands-84-edge2_straight_1"
     },
     "id": 153,
     "terrain": {
@@ -2332,7 +2332,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-103-edge1_corner_out_3"
+      "name": "islands-104-edge1_corner_out_2"
     },
     "id": 155,
     "terrain": {
@@ -2347,7 +2347,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-94-edge1_straight_4"
+      "name": "islands-95-edge1_straight_3"
     },
     "id": 156,
     "terrain": {
@@ -2362,7 +2362,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-96-edge1_straight_2"
+      "name": "islands-97-edge1_straight_1"
     },
     "id": 157,
     "terrain": {
@@ -2392,7 +2392,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-97-edge1_straight_1"
+      "name": "islands-96-edge1_straight_2"
     },
     "id": 159,
     "terrain": {
@@ -2407,7 +2407,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-105-edge1_corner_out_1"
+      "name": "islands-101-edge1_corner_out_5"
     },
     "id": 160,
     "terrain": {
@@ -2419,7 +2419,7 @@
       "x": 6,
       "y": 0,
       "z": 7,
-      "rotation": 2
+      "rotation": 0
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -2464,7 +2464,7 @@
       "x": 7,
       "y": 0,
       "z": 7,
-      "rotation": 2
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -2512,7 +2512,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-101-edge1_corner_out_5"
+      "name": "islands-100-edge1_corner_out_6"
     },
     "id": 167,
     "terrain": {
@@ -2812,7 +2812,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-103-edge1_corner_out_3"
+      "name": "islands-101-edge1_corner_out_5"
     },
     "id": 187,
     "terrain": {
@@ -2917,7 +2917,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-105-edge1_corner_out_1"
+      "name": "islands-103-edge1_corner_out_3"
     },
     "id": 194,
     "terrain": {
@@ -2929,7 +2929,7 @@
       "x": 6,
       "y": 0,
       "z": 8,
-      "rotation": 1
+      "rotation": 0
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -2974,10 +2974,10 @@
       "x": 7,
       "y": 0,
       "z": 8,
-      "rotation": 0
+      "rotation": 3
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 198,
     "terrain": {
@@ -3022,7 +3022,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-105-edge1_corner_out_1"
+      "name": "islands-101-edge1_corner_out_5"
     },
     "id": 201,
     "terrain": {
@@ -3232,7 +3232,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-105-edge1_corner_out_1"
+      "name": "islands-101-edge1_corner_out_5"
     },
     "id": 215,
     "terrain": {
@@ -3247,7 +3247,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-95-edge1_straight_3"
+      "name": "islands-96-edge1_straight_2"
     },
     "id": 216,
     "terrain": {
@@ -3547,7 +3547,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-105-edge1_corner_out_1"
+      "name": "islands-102-edge1_corner_out_4"
     },
     "id": 236,
     "terrain": {
@@ -3559,10 +3559,10 @@
       "x": 6,
       "y": 0,
       "z": 9,
-      "rotation": 0
+      "rotation": 3
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 237,
     "terrain": {
@@ -3604,7 +3604,7 @@
       "x": 7,
       "y": 0,
       "z": 9,
-      "rotation": 3
+      "rotation": 1
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -3652,7 +3652,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-104-edge1_corner_out_2"
+      "name": "islands-102-edge1_corner_out_4"
     },
     "id": 243,
     "terrain": {
@@ -3892,7 +3892,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-97-edge1_straight_1"
+      "name": "islands-94-edge1_straight_4"
     },
     "id": 259,
     "terrain": {
@@ -3904,7 +3904,7 @@
       "x": 20,
       "y": 0,
       "z": 9,
-      "rotation": 2
+      "rotation": 0
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -3922,7 +3922,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 261,
     "terrain": {
@@ -3967,7 +3967,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-100-edge1_corner_out_6"
+      "name": "islands-105-edge1_corner_out_1"
     },
     "id": 264,
     "terrain": {
@@ -4177,7 +4177,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-92-edge2_corner_out_1"
+      "name": "islands-87-edge2_corner_out_6"
     },
     "id": 278,
     "terrain": {
@@ -4192,7 +4192,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-77-fence1_out_4"
+      "name": "islands-79-fence1_out_2"
     },
     "id": 279,
     "terrain": {
@@ -4204,7 +4204,7 @@
       "x": 6,
       "y": 0,
       "z": 10,
-      "rotation": 1
+      "rotation": 0
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -4249,10 +4249,10 @@
       "x": 7,
       "y": 0,
       "z": 10,
-      "rotation": 0
+      "rotation": 3
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 283,
     "terrain": {
@@ -4297,7 +4297,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-104-edge1_corner_out_2"
+      "name": "islands-101-edge1_corner_out_5"
     },
     "id": 286,
     "terrain": {
@@ -4402,7 +4402,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-103-edge1_corner_out_3"
+      "name": "islands-105-edge1_corner_out_1"
     },
     "id": 293,
     "terrain": {
@@ -4414,10 +4414,10 @@
       "x": 20,
       "y": 0,
       "z": 10,
-      "rotation": 3
+      "rotation": 2
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 294,
     "terrain": {
@@ -4459,7 +4459,7 @@
       "x": 21,
       "y": 0,
       "z": 10,
-      "rotation": 2
+      "rotation": 1
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -4732,7 +4732,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-75-fence1_straight_1"
+      "name": "islands-73-fence1_straight_3"
     },
     "id": 315,
     "terrain": {
@@ -4744,7 +4744,7 @@
       "x": 6,
       "y": 0,
       "z": 11,
-      "rotation": 2
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -4792,7 +4792,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 319,
     "terrain": {
@@ -4837,7 +4837,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-102-edge1_corner_out_4"
+      "name": "islands-100-edge1_corner_out_6"
     },
     "id": 322,
     "terrain": {
@@ -4852,7 +4852,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-96-edge1_straight_2"
+      "name": "islands-94-edge1_straight_4"
     },
     "id": 323,
     "terrain": {
@@ -4912,7 +4912,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-105-edge1_corner_out_1"
+      "name": "islands-103-edge1_corner_out_3"
     },
     "id": 327,
     "terrain": {
@@ -4927,7 +4927,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-95-edge1_straight_3"
+      "name": "islands-94-edge1_straight_4"
     },
     "id": 328,
     "terrain": {
@@ -5152,7 +5152,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-73-fence1_straight_3"
+      "name": "islands-74-fence1_straight_2"
     },
     "id": 343,
     "terrain": {
@@ -5164,10 +5164,10 @@
       "x": 6,
       "y": 0,
       "z": 12,
-      "rotation": 1
+      "rotation": 0
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 344,
     "terrain": {
@@ -5209,10 +5209,10 @@
       "x": 7,
       "y": 0,
       "z": 12,
-      "rotation": 3
+      "rotation": 2
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 347,
     "terrain": {
@@ -5257,7 +5257,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-90-edge2_corner_out_3"
+      "name": "islands-92-edge2_corner_out_1"
     },
     "id": 350,
     "terrain": {
@@ -5272,7 +5272,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-78-fence1_out_3"
+      "name": "islands-80-fence1_out_1"
     },
     "id": 351,
     "terrain": {
@@ -5287,7 +5287,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-82-edge2_straight_3"
+      "name": "islands-83-edge2_straight_2"
     },
     "id": 352,
     "terrain": {
@@ -5317,7 +5317,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-92-edge2_corner_out_1"
+      "name": "islands-91-edge2_corner_out_2"
     },
     "id": 354,
     "terrain": {
@@ -5332,7 +5332,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-77-fence1_out_4"
+      "name": "islands-78-fence1_out_3"
     },
     "id": 355,
     "terrain": {
@@ -5347,7 +5347,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-105-edge1_corner_out_1"
+      "name": "islands-104-edge1_corner_out_2"
     },
     "id": 356,
     "terrain": {
@@ -5587,7 +5587,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-90-edge2_corner_out_3"
+      "name": "islands-91-edge2_corner_out_2"
     },
     "id": 372,
     "terrain": {
@@ -5602,7 +5602,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-79-fence1_out_2"
+      "name": "islands-78-fence1_out_3"
     },
     "id": 373,
     "terrain": {
@@ -5614,7 +5614,7 @@
       "x": 6,
       "y": 0,
       "z": 13,
-      "rotation": 0
+      "rotation": 1
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -5662,7 +5662,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 377,
     "terrain": {
@@ -5707,7 +5707,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-89-edge2_corner_out_4"
+      "name": "islands-87-edge2_corner_out_6"
     },
     "id": 380,
     "terrain": {
@@ -5722,7 +5722,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-80-fence1_out_1"
+      "name": "islands-78-fence1_out_3"
     },
     "id": 381,
     "terrain": {
@@ -5737,7 +5737,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-89-edge2_corner_out_4"
+      "name": "islands-87-edge2_corner_out_6"
     },
     "id": 382,
     "terrain": {
@@ -5767,7 +5767,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-92-edge2_corner_out_1"
+      "name": "islands-91-edge2_corner_out_2"
     },
     "id": 384,
     "terrain": {
@@ -5782,7 +5782,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-77-fence1_out_4"
+      "name": "islands-79-fence1_out_2"
     },
     "id": 385,
     "terrain": {
@@ -5797,7 +5797,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-84-edge2_straight_1"
+      "name": "islands-81-edge2_straight_4"
     },
     "id": 386,
     "terrain": {
@@ -5812,7 +5812,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-75-fence1_straight_1"
+      "name": "islands-73-fence1_straight_3"
     },
     "id": 387,
     "terrain": {
@@ -6082,7 +6082,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-73-fence1_straight_3"
+      "name": "islands-74-fence1_straight_2"
     },
     "id": 405,
     "terrain": {
@@ -6094,10 +6094,10 @@
       "x": 6,
       "y": 0,
       "z": 14,
-      "rotation": 0
+      "rotation": 1
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 406,
     "terrain": {
@@ -6142,7 +6142,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 409,
     "terrain": {
@@ -6187,7 +6187,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-101-edge1_corner_out_5"
+      "name": "islands-105-edge1_corner_out_1"
     },
     "id": 412,
     "terrain": {
@@ -6232,7 +6232,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-83-edge2_straight_2"
+      "name": "islands-84-edge2_straight_1"
     },
     "id": 415,
     "terrain": {
@@ -6262,7 +6262,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-95-edge1_straight_3"
+      "name": "islands-94-edge1_straight_4"
     },
     "id": 417,
     "terrain": {
@@ -6277,7 +6277,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-97-edge1_straight_1"
+      "name": "islands-94-edge1_straight_4"
     },
     "id": 418,
     "terrain": {
@@ -6292,7 +6292,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-96-edge1_straight_2"
+      "name": "islands-97-edge1_straight_1"
     },
     "id": 419,
     "terrain": {
@@ -6307,7 +6307,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-94-edge1_straight_4"
+      "name": "islands-96-edge1_straight_2"
     },
     "id": 420,
     "terrain": {
@@ -6322,7 +6322,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-95-edge1_straight_3"
+      "name": "islands-94-edge1_straight_4"
     },
     "id": 421,
     "terrain": {
@@ -6607,7 +6607,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-84-edge2_straight_1"
+      "name": "islands-83-edge2_straight_2"
     },
     "id": 440,
     "terrain": {
@@ -6622,7 +6622,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-75-fence1_straight_1"
+      "name": "islands-73-fence1_straight_3"
     },
     "id": 441,
     "terrain": {
@@ -6679,10 +6679,10 @@
       "x": 7,
       "y": 0,
       "z": 15,
-      "rotation": 3
+      "rotation": 0
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 445,
     "terrain": {
@@ -6697,7 +6697,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-95-edge1_straight_3"
+      "name": "islands-94-edge1_straight_4"
     },
     "id": 446,
     "terrain": {
@@ -7102,7 +7102,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-82-edge2_straight_3"
+      "name": "islands-84-edge2_straight_1"
     },
     "id": 473,
     "terrain": {
@@ -7129,7 +7129,7 @@
       "x": 6,
       "y": 0,
       "z": 16,
-      "rotation": 1
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -7174,7 +7174,7 @@
       "x": 7,
       "y": 0,
       "z": 16,
-      "rotation": 1
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -7189,7 +7189,7 @@
       "x": 8,
       "y": 0,
       "z": 16,
-      "rotation": 2
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -7237,7 +7237,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-105-edge1_corner_out_1"
+      "name": "islands-104-edge1_corner_out_2"
     },
     "id": 482,
     "terrain": {
@@ -7912,7 +7912,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-74-fence1_straight_2"
+      "name": "islands-75-fence1_straight_1"
     },
     "id": 527,
     "terrain": {
@@ -7924,7 +7924,7 @@
       "x": 6,
       "y": 0,
       "z": 17,
-      "rotation": 2
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -7969,7 +7969,7 @@
       "x": 7,
       "y": 0,
       "z": 17,
-      "rotation": 1
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -7984,10 +7984,10 @@
       "x": 8,
       "y": 0,
       "z": 17,
-      "rotation": 0
+      "rotation": 1
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 532,
     "terrain": {
@@ -8002,7 +8002,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-97-edge1_straight_1"
+      "name": "islands-96-edge1_straight_2"
     },
     "id": 533,
     "terrain": {
@@ -8437,7 +8437,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-75-fence1_straight_1"
+      "name": "islands-73-fence1_straight_3"
     },
     "id": 562,
     "terrain": {
@@ -8449,10 +8449,10 @@
       "x": 6,
       "y": 0,
       "z": 18,
-      "rotation": 3
+      "rotation": 2
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 563,
     "terrain": {
@@ -8494,7 +8494,7 @@
       "x": 7,
       "y": 0,
       "z": 18,
-      "rotation": 1
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -8962,7 +8962,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-81-edge2_straight_4"
+      "name": "islands-84-edge2_straight_1"
     },
     "id": 597,
     "terrain": {
@@ -8977,7 +8977,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-73-fence1_straight_3"
+      "name": "islands-75-fence1_straight_1"
     },
     "id": 598,
     "terrain": {
@@ -8989,7 +8989,7 @@
       "x": 6,
       "y": 0,
       "z": 19,
-      "rotation": 1
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -9034,10 +9034,10 @@
       "x": 7,
       "y": 0,
       "z": 19,
-      "rotation": 1
+      "rotation": 2
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 602,
     "terrain": {
@@ -9082,7 +9082,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-101-edge1_corner_out_5"
+      "name": "islands-102-edge1_corner_out_4"
     },
     "id": 605,
     "terrain": {
@@ -9487,7 +9487,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-84-edge2_straight_1"
+      "name": "islands-82-edge2_straight_3"
     },
     "id": 632,
     "terrain": {
@@ -9502,7 +9502,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-73-fence1_straight_3"
+      "name": "islands-75-fence1_straight_1"
     },
     "id": 633,
     "terrain": {
@@ -9514,10 +9514,10 @@
       "x": 6,
       "y": 0,
       "z": 20,
-      "rotation": 2
+      "rotation": 3
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 634,
     "terrain": {
@@ -9562,7 +9562,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 637,
     "terrain": {
@@ -9607,7 +9607,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-92-edge2_corner_out_1"
+      "name": "islands-87-edge2_corner_out_6"
     },
     "id": 640,
     "terrain": {
@@ -9622,7 +9622,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-78-fence1_out_3"
+      "name": "islands-79-fence1_out_2"
     },
     "id": 641,
     "terrain": {
@@ -9637,7 +9637,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-84-edge2_straight_1"
+      "name": "islands-83-edge2_straight_2"
     },
     "id": 642,
     "terrain": {
@@ -9652,7 +9652,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-75-fence1_straight_1"
+      "name": "islands-73-fence1_straight_3"
     },
     "id": 643,
     "terrain": {
@@ -10027,7 +10027,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-90-edge2_corner_out_3"
+      "name": "islands-87-edge2_corner_out_6"
     },
     "id": 668,
     "terrain": {
@@ -10057,7 +10057,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-101-edge1_corner_out_5"
+      "name": "islands-103-edge1_corner_out_3"
     },
     "id": 670,
     "terrain": {
@@ -10072,7 +10072,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-97-edge1_straight_1"
+      "name": "islands-94-edge1_straight_4"
     },
     "id": 671,
     "terrain": {
@@ -10087,7 +10087,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-97-edge1_straight_1"
+      "name": "islands-95-edge1_straight_3"
     },
     "id": 672,
     "terrain": {
@@ -10102,7 +10102,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-94-edge1_straight_4"
+      "name": "islands-95-edge1_straight_3"
     },
     "id": 673,
     "terrain": {
@@ -10132,7 +10132,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-100-edge1_corner_out_6"
+      "name": "islands-101-edge1_corner_out_5"
     },
     "id": 675,
     "terrain": {
@@ -10147,7 +10147,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-87-edge2_corner_out_6"
+      "name": "islands-91-edge2_corner_out_2"
     },
     "id": 676,
     "terrain": {
@@ -10162,7 +10162,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-77-fence1_out_4"
+      "name": "islands-80-fence1_out_1"
     },
     "id": 677,
     "terrain": {
@@ -10507,7 +10507,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-89-edge2_corner_out_4"
+      "name": "islands-91-edge2_corner_out_2"
     },
     "id": 700,
     "terrain": {
@@ -10522,7 +10522,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-80-fence1_out_1"
+      "name": "islands-78-fence1_out_3"
     },
     "id": 701,
     "terrain": {
@@ -10537,7 +10537,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-87-edge2_corner_out_6"
+      "name": "islands-92-edge2_corner_out_1"
     },
     "id": 702,
     "terrain": {
@@ -10552,7 +10552,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-77-fence1_out_4"
+      "name": "islands-79-fence1_out_2"
     },
     "id": 703,
     "terrain": {
@@ -10657,7 +10657,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-89-edge2_corner_out_4"
+      "name": "islands-90-edge2_corner_out_3"
     },
     "id": 710,
     "terrain": {
@@ -10687,7 +10687,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-104-edge1_corner_out_2"
+      "name": "islands-100-edge1_corner_out_6"
     },
     "id": 712,
     "terrain": {
@@ -11362,7 +11362,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-100-edge1_corner_out_6"
+      "name": "islands-101-edge1_corner_out_5"
     },
     "id": 757,
     "terrain": {
@@ -11377,7 +11377,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-104-edge1_corner_out_2"
+      "name": "islands-105-edge1_corner_out_1"
     },
     "id": 758,
     "terrain": {
@@ -11512,7 +11512,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-105-edge1_corner_out_1"
+      "name": "islands-102-edge1_corner_out_4"
     },
     "id": 767,
     "terrain": {
@@ -11527,7 +11527,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-102-edge1_corner_out_4"
+      "name": "islands-105-edge1_corner_out_1"
     },
     "id": 768,
     "terrain": {
@@ -11542,7 +11542,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-95-edge1_straight_3"
+      "name": "islands-97-edge1_straight_1"
     },
     "id": 769,
     "terrain": {
@@ -11572,7 +11572,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-94-edge1_straight_4"
+      "name": "islands-97-edge1_straight_1"
     },
     "id": 771,
     "terrain": {
@@ -11587,7 +11587,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-96-edge1_straight_2"
+      "name": "islands-97-edge1_straight_1"
     },
     "id": 772,
     "terrain": {
@@ -11602,7 +11602,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-96-edge1_straight_2"
+      "name": "islands-94-edge1_straight_4"
     },
     "id": 773,
     "terrain": {
@@ -11617,7 +11617,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-94-edge1_straight_4"
+      "name": "islands-95-edge1_straight_3"
     },
     "id": 774,
     "terrain": {
@@ -11632,7 +11632,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-94-edge1_straight_4"
+      "name": "islands-97-edge1_straight_1"
     },
     "id": 775,
     "terrain": {
@@ -11647,7 +11647,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-95-edge1_straight_3"
+      "name": "islands-97-edge1_straight_1"
     },
     "id": 776,
     "terrain": {
@@ -11677,7 +11677,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-94-edge1_straight_4"
+      "name": "islands-96-edge1_straight_2"
     },
     "id": 778,
     "terrain": {
@@ -11692,7 +11692,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-95-edge1_straight_3"
+      "name": "islands-96-edge1_straight_2"
     },
     "id": 779,
     "terrain": {
@@ -11707,7 +11707,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-96-edge1_straight_2"
+      "name": "islands-94-edge1_straight_4"
     },
     "id": 780,
     "terrain": {
@@ -11722,7 +11722,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-97-edge1_straight_1"
+      "name": "islands-95-edge1_straight_3"
     },
     "id": 781,
     "terrain": {
@@ -11752,7 +11752,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-103-edge1_corner_out_3"
+      "name": "islands-104-edge1_corner_out_2"
     },
     "id": 783,
     "terrain": {
@@ -11767,7 +11767,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-95-edge1_straight_3"
+      "name": "islands-94-edge1_straight_4"
     },
     "id": 784,
     "terrain": {
@@ -11902,7 +11902,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-94-edge1_straight_4"
+      "name": "islands-96-edge1_straight_2"
     },
     "id": 793,
     "terrain": {
@@ -11914,7 +11914,7 @@
       "x": 21,
       "y": 0,
       "z": 24,
-      "rotation": 3
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-53-walkway_2"
@@ -11929,10 +11929,10 @@
       "x": 22,
       "y": 0,
       "z": 24,
-      "rotation": 0
+      "rotation": 2
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 795,
     "terrain": {
@@ -11944,7 +11944,7 @@
       "x": -5,
       "y": 0,
       "z": 25,
-      "rotation": 1
+      "rotation": 0
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -12082,7 +12082,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 805,
     "terrain": {
@@ -12124,7 +12124,7 @@
       "x": -1,
       "y": 0,
       "z": 25,
-      "rotation": 2
+      "rotation": 0
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -12214,7 +12214,7 @@
       "x": 1,
       "y": 0,
       "z": 25,
-      "rotation": 3
+      "rotation": 0
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -12262,7 +12262,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-96-edge1_straight_2"
+      "name": "islands-97-edge1_straight_1"
     },
     "id": 817,
     "terrain": {
@@ -12397,7 +12397,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-96-edge1_straight_2"
+      "name": "islands-94-edge1_straight_4"
     },
     "id": 826,
     "terrain": {
@@ -12454,7 +12454,7 @@
       "x": 13,
       "y": 0,
       "z": 25,
-      "rotation": 3
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -12499,7 +12499,7 @@
       "x": 14,
       "y": 0,
       "z": 25,
-      "rotation": 2
+      "rotation": 0
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -12544,7 +12544,7 @@
       "x": 15,
       "y": 0,
       "z": 25,
-      "rotation": 1
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -12589,7 +12589,7 @@
       "x": 16,
       "y": 0,
       "z": 25,
-      "rotation": 0
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -12634,10 +12634,10 @@
       "x": 17,
       "y": 0,
       "z": 25,
-      "rotation": 2
+      "rotation": 0
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 842,
     "terrain": {
@@ -12679,7 +12679,7 @@
       "x": 18,
       "y": 0,
       "z": 25,
-      "rotation": 0
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -12727,7 +12727,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 848,
     "terrain": {
@@ -12769,7 +12769,7 @@
       "x": 20,
       "y": 0,
       "z": 25,
-      "rotation": 2
+      "rotation": 0
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -12814,7 +12814,7 @@
       "x": 21,
       "y": 0,
       "z": 25,
-      "rotation": 1
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -12829,10 +12829,10 @@
       "x": 22,
       "y": 0,
       "z": 25,
-      "rotation": 3
+      "rotation": 2
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 855,
     "terrain": {
@@ -12889,7 +12889,7 @@
       "x": 24,
       "y": 0,
       "z": 25,
-      "rotation": 2
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -12934,10 +12934,10 @@
       "x": 25,
       "y": 0,
       "z": 25,
-      "rotation": 3
+      "rotation": 0
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 862,
     "terrain": {
@@ -12979,10 +12979,10 @@
       "x": 26,
       "y": 0,
       "z": 25,
-      "rotation": 0
+      "rotation": 2
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 865,
     "terrain": {
@@ -13114,7 +13114,7 @@
       "x": 29,
       "y": 0,
       "z": 25,
-      "rotation": 0
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -13159,7 +13159,7 @@
       "x": 30,
       "y": 0,
       "z": 25,
-      "rotation": 0
+      "rotation": 1
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -13204,10 +13204,10 @@
       "x": 31,
       "y": 0,
       "z": 25,
-      "rotation": 3
+      "rotation": 0
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 880,
     "terrain": {
@@ -13249,10 +13249,10 @@
       "x": 32,
       "y": 0,
       "z": 25,
-      "rotation": 1
+      "rotation": 2
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 883,
     "terrain": {
@@ -13294,7 +13294,7 @@
       "x": 33,
       "y": 0,
       "z": 25,
-      "rotation": 2
+      "rotation": 1
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -13339,7 +13339,7 @@
       "x": -5,
       "y": 0,
       "z": 26,
-      "rotation": 1
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -13384,10 +13384,10 @@
       "x": -4,
       "y": 0,
       "z": 26,
-      "rotation": 0
+      "rotation": 3
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 892,
     "terrain": {
@@ -13429,7 +13429,7 @@
       "x": -3,
       "y": 0,
       "z": 26,
-      "rotation": 0
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -13519,7 +13519,7 @@
       "x": -1,
       "y": 0,
       "z": 26,
-      "rotation": 3
+      "rotation": 1
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -13567,7 +13567,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 904,
     "terrain": {
@@ -13609,7 +13609,7 @@
       "x": 1,
       "y": 0,
       "z": 26,
-      "rotation": 1
+      "rotation": 0
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -13657,7 +13657,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-95-edge1_straight_3"
+      "name": "islands-94-edge1_straight_4"
     },
     "id": 910,
     "terrain": {
@@ -13792,7 +13792,7 @@
       "rotation": 0
     },
     "sprite": {
-      "name": "islands-96-edge1_straight_2"
+      "name": "islands-97-edge1_straight_1"
     },
     "id": 919,
     "terrain": {
@@ -13804,7 +13804,7 @@
       "x": 12,
       "y": 0,
       "z": 26,
-      "rotation": 0
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -13849,7 +13849,7 @@
       "x": 13,
       "y": 0,
       "z": 26,
-      "rotation": 1
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -13939,7 +13939,7 @@
       "x": 15,
       "y": 0,
       "z": 26,
-      "rotation": 1
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -13984,7 +13984,7 @@
       "x": 16,
       "y": 0,
       "z": 26,
-      "rotation": 0
+      "rotation": 1
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -14029,7 +14029,7 @@
       "x": 17,
       "y": 0,
       "z": 26,
-      "rotation": 3
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -14074,7 +14074,7 @@
       "x": 18,
       "y": 0,
       "z": 26,
-      "rotation": 3
+      "rotation": 0
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -14209,7 +14209,7 @@
       "x": 21,
       "y": 0,
       "z": 26,
-      "rotation": 1
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -14254,10 +14254,10 @@
       "x": 22,
       "y": 0,
       "z": 26,
-      "rotation": 2
+      "rotation": 3
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 950,
     "terrain": {
@@ -14299,7 +14299,7 @@
       "x": 23,
       "y": 0,
       "z": 26,
-      "rotation": 3
+      "rotation": 0
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -14347,7 +14347,7 @@
       "rotation": 1
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 956,
     "terrain": {
@@ -14389,10 +14389,10 @@
       "x": 25,
       "y": 0,
       "z": 26,
-      "rotation": 3
+      "rotation": 1
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 959,
     "terrain": {
@@ -14437,7 +14437,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 962,
     "terrain": {
@@ -14479,7 +14479,7 @@
       "x": 27,
       "y": 0,
       "z": 26,
-      "rotation": 1
+      "rotation": 0
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -14524,10 +14524,10 @@
       "x": 28,
       "y": 0,
       "z": 26,
-      "rotation": 1
+      "rotation": 2
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 968,
     "terrain": {
@@ -14569,7 +14569,7 @@
       "x": 29,
       "y": 0,
       "z": 26,
-      "rotation": 0
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -14614,7 +14614,7 @@
       "x": 30,
       "y": 0,
       "z": 26,
-      "rotation": 0
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -14659,7 +14659,7 @@
       "x": 31,
       "y": 0,
       "z": 26,
-      "rotation": 0
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -14704,7 +14704,7 @@
       "x": 32,
       "y": 0,
       "z": 26,
-      "rotation": 2
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -14752,7 +14752,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 983,
     "terrain": {
@@ -14947,7 +14947,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-103-edge1_corner_out_3"
+      "name": "islands-104-edge1_corner_out_2"
     },
     "id": 996,
     "terrain": {
@@ -15097,7 +15097,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-90-edge2_corner_out_3"
+      "name": "islands-92-edge2_corner_out_1"
     },
     "id": 1006,
     "terrain": {
@@ -15217,7 +15217,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-90-edge2_corner_out_3"
+      "name": "islands-92-edge2_corner_out_1"
     },
     "id": 1014,
     "terrain": {
@@ -15232,7 +15232,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-79-fence1_out_2"
+      "name": "islands-80-fence1_out_1"
     },
     "id": 1015,
     "terrain": {
@@ -15247,7 +15247,7 @@
       "rotation": 2
     },
     "sprite": {
-      "name": "islands-102-edge1_corner_out_4"
+      "name": "islands-101-edge1_corner_out_5"
     },
     "id": 1016,
     "terrain": {
@@ -15277,7 +15277,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-94-edge1_straight_4"
+      "name": "islands-96-edge1_straight_2"
     },
     "id": 1018,
     "terrain": {
@@ -15292,7 +15292,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-97-edge1_straight_1"
+      "name": "islands-96-edge1_straight_2"
     },
     "id": 1019,
     "terrain": {
@@ -15307,7 +15307,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-94-edge1_straight_4"
+      "name": "islands-95-edge1_straight_3"
     },
     "id": 1020,
     "terrain": {
@@ -15322,7 +15322,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-103-edge1_corner_out_3"
+      "name": "islands-104-edge1_corner_out_2"
     },
     "id": 1021,
     "terrain": {
@@ -15334,10 +15334,10 @@
       "x": 6,
       "y": 0,
       "z": 31,
-      "rotation": 0
+      "rotation": 1
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 1022,
     "terrain": {
@@ -15379,10 +15379,10 @@
       "x": 7,
       "y": 0,
       "z": 31,
-      "rotation": 2
+      "rotation": 0
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 1025,
     "terrain": {
@@ -15424,7 +15424,7 @@
       "x": 6,
       "y": 0,
       "z": 32,
-      "rotation": 3
+      "rotation": 1
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -15469,7 +15469,7 @@
       "x": 7,
       "y": 0,
       "z": 32,
-      "rotation": 3
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -15514,10 +15514,10 @@
       "x": 6,
       "y": 0,
       "z": 33,
-      "rotation": 0
+      "rotation": 3
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 1034,
     "terrain": {
@@ -15604,7 +15604,7 @@
       "x": 6,
       "y": 0,
       "z": 34,
-      "rotation": 1
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -15649,7 +15649,7 @@
       "x": 7,
       "y": 0,
       "z": 34,
-      "rotation": 1
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -15739,10 +15739,10 @@
       "x": 7,
       "y": 0,
       "z": 35,
-      "rotation": 1
+      "rotation": 0
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 1049,
     "terrain": {
@@ -15784,10 +15784,10 @@
       "x": 6,
       "y": 0,
       "z": 36,
-      "rotation": 2
+      "rotation": 1
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 1052,
     "terrain": {
@@ -15832,7 +15832,7 @@
       "rotation": 3
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 1055,
     "terrain": {
@@ -15874,7 +15874,7 @@
       "x": 6,
       "y": 0,
       "z": 37,
-      "rotation": 1
+      "rotation": 0
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -15919,7 +15919,7 @@
       "x": 7,
       "y": 0,
       "z": 37,
-      "rotation": 1
+      "rotation": 3
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -15964,10 +15964,10 @@
       "x": 6,
       "y": 0,
       "z": 38,
-      "rotation": 1
+      "rotation": 0
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 1064,
     "terrain": {
@@ -16009,10 +16009,10 @@
       "x": 7,
       "y": 0,
       "z": 38,
-      "rotation": 3
+      "rotation": 2
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 1067,
     "terrain": {
@@ -16054,10 +16054,10 @@
       "x": 6,
       "y": 0,
       "z": 39,
-      "rotation": 3
+      "rotation": 0
     },
     "sprite": {
-      "name": "islands-53-walkway_2"
+      "name": "islands-54-walkway_1"
     },
     "id": 1070,
     "terrain": {
@@ -16099,7 +16099,7 @@
       "x": 7,
       "y": 0,
       "z": 39,
-      "rotation": 1
+      "rotation": 2
     },
     "sprite": {
       "name": "islands-54-walkway_1"
@@ -16144,10 +16144,10 @@
       "x": 6,
       "y": 0,
       "z": 40,
-      "rotation": 3
+      "rotation": 1
     },
     "sprite": {
-      "name": "islands-54-walkway_1"
+      "name": "islands-53-walkway_2"
     },
     "id": 1076,
     "terrain": {
@@ -16189,7 +16189,7 @@
       "x": 7,
       "y": 0,
       "z": 40,
-      "rotation": 1
+      "rotation": 0
     },
     "sprite": {
       "name": "islands-54-walkway_1"

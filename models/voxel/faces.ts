@@ -1,4 +1,4 @@
-import { LookupData } from "../utils";
+import { LookupData } from "./utils";
 
 export interface Faces {
 	topFaces: FaceData[];

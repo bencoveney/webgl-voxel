@@ -26,10 +26,21 @@ function configureEcs(entities: any[]): TickEcs {
   entityPool.registerComponent(ComponentNames.PATH, pathToFactory);
   entityPool.registerComponent(ComponentNames.TIME_TRIGGER, timeTriggerFactory);
 
-  entityPool.registerSearch(SearchNames.RENDERABLE, [ComponentNames.SPRITE, ComponentNames.POSITION]);
-  entityPool.registerSearch(SearchNames.PATHABLE, [ComponentNames.PATH, ComponentNames.POSITION]);
-  entityPool.registerSearch(SearchNames.TERRAIN, [ComponentNames.TERRAIN, ComponentNames.POSITION]);
-  entityPool.registerSearch(SearchNames.TRIGGERABLE, [ComponentNames.TIME_TRIGGER]);
+  entityPool.registerSearch(SearchNames.RENDERABLE, [
+    ComponentNames.SPRITE,
+    ComponentNames.POSITION
+  ]);
+  entityPool.registerSearch(SearchNames.PATHABLE, [
+    ComponentNames.PATH,
+    ComponentNames.POSITION
+  ]);
+  entityPool.registerSearch(SearchNames.TERRAIN, [
+    ComponentNames.TERRAIN,
+    ComponentNames.POSITION
+  ]);
+  entityPool.registerSearch(SearchNames.TRIGGERABLE, [
+    ComponentNames.TIME_TRIGGER
+  ]);
 
   ecs.add(renderSystem);
   ecs.add(pathFindSystem);
@@ -59,8 +70,7 @@ function gameLoop(onTick: TickEcs) {
   run(lastTime);
 }
 
-loadWorld("world").then(entities => {
-  const tickEcs = configureEcs(entities);
-  gameLoop(tickEcs);
-});
+const entities = loadWorld("world");
 
+const tickEcs = configureEcs(entities);
+gameLoop(tickEcs);
