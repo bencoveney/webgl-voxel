@@ -1,15 +1,9 @@
 import { EntityPool } from "entity-component-system";
 import { SearchNames, ComponentNames, DEBUG } from "../constants";
-import { Position } from "../component/position";
+import { Position, Rotation } from "../component/position";
 import { PathTo } from "../component/pathTo";
 import { Terrain } from "../component/terrain";
-import {
-  createMask3d,
-  Mask3d,
-  Vector3,
-  mask3dGet,
-  distanceManhattan3
-} from "../utils";
+import { createMask3d, Vector3, mask3dGet, distanceManhattan3 } from "../utils";
 import createGraph from "ngraph.graph";
 import { aStar } from "ngraph.path";
 
@@ -85,21 +79,6 @@ export function buildWalkMask(entities: EntityPool) {
     });
   });
 
-  if (DEBUG) {
-    let walkMap = "";
-    mask.forEach(xArray => {
-      xArray[0].forEach(walkSpeed => {
-        if (walkSpeed !== undefined) {
-          walkMap += `X,`;
-        } else {
-          walkMap += `_,`;
-        }
-      });
-      walkMap += "\n";
-    });
-    console.log(walkMap);
-  }
-
   mask.forEach((xArray, xIndex) => {
     xArray.forEach((yArray, yIndex) => {
       yArray.forEach((walkSpeed, zIndex) => {
@@ -160,7 +139,10 @@ export function getRandomDestination(): Vector3 {
 
 export function pathFindSystem(entities: EntityPool, deltaTime: number): void {
   entities.find(SearchNames.PATHABLE).forEach(entityId => {
-    const path: PathTo = entities.getComponent<PathTo>(entityId, ComponentNames.PATH);
+    const path: PathTo = entities.getComponent<PathTo>(
+      entityId,
+      ComponentNames.PATH
+    );
     const position = entities.getComponent<Position>(
       entityId,
       ComponentNames.POSITION
@@ -168,16 +150,22 @@ export function pathFindSystem(entities: EntityPool, deltaTime: number): void {
 
     if (path.waypoints.length === 0) {
       try {
-        path.waypoints = pathFinder.find(
-          `${path.x},${path.y - 1},${path.z}`,
-          `${Math.floor(position.x)},${Math.floor(position.y - 1)},${Math.floor(position.z)}`
-        ).map(waypoint => waypoint.id) as string[]
-      } catch(error) {
+        path.waypoints = pathFinder
+          .find(
+            `${path.x},${path.y - 1},${path.z}`,
+            `${Math.floor(position.x)},${Math.floor(
+              position.y - 1
+            )},${Math.floor(position.z)}`
+          )
+          .map(waypoint => waypoint.id) as string[];
+      } catch (error) {
         console.error(error);
       }
 
       if (path.waypoints.length === 0) {
-        console.error(`Could not pathfind to ${path.x},${path.y - 1},${path.z}`);
+        console.error(
+          `Could not pathfind to ${path.x},${path.y - 1},${path.z}`
+        );
         entities.removeComponent(entityId, ComponentNames.PATH);
         return;
       }
@@ -213,5 +201,22 @@ export function pathFindSystem(entities: EntityPool, deltaTime: number): void {
     position.x += (deltaX / magnitude) * speed;
     position.y += (deltaY / magnitude) * speed;
     position.z += (deltaZ / magnitude) * speed;
+    position.rotation = getRotation(position, nextWaypoint.position);
   });
+}
+
+function getRotation(from: Position, to: Position): Rotation {
+  if (from.x === to.x) {
+    if (from.z > to.z) {
+      return Rotation.TURN_2;
+    } else {
+      return Rotation.TURN_0;
+    }
+  } else {
+    if (from.x > to.x) {
+      return Rotation.TURN_3;
+    } else {
+      return Rotation.TURN_1;
+    }
+  }
 }

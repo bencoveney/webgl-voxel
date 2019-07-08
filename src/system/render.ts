@@ -99,13 +99,7 @@ export function renderSystem(entities: EntityPool, deltaTime: number): void {
     // Is there an instance of it?
     const object = objects.get(entityId);
     if (object) {
-      object.position.set(
-        clampedPosition.x,
-        clampedPosition.y,
-        clampedPosition.z
-      );
-      object.rotateY((Math.PI / 2) * clampedPosition.rotation);
-      object.updateMatrix();
+      setPosition(object, clampedPosition);
       lastUpdates.set(entityId, entityHash);
       return;
     }
@@ -115,11 +109,18 @@ export function renderSystem(entities: EntityPool, deltaTime: number): void {
     if (mesh) {
       const object = mesh.clone();
       object.matrixAutoUpdate = false;
-      scene.add(object);
-      sceneObjects.push(object);
-      objects.set(entityId, object);
-      setPosition(object, clampedPosition);
-      object.updateMatrix();
+
+      const rotationWrapper = new THREE.Object3D();
+      rotationWrapper.matrixAutoUpdate = false;
+      rotationWrapper.add(object);
+
+      scene.add(rotationWrapper);
+
+      sceneObjects.push(rotationWrapper);
+      objects.set(entityId, rotationWrapper);
+
+      setPosition(rotationWrapper, clampedPosition);
+
       lastUpdates.set(entityId, entityHash);
       return;
     }
@@ -144,29 +145,50 @@ function hashComponents(
 
 const objects = new Map<number, THREE.Object3D>();
 
-function clampPosition({ x, y, z, rotation }: Position): Position {
-  return {
-    x: Math.floor(x * GRID_SIZE),
-    y: Math.floor(y * GRID_SIZE),
-    z: Math.floor(z * GRID_SIZE),
-    rotation: rotation
-  };
+function setPosition(object: THREE.Object3D, position: Position) {
+  // //if (object.rotation.y !== position.rotation) {
+  // //object.parent.localToWorld(object.position);
+  // const point = object.position.clone();
+  // const previousPosition = object.position.clone();
+  // const nextPosition = new THREE.Vector3(position.x, position.y, position.z);
+  // const axis = new THREE.Vector3(0, 1, 0);
+  // object.position.sub(previousPosition);
+  // object.position.applyAxisAngle(axis, position.rotation);
+  // object.position.add(nextPosition);
+  // //object.parent.worldToLocal(object.position);
+  // object.rotateOnAxis(axis, position.rotation);
+  // //}
+
+  if (object.children[0].rotation.y !== position.rotation) {
+    object.children[0].rotation.set(0, position.rotation, 0);
+    object.children[0].updateMatrix();
+  }
+  object.position.set(position.x, position.y, position.z);
+  object.updateMatrix();
 }
 
-function setPosition(object: THREE.Object3D, { x, y, z, rotation }: Position) {
+function clampPosition({ x, y, z, rotation }: Position): Position {
+  x = Math.floor(x * GRID_SIZE);
+  y = Math.floor(y * GRID_SIZE);
+  z = Math.floor(z * GRID_SIZE);
+
   switch (rotation) {
     case Rotation.TURN_0:
-      object.position.set(x, y, z);
+    default:
       break;
     case Rotation.TURN_1:
-      object.position.set(x, y, z + GRID_SIZE - 1);
+      z = z + GRID_SIZE - 1;
       break;
     case Rotation.TURN_2:
-      object.position.set(x + GRID_SIZE - 1, y, z + GRID_SIZE - 1);
+      x = x + GRID_SIZE - 1;
+      z = z + GRID_SIZE - 1;
       break;
     case Rotation.TURN_3:
-      object.position.set(x + GRID_SIZE - 1, y, z);
+      x = x + GRID_SIZE - 1;
       break;
   }
-  object.rotateY((Math.PI / 2) * rotation);
+
+  rotation = (Math.PI / 2) * rotation;
+
+  return { x, y, z, rotation };
 }
