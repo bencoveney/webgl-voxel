@@ -177,7 +177,7 @@ export function pathFindSystem(entities: EntityPool, deltaTime: number): void {
     const nextY = nextWaypoint.position.y + 1;
     const nextZ = nextWaypoint.position.z;
 
-    const speed = deltaTime * 0.005;
+    const speed = deltaTime * 0.001;
 
     const deltaX = nextX - position.x;
     const deltaY = nextY - position.y;

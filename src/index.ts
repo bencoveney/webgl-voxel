@@ -12,6 +12,7 @@ import { dayNightSystem } from "./system/dayNight";
 import { renderUi } from "./ui/render";
 import { timeTriggerFactory } from "./component/timeTrigger";
 import { loadWorld } from "./load";
+import { setCameraTarget, cameraSystem } from "./system/camera";
 require("./system/render");
 
 type TickEcs = (deltaTime: number) => void;
@@ -45,10 +46,14 @@ function configureEcs(entities: any[]): TickEcs {
   ecs.add(renderSystem);
   ecs.add(pathFindSystem);
   ecs.add(dayNightSystem);
+  ecs.add(cameraSystem);
 
   entityPool.load(entities);
 
   buildWalkMask(entityPool);
+
+  // This will break if I change the world :(
+  setCameraTarget(1082);
 
   return (deltaTime: number) => ecs.run(entityPool, deltaTime);
 }
