@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { EntityPool } from "entity-component-system";
 import { ComponentNames, GRID_SIZE } from "../constants";
 import { Position } from "../component/position";
-import { Vector3 } from "../utils";
+import { Vector3, addKeyListener } from "../utils";
 
 enum CameraPosition {
   // +x +z
@@ -29,6 +29,7 @@ let needsUpdate = true;
 const zoom = 100;
 let targetRotation = CameraPosition.FrontLeft;
 
+camera.rotation.order = "YXZ";
 camera.rotation.x = Math.atan(-1 / Math.sqrt(2));
 updatePosition({ rotation: -1, x: 0, y: 0, z: 0 }, targetRotation);
 
@@ -76,12 +77,12 @@ export function cameraSystem(entities: EntityPool, deltaTime: number) {
     ComponentNames.POSITION
   );
 
+  updatePosition(position, targetRotation);
+
   const positionHash = hashPosition(position);
   if (lastPositionHash == positionHash) {
     return;
   }
-
-  updatePosition(position, targetRotation);
 
   lastPositionHash = positionHash;
 }
@@ -106,14 +107,41 @@ function hashPosition(position: Position) {
 }
 
 function updatePosition(position: Position, rotation: CameraPosition) {
-  camera.position.set(
-    -zoom + position.x * GRID_SIZE,
-    zoom + position.y * GRID_SIZE,
-    zoom + position.z * GRID_SIZE
-  );
+  const oneEighthTurn = Math.PI / 4;
+  const threeEighthTurn = (3 * Math.PI) / 4;
 
-  camera.rotation.order = "YXZ";
-  camera.rotation.y = -Math.PI / 4;
+  const x = (position.x + 0.5) * GRID_SIZE;
+  const y = position.y * GRID_SIZE;
+  const z = (position.z + 0.5) * GRID_SIZE;
+
+  switch (rotation) {
+    case CameraPosition.FrontRight:
+      camera.position.set(zoom + x, zoom + y, zoom + z);
+      camera.rotation.y = +oneEighthTurn;
+      break;
+
+    case CameraPosition.FrontLeft:
+      camera.position.set(-zoom + x, zoom + y, zoom + z);
+      camera.rotation.y = -oneEighthTurn;
+      break;
+
+    case CameraPosition.BackLeft:
+      camera.position.set(-zoom + x, zoom + y, -zoom + z);
+      camera.rotation.y = -threeEighthTurn;
+      break;
+
+    case CameraPosition.BackRight:
+      camera.position.set(zoom + x, zoom + y, -zoom + z);
+      camera.rotation.y = +threeEighthTurn;
+      break;
+  }
 
   needsUpdate = true;
 }
+
+function updateTargetCameraRotation(direction: 1 | -1) {
+  targetRotation = (4 + targetRotation + direction) % 4;
+}
+
+addKeyListener("ArrowLeft", () => updateTargetCameraRotation(1));
+addKeyListener("ArrowRight", () => updateTargetCameraRotation(-1));

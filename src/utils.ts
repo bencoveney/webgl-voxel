@@ -38,7 +38,7 @@ export function distanceEuclidean3(from: Vector3, to: Vector3) {
   const x = Math.abs(to.x - from.x);
   const y = Math.abs(to.y - from.y);
   const z = Math.abs(to.z - from.z);
-  return Math.sqrt((x * x) + (y * y) + (z * z))
+  return Math.sqrt(x * x + y * y + z * z);
 }
 
 export type LookupData<Index extends number> = { [key in Index]: number } &
@@ -60,7 +60,11 @@ export function createMask2d(size: number): Mask2d {
 
 export type Mask3d<Value = number> = Array<Array<Array<Value>>>;
 
-export function createMask3d<Value = number>(xSize: number, ySize: number, zSize: number): Mask3d<Value> {
+export function createMask3d<Value = number>(
+  xSize: number,
+  ySize: number,
+  zSize: number
+): Mask3d<Value> {
   const array = [];
   for (let x = 0; x < xSize; x++) {
     const xContent = [];
@@ -76,7 +80,12 @@ export function createMask3d<Value = number>(xSize: number, ySize: number, zSize
   return array;
 }
 
-export function mask3dGet<Value>(mask3d: Mask3d<Value>, x: number, y: number, z: number): Value {
+export function mask3dGet<Value>(
+  mask3d: Mask3d<Value>,
+  x: number,
+  y: number,
+  z: number
+): Value {
   let xContent = mask3d[x];
 
   if (xContent === undefined) {
@@ -91,3 +100,15 @@ export function mask3dGet<Value>(mask3d: Mask3d<Value>, x: number, y: number, z:
 
   return yContent[z];
 }
+
+export function addKeyListener(
+  key: string,
+  handler: (event: KeyboardEvent) => void
+): Function {
+  document.addEventListener("keydown", event =>
+    event.key === key ? handler(event) : void 0
+  );
+  return () => document.removeEventListener("keydown", handler);
+}
+
+document.addEventListener("keydown", ({ key }) => console.log(key));

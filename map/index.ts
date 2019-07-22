@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const files = fs
-  .readdirSync("./src/models")
+  .readdirSync(path.resolve(process.cwd(), "./models/slices"))
   .filter(name => name.startsWith("islands-"))
   .map(name => path.basename(name, ".png"));
 
@@ -211,7 +211,6 @@ cells.forEach(row =>
             case 1:
               throw new Error("Unexpected surrounding blocks");
             case 2:
-
               if (grassAbove === 0 && grassRight === 0) {
                 rotation = 0;
               } else if (grassRight === 0 && grassBelow === 0) {
@@ -234,7 +233,6 @@ cells.forEach(row =>
 
               break;
             case 3:
-
               if (grassAbove === 0) {
                 rotation = 1;
               } else if (grassRight === 0) {
@@ -248,7 +246,8 @@ cells.forEach(row =>
               if (isIsolated) {
                 tile = `edge2_straight_${Math.floor(Math.random() * 4) + 1}`;
                 setAtPosition(column, 0, row, rotation, tile);
-                isolated = `fence1_straight_${Math.floor(Math.random() * 3) + 1}`;
+                isolated = `fence1_straight_${Math.floor(Math.random() * 3) +
+                  1}`;
                 setAtPosition(column, 1, row, rotation, isolated);
               } else {
                 tile = `edge1_straight_${Math.floor(Math.random() * 4) + 1}`;
