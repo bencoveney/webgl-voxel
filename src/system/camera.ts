@@ -15,6 +15,18 @@ enum CameraPosition {
   BackRight = 3
 }
 
+const cameraRadius = Math.SQRT2;
+
+const oneEighthTurn = Math.PI / 4;
+const threeEighthTurn = (3 * Math.PI) / 4;
+
+function toDegrees(radians: number): number {
+  return (radians * 180) / Math.PI;
+}
+function toRadians(degrees: number): number {
+  return (degrees * Math.PI) / 180;
+}
+
 const aspectRatio = window.innerWidth / window.innerHeight;
 const depth = 75;
 const camera = new THREE.OrthographicCamera(
@@ -27,11 +39,15 @@ const camera = new THREE.OrthographicCamera(
 let needsUpdate = true;
 
 const zoom = 100;
-let targetRotation = CameraPosition.FrontLeft;
+
+let targetPosition = CameraPosition.FrontLeft;
+let targetRadians = rotationToAngle(targetPosition);
+
+let actualRadians = targetRadians;
 
 camera.rotation.order = "YXZ";
 camera.rotation.x = Math.atan(-1 / Math.sqrt(2));
-updatePosition({ rotation: -1, x: 0, y: 0, z: 0 }, targetRotation);
+updatePosition({ rotation: -1, x: 0, y: 0, z: 0 }, actualRadians);
 
 let target;
 let lastPositionHash;
@@ -77,7 +93,18 @@ export function cameraSystem(entities: EntityPool, deltaTime: number) {
     ComponentNames.POSITION
   );
 
-  updatePosition(position, targetRotation);
+  if (targetRadians != actualRadians) {
+    const diff = targetRadians - actualRadians;
+    if (diff < 0.05 && diff > -0.05) {
+      actualRadians = targetRadians;
+    } else {
+      const moveDirection = targetRadians - actualRadians > 0 ? 1 : -1;
+      const tweenAmount = moveDirection * 0.1;
+      actualRadians = actualRadians + tweenAmount;
+    }
+  }
+
+  updatePosition(position, actualRadians);
 
   const positionHash = hashPosition(position);
   if (lastPositionHash == positionHash) {
@@ -106,41 +133,56 @@ function hashPosition(position: Position) {
   return `${position.x}_${position.y}_${position.z}`;
 }
 
-function updatePosition(position: Position, rotation: CameraPosition) {
-  const oneEighthTurn = Math.PI / 4;
-  const threeEighthTurn = (3 * Math.PI) / 4;
-
+function updatePosition(position: Position, radians: number) {
   const x = (position.x + 0.5) * GRID_SIZE;
   const y = position.y * GRID_SIZE;
   const z = (position.z + 0.5) * GRID_SIZE;
 
-  switch (rotation) {
-    case CameraPosition.FrontRight:
-      camera.position.set(zoom + x, zoom + y, zoom + z);
-      camera.rotation.y = +oneEighthTurn;
-      break;
+  camera.rotation.y = radians;
 
-    case CameraPosition.FrontLeft:
-      camera.position.set(-zoom + x, zoom + y, zoom + z);
-      camera.rotation.y = -oneEighthTurn;
-      break;
+  const degrees = toDegrees(radians);
 
-    case CameraPosition.BackLeft:
-      camera.position.set(-zoom + x, zoom + y, -zoom + z);
-      camera.rotation.y = -threeEighthTurn;
-      break;
+  const cameraPosition = rotationToPosition(radians);
+  camera.position.set(
+    cameraPosition.x + x,
+    cameraPosition.y + y,
+    cameraPosition.z + z
+  );
 
-    case CameraPosition.BackRight:
-      camera.position.set(zoom + x, zoom + y, -zoom + z);
-      camera.rotation.y = +threeEighthTurn;
-      break;
-  }
+  console.log(degrees);
 
   needsUpdate = true;
 }
 
 function updateTargetCameraRotation(direction: 1 | -1) {
-  targetRotation = (4 + targetRotation + direction) % 4;
+  targetPosition = (4 + targetPosition + direction) % 4;
+  targetRadians = rotationToAngle(targetPosition);
+}
+
+function rotationToAngle(rotation: CameraPosition) {
+  switch (rotation) {
+    case CameraPosition.FrontRight:
+      return +oneEighthTurn;
+
+    case CameraPosition.FrontLeft:
+      return -oneEighthTurn;
+
+    case CameraPosition.BackLeft:
+      return -threeEighthTurn;
+
+    case CameraPosition.BackRight:
+      return +threeEighthTurn;
+  }
+
+  throw new Error("Bad rotation");
+}
+
+function rotationToPosition(degrees: number): Vector3 {
+  return {
+    x: Math.sin(degrees) * zoom,
+    y: zoom,
+    z: Math.cos(degrees) * zoom
+  };
 }
 
 addKeyListener("ArrowLeft", () => updateTargetCameraRotation(1));
